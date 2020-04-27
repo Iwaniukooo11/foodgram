@@ -9,6 +9,8 @@ const xss = require('xss-clean')
 const hpp = require('hpp')
 
 const postRoutes = require('./routes/postRoutes')
+const commentRoutes = require('./routes/commentRoutes')
+const reactionRoutes = require('./routes/reactionRoutes')
 
 const app = express()
 
@@ -44,5 +46,7 @@ app.get('/api/test', (req, res) => {
 })
 
 app.use('/api/v1/posts', postRoutes)
+app.use('/api/v1/comments', commentRoutes)
+app.use('/api/v1/reactions', reactionRoutes)
 
 module.exports = app
