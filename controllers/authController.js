@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const { promisify } = require('util')
 const User = require('./../models/userModel')
 const AppError = require('./../utils/appError')
 const catchAsync = require('./../utils/catchAsync')
@@ -47,6 +48,7 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user || !(await user.correctPassword(candidatePassword, user.password)))
     return next(new AppError('incorrect nick or password', 401))
 
+  console.log('REQ-COOKIES: ', req.cookies)
   createsSendToken(user, 201, res)
 })
 
@@ -56,4 +58,27 @@ exports.logout = (req, res) => {
     status: 'success',
     data: 'unloged!',
   })
+}
+
+exports.protect = (req, res, next) => {
+  let token
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1]
+  } else if (req.cookies.jwt) token = req.cookies.jwt
+
+  console.log('token: ', token)
+  if (!token) return next(new AppError('y not logged', 401))
+
+  const decoded = await promisify(jwt.verify)(token,process.env.JWT_SECRET)//<-- id, issuedAt, issuedAt+90d (exp)
+
+  const currentUser = await User.findById(decoded.id) //<- z tokena dekoduje id usra w mongoose
+  if (!currentUser) return next(new AppError('Token no longer exists'))
+
+  res.locals.user = currentUser //<--save to locals
+  req.user = currentUser
+  next()
 }
