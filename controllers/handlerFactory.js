@@ -19,7 +19,7 @@ exports.deleteOne = (Model) =>
     })
   })
 
-exports.disactiveOne = (Model) => {
+exports.disactiveOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndUpdate(req.params.id, {
       isActive: false,
@@ -34,7 +34,6 @@ exports.disactiveOne = (Model) => {
       },
     })
   })
-}
 
 exports.updateOne = (Model) =>
   catchAsync(async (req, res, next) => {
@@ -89,6 +88,7 @@ exports.getOne = (Model, populateOptions) =>
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res) => {
+    console.log('GET-ALL')
     //to allow nested GEt reviews
     let filter = {}
     if (req.params.tourId) filter = { tour: req.params.tourId }

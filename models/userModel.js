@@ -47,7 +47,6 @@ const userSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: [true, 'must have a img'],
     //TD add img
   },
   createdAt: {
@@ -78,7 +77,7 @@ userSchema.pre('save', async function (next) {
 userSchema.pre(/^find/, function (next) {
   // if (this.active === null) this.active = true
 
-  this.find({ isActive: true })
+  this.find({ isLive: true })
   next()
 })
 

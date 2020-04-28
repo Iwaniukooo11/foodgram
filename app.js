@@ -11,6 +11,7 @@ const hpp = require('hpp')
 const postRoutes = require('./routes/postRoutes')
 const commentRoutes = require('./routes/commentRoutes')
 const reactionRoutes = require('./routes/reactionRoutes')
+const userRoutes = require('./routes/userRoutes')
 
 const app = express()
 
@@ -44,6 +45,8 @@ app.get('/api/test', (req, res) => {
     message: 'test',
   })
 })
+
+app.use('/api/v1/users', userRoutes)
 
 app.use('/api/v1/posts', postRoutes)
 app.use('/api/v1/comments', commentRoutes)
