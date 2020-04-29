@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const User = require('./userModel')
+const AppError = require('./../utils/appError')
 
 const postSchema = new mongoose.Schema(
   {
@@ -50,7 +51,13 @@ postSchema.pre(/^find/, function (next) {
 })
 
 postSchema.pre('save', async function (next) {
-  console.log('SAVING!!')
+  const user = await User.findById(this.user._id)
+  if (!user) return next(AppError('Given user doesnt exist', 404))
+
+  next()
+})
+
+postSchema.pre('save', async function (next) {
   console.log(this.user._id, this.id)
   const user = await User.findById(this.user._id)
   user.posts.push(this.id)
@@ -58,21 +65,12 @@ postSchema.pre('save', async function (next) {
   next()
 })
 postSchema.pre('remove', async function (next) {
-  console.log('DELETING!')
   console.log(this.user._id, this.id)
   const user = await User.findById(this.user._id)
   user.posts = user.posts.filter((id) => id != this.id)
   user.save({ validateBeforeSave: false })
   next()
 })
-// postSchema.methods.removeIdFromUserModel = async function (next) {
-//   console.log('DELETING!')
-//   console.log(this.user._id, this.id)
-//   const user = await User.findById(this.user._id)
-//   user.posts = user.posts.filter((id) => id != this.id)
-//   user.save({ validateBeforeSave: false })
-//   next()
-// }
 
 const Post = mongoose.model('Post', postSchema)
 
