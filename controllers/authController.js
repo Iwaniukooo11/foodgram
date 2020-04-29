@@ -60,7 +60,7 @@ exports.logout = (req, res) => {
   })
 }
 
-exports.protect = (req, res, next) => {
+exports.protect = catchAsync(async (req, res, next) => {
   let token
 
   if (
@@ -73,7 +73,7 @@ exports.protect = (req, res, next) => {
   console.log('token: ', token)
   if (!token) return next(new AppError('y not logged', 401))
 
-  const decoded = await promisify(jwt.verify)(token,process.env.JWT_SECRET)//<-- id, issuedAt, issuedAt+90d (exp)
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET) //<-- id, issuedAt, issuedAt+90d (exp)
 
   const currentUser = await User.findById(decoded.id) //<- z tokena dekoduje id usra w mongoose
   if (!currentUser) return next(new AppError('Token no longer exists'))
@@ -81,4 +81,4 @@ exports.protect = (req, res, next) => {
   res.locals.user = currentUser //<--save to locals
   req.user = currentUser
   next()
-}
+})

@@ -7,6 +7,10 @@ const reactionSchema = new mongoose.Schema({
     enum: ['like', 'love', 'tasty'],
     required: [true, 'no reaction given!'],
   },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
 })
 
 const Reaction = mongoose.model('Reaction', reactionSchema)

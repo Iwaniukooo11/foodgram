@@ -28,8 +28,6 @@ const postSchema = new mongoose.Schema({
     select: false,
   },
   //add user
-  //add comments
-  //add likes
 })
 
 const Post = mongoose.model('Post', postSchema)
