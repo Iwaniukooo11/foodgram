@@ -3,7 +3,7 @@ const factory = require('./handlerFactory')
 
 exports.getAllUsers = factory.getAll(User)
 
-exports.getUser = factory.getOne(User)
+exports.getUser = factory.getOne(User, 'posts')
 
 exports.deleteUser = factory.disactiveOne(User)
 
