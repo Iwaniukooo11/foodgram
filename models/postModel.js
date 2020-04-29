@@ -29,7 +29,6 @@ const postSchema = new mongoose.Schema(
       default: true,
       select: false,
     },
-    //add user
     user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',

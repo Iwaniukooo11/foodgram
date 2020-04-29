@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 const reactionSchema = new mongoose.Schema({
-  //TD add post
-  //TD add user,who gave the like
   reaction: {
     type: String,
     enum: ['like', 'love', 'tasty'],
@@ -10,6 +8,16 @@ const reactionSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now(),
+  },
+  author: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: [true, 'Reaction must have an author'],
+  },
+  post: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Post',
+    required: [true, 'Reaction must have a post'],
   },
 })
 

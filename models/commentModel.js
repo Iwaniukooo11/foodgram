@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
 
 const commentSchema = new mongoose.Schema({
-  //TD add user,who commented
-  //TD add post
   content: {
     required: [true, 'comment must have a content'],
     type: String,
