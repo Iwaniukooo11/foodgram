@@ -52,7 +52,7 @@ postSchema.pre(/^find/, function (next) {
 
 postSchema.pre('save', async function (next) {
   const user = await User.findById(this.user._id)
-  if (!user) return next(AppError('Given user doesnt exist', 404))
+  if (!user) return next(new AppError('Given user doesnt exist', 404))
 
   next()
 })
