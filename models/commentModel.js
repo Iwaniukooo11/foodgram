@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const User = require('./userModel')
+const Post = require('./postModel')
 
 const commentSchema = new mongoose.Schema({
   content: {
@@ -20,6 +22,16 @@ const commentSchema = new mongoose.Schema({
     ref: 'Post',
     required: [true, 'Comment must have a post'],
   },
+})
+
+commentSchema.pre('save', async function (next) {
+  const user = await User.findById(this.author)
+  if (!user) return next(AppError('Given author doesnt exist', 404))
+
+  const post = await Post.findById(this.post)
+  if (!post) return next(AppError('Given post doesnt exist', 404))
+
+  next()
 })
 
 const Comment = mongoose.model('Comment', commentSchema)
