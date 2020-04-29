@@ -45,14 +45,35 @@ const postSchema = new mongoose.Schema(
 postSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',
-    select: 'nick',
+    select: 'nick _id',
   })
   next()
 })
 
-// postSchema.pre('save',function(next){
-
-// })
+postSchema.pre('save', async function (next) {
+  console.log('SAVING!!')
+  console.log(this.user._id, this.id)
+  const user = await User.findById(this.user._id)
+  user.posts.push(this.id)
+  user.save({ validateBeforeSave: false })
+  next()
+})
+postSchema.pre('remove', async function (next) {
+  console.log('DELETING!')
+  console.log(this.user._id, this.id)
+  const user = await User.findById(this.user._id)
+  user.posts = user.posts.filter((id) => id != this.id)
+  user.save({ validateBeforeSave: false })
+  next()
+})
+// postSchema.methods.removeIdFromUserModel = async function (next) {
+//   console.log('DELETING!')
+//   console.log(this.user._id, this.id)
+//   const user = await User.findById(this.user._id)
+//   user.posts = user.posts.filter((id) => id != this.id)
+//   user.save({ validateBeforeSave: false })
+//   next()
+// }
 
 const Post = mongoose.model('Post', postSchema)
 
