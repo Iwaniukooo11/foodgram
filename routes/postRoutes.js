@@ -4,9 +4,11 @@ const authController = require('../controllers/authController')
 const hanlderFactory = require('../controllers/handlerFactory')
 
 const commentRouter = require('./commentRoutes')
+const reactionRouter = require('./reactionRoutes')
 
 const router = express.Router()
 router.use('/:postId/comments', commentRouter)
+router.use('/:postId/reactions', reactionRouter)
 
 router
   .route('/')
