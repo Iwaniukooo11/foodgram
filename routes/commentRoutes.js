@@ -1,12 +1,13 @@
 const express = require('express')
 const commentController = require('../controllers/commentController')
+const hanlderFactory = require('../controllers/handlerFactory')
 
 const router = express.Router()
 
 router
   .route('/')
   .get(commentController.getAllComments)
-  .post(commentController.createComment)
+  .post(hanlderFactory.setUserIdAsUser, commentController.createComment)
 
 router
   .route('/:id')

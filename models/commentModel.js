@@ -12,7 +12,8 @@ const commentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  author: {
+  user: {
+    //author
     type: mongoose.Schema.ObjectId,
     ref: 'User',
     required: [true, 'Comment must have an author'],

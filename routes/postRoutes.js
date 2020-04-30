@@ -1,12 +1,14 @@
 const express = require('express')
 const postController = require('../controllers/postController')
+const authController = require('../controllers/authController')
+const hanlderFactory = require('../controllers/handlerFactory')
 
 const router = express.Router()
 
 router
   .route('/')
-  .get(postController.getAllPosts)
-  .post(postController.createPost)
+  .get(authController.protect, postController.getAllPosts)
+  .post(hanlderFactory.setUserIdAsUser, postController.createPost)
 
 router
   .route('/:id')

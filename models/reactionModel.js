@@ -12,7 +12,8 @@ const reactionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  author: {
+  user: {
+    //author
     type: mongoose.Schema.ObjectId,
     ref: 'User',
     required: [true, 'Reaction must have an author'],

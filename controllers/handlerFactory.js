@@ -110,3 +110,9 @@ exports.getAll = (Model) =>
       },
     })
   })
+
+exports.setUserIdAsUser = (req, res, next) => {
+  req.body.user = req.params.id
+
+  next()
+}

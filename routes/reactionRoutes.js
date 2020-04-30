@@ -1,12 +1,13 @@
 const express = require('express')
 const reactionController = require('../controllers/reactionController')
+const hanlderFactory = require('../controllers/handlerFactory')
 
 const router = express.Router()
 
 router
   .route('/')
   .get(reactionController.getAllReactions)
-  .post(reactionController.createReaction)
+  .post(hanlderFactory.setUserIdAsUser, reactionController.createReaction)
 
 router
   .route('/:id')
