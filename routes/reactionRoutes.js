@@ -11,6 +11,7 @@ router
   .post(
     authController.protect,
     hanlderFactory.setUserIdAsUser,
+    reactionController.checkIfUserGaveReaction,
     reactionController.createReaction
   )
 
