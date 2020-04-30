@@ -13,6 +13,8 @@ const commentRoutes = require('./routes/commentRoutes')
 const reactionRoutes = require('./routes/reactionRoutes')
 const userRoutes = require('./routes/userRoutes')
 
+const globalErrorHandler = require('./controllers/errorController')
+
 const app = express()
 
 app.use(express.static(path.join(__dirname, 'public')))
@@ -51,5 +53,7 @@ app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/posts', postRoutes)
 app.use('/api/v1/comments', commentRoutes)
 app.use('/api/v1/reactions', reactionRoutes)
+
+app.use(globalErrorHandler)
 
 module.exports = app
