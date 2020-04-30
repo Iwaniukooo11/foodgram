@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const User = require('./userModel')
-const Post = require('./postModel')
 const AppError = require('./../utils/appError')
 
 const reactionSchema = new mongoose.Schema({
@@ -28,10 +27,6 @@ const reactionSchema = new mongoose.Schema({
 reactionSchema.pre('save', async function (next) {
   const user = await User.findById(this.author)
   if (!user) return next(new AppError('Given author doesnt exist', 404))
-
-  const post = await Post.findById(this.post)
-  if (!post) return next(new AppError('Given post doesnt exist', 404))
-
   next()
 })
 
