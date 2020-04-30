@@ -3,7 +3,10 @@ const postController = require('../controllers/postController')
 const authController = require('../controllers/authController')
 const hanlderFactory = require('../controllers/handlerFactory')
 
+const commentRouter = require('./commentRoutes')
+
 const router = express.Router()
+router.use('/:postId/comments', commentRouter)
 
 router
   .route('/')

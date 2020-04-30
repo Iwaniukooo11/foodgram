@@ -3,7 +3,7 @@ const commentController = require('../controllers/commentController')
 const hanlderFactory = require('../controllers/handlerFactory')
 const authController = require('../controllers/authController')
 
-const router = express.Router()
+const router = express.Router({ mergeParams: true })
 
 router
   .route('/')

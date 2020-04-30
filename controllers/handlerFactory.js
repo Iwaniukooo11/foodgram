@@ -56,6 +56,8 @@ exports.updateOne = (Model) =>
 
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
+    if (req.params.postId) req.body.post = req.params.postId
+
     const doc = await Model.create(req.body)
 
     res.status(201).json({
@@ -89,10 +91,8 @@ exports.getOne = (Model, populateOptions) =>
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res) => {
-    console.log('GET-ALL')
-    //to allow nested GEt reviews
     let filter = {}
-    if (req.params.tourId) filter = { tour: req.params.tourId }
+    if (req.params.postId) filter = { post: req.params.postId }
 
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()
