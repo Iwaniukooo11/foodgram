@@ -7,13 +7,17 @@ const router = express.Router()
 
 router
   .route('/')
-  .get(authController.protect, postController.getAllPosts)
-  .post(hanlderFactory.setUserIdAsUser, postController.createPost)
+  .get(postController.getAllPosts)
+  .post(
+    authController.protect,
+    hanlderFactory.setUserIdAsUser,
+    postController.createPost
+  )
 
 router
   .route('/:id')
   .get(postController.getPost)
-  .patch(postController.updatePost)
-  .delete(postController.deletePost)
+  .patch(authController.protect, postController.updatePost)
+  .delete(authController.protect, postController.deletePost)
 
 module.exports = router

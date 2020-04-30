@@ -26,8 +26,8 @@ const reactionSchema = new mongoose.Schema({
 })
 
 reactionSchema.pre('save', async function (next) {
-  const user = await User.findById(this.author)
-  if (!user) return next(new AppError('Given author doesnt exist', 404))
+  const user = await User.findById(this.user)
+  if (!user) return next(new AppError('Given user doesnt exist', 404))
   next()
 })
 
