@@ -27,6 +27,17 @@ exports.unFollow = catchAsync(async (req, res, next) => {
   })
 })
 
+exports.countFollowers = catchAsync(async (req, res) => {
+  console.log('COUNT', req.body.followed)
+  const count = await Follow.count({ followed: req.body.followed })
+  res.status(200).json({
+    status: 'OK',
+    data: {
+      data: count,
+    },
+  })
+})
+
 exports.addIdToBody = catchAsync(async (req, res, next) => {
   console.log('ADD ID TO BODY', req.params)
   if (req.params.id) req.body.followed = req.params.id
