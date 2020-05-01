@@ -56,8 +56,9 @@ exports.updateOne = (Model) =>
 
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    if (req.params.postId) req.body.post = req.params.postId
+    console.log('TESTT')
 
+    if (req.params.postId) req.body.post = req.params.postId
     const doc = await Model.create(req.body)
 
     res.status(201).json({
@@ -112,7 +113,7 @@ exports.getAll = (Model) =>
   })
 
 exports.setUserIdAsUser = (req, res, next) => {
-  req.body.user = req.user.id
+  if (req.user.id) req.body.user = req.user.id
 
   next()
 }

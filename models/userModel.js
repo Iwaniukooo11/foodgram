@@ -60,6 +60,7 @@ const userSchema = new mongoose.Schema(
       default: true,
       select: false,
     },
+    followedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     createdAt: {
       type: Date,
       default: Date.now(),
@@ -71,7 +72,7 @@ const userSchema = new mongoose.Schema(
     posts: [
       {
         type: mongoose.Schema.ObjectId,
-        ref: 'Post',
+        // ref: 'Post',
         refPath: 'Post',
       },
     ],
@@ -96,30 +97,14 @@ userSchema.pre(/^find/, function (next) {
   next()
 })
 
-// userSchema.pre(/^find/, function (next) {
-//   console.log('POPULATION')
-//   this.populate({
-//     path: 'posts',
-//     select: '_id',
-//     // populate: { path: 'posts' },
-//   })
-//   next()
-// })
-
-// userSchema.pre()
-
-// userSchema.virtual('posts', {
-//   ref: 'Post',
-//   foreignField: 'user',
-//   localField: '_id',
-// })
-
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
 ) {
   return await bcrypt.compare(candidatePassword, userPassword)
 }
+
+// userSchema.me
 
 const User = mongoose.model('User', userSchema)
 

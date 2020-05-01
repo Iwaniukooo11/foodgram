@@ -54,6 +54,6 @@ app.use('/api/v1/posts', postRoutes)
 app.use('/api/v1/comments', commentRoutes)
 app.use('/api/v1/reactions', reactionRoutes)
 
-app.use(globalErrorHandler)
+// app.use(globalErrorHandler)
 
 module.exports = app

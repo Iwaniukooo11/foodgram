@@ -15,7 +15,7 @@ exports.deleteUser = factory.disactiveOne(User)
 
 exports.updateUser = factory.updateOne(User)
 
-exports.getTotalsPosted = catchAsync(async (req, res) => {
+exports.getTotalsPosted = catchAsync(async (req, res, next) => {
   const likes = Reaction.count({ user: req.user.id })
   const comments = Comment.count({ user: req.user.id })
   const posts = Post.count({ user: req.user.id })

@@ -15,7 +15,6 @@ exports.updateReaction = factory.updateOne(Reaction)
 exports.deleteReaction = factory.deleteOne(Reaction)
 
 exports.checkIfUserGaveReaction = catchAsync(async (req, res, next) => {
-  //   const { postId } = req.params
   const reaction = await Reaction.findOne({
     user: req.user.id,
     post: req.params.postId,
