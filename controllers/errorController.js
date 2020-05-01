@@ -6,5 +6,6 @@ module.exports = async (err, req, res, next) => {
   res.status(err.statusCode).json({
     test: 'mati',
     error: err,
+    message: err.message || err.data.message,
   })
 }
