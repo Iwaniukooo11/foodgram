@@ -27,14 +27,29 @@ exports.unFollow = catchAsync(async (req, res, next) => {
   })
 })
 
-exports.countFollowers = catchAsync(async (req, res) => {
-  console.log('COUNT', req.body.followed)
-  const count = await Follow.count({ followed: req.body.followed })
+// exports.countFollowers = catchAsync(async (req, res) => {
+//   console.log('COUNT', req.body.followed)
+//   const count = await Follow.count({ followed: req.body.followed })
+//   res.status(200).json({
+//     status: 'OK',
+//     data: {
+//       data: count,
+//     },
+//   })
+// })
+
+exports.countAllFolowers = catchAsync(async (req, res) => {
+  const followers = await Follow.count({ followed: req.user.id })
   res.status(200).json({
     status: 'OK',
-    data: {
-      data: count,
-    },
+    data: { followers },
+  })
+})
+exports.countAllFolowed = catchAsync(async (req, res) => {
+  const followed = await Follow.count({ user: req.user.id })
+  res.status(200).json({
+    status: 'OK',
+    data: { followed },
   })
 })
 

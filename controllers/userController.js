@@ -29,17 +29,3 @@ exports.getTotalsPosted = catchAsync(async (req, res, next) => {
 exports.getTotalsReceived = catchAsync(async (req, res) => {
   //  THIS ROUTE IS NOT DEFINED
 })
-exports.getAllFolowers = catchAsync(async (req, res) => {
-  const followers = Follow.count({ followed: req.user.id })
-  res.status(200).json({
-    status: 'OK',
-    data: { followers },
-  })
-})
-exports.getAllFolowed = catchAsync(async (req, res) => {
-  const followed = Follow.count({ user: req.user.id })
-  res.status(200).json({
-    status: 'OK',
-    data: { followed },
-  })
-})

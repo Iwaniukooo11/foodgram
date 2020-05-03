@@ -22,11 +22,17 @@ router
     followController.unFollow
   )
 
-router.route('/count').get(
+router.route('/count-followers').get(
   // authController.protect,
   // hanlderFactory.setUserIdAsUser,
   followController.addIdToBody,
-  followController.countFollowers
+  followController.countAllFollowers
+)
+router.route('/count-followed').get(
+  // authController.protect,
+  // hanlderFactory.setUserIdAsUser,
+  followController.addIdToBody,
+  followController.countAllFollowed
 )
 
 router.route('/:id').get(followController.getFollow)
