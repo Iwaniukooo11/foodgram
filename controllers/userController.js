@@ -2,6 +2,7 @@ const User = require('../models/userModel')
 const Reaction = require('../models/reactionModel')
 const Comment = require('../models/commentModel')
 const Post = require('../models/postModel')
+const Follow = require('../models/followModel')
 const catchAsync = require('../utils/catchAsync')
 const AppError = require('../utils/appError')
 
@@ -27,4 +28,18 @@ exports.getTotalsPosted = catchAsync(async (req, res, next) => {
 
 exports.getTotalsReceived = catchAsync(async (req, res) => {
   //  THIS ROUTE IS NOT DEFINED
+})
+exports.getAllFolowers = catchAsync(async (req, res) => {
+  const followers = Follow.count({ followed: req.user.id })
+  res.status(200).json({
+    status: 'OK',
+    data: { followers },
+  })
+})
+exports.getAllFolowed = catchAsync(async (req, res) => {
+  const followed = Follow.count({ user: req.user.id })
+  res.status(200).json({
+    status: 'OK',
+    data: { followed },
+  })
 })
