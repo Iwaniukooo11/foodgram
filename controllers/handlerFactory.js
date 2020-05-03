@@ -7,6 +7,10 @@ const APIFeatures = require('../utils/apiFeatures')
 exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findById(req.params.id)
+    console.log('DELETING: ', doc.user.id, req.user.id)
+    if (doc.user.id !== req.user.id)
+      return next(new AppError('removed a doc, that you warent an author', 500))
+
     doc.delete()
     if (!doc) {
       return next(new AppError('No document found with that ID', 404))
