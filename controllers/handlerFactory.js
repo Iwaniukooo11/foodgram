@@ -113,7 +113,9 @@ exports.getAll = (Model) =>
   })
 
 exports.setUserIdAsUser = (req, res, next) => {
-  if (req.user.id) req.body.user = req.user.id
+  if (req.user.id !== undefined) {
+    req.body.user = req.user.id
+  }
 
   next()
 }

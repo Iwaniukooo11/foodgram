@@ -10,14 +10,14 @@ const router = express.Router()
 router.use('/:postId/comments', commentRouter)
 router.use('/:postId/reactions', reactionRouter)
 
-router
-  .route('/')
-  .get(postController.getAllPosts)
-  .post(
-    authController.protect,
-    hanlderFactory.setUserIdAsUser,
-    postController.createPost
-  )
+router.route('/').get(postController.getAllPosts).post(
+  authController.protect,
+  postController.uploadImage,
+  postController.resizeImg,
+  hanlderFactory.setUserIdAsUser,
+
+  postController.createPost
+)
 
 router
   .route('/:id')
@@ -25,11 +25,11 @@ router
   .patch(authController.protect, postController.updatePost)
   .delete(authController.protect, postController.deletePost)
 
-router
-  .route('/test')
-  .post(
-    authController.protect,
-    postController.uploadImage,
-    postController.resizeImg
-  )
+// router
+//   .route('/test')
+//   .post(
+//     authController.protect,
+//     postController.uploadImage,
+//     postController.resizeImg
+//   )
 module.exports = router
