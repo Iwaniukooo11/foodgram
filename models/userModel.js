@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
+// const Follow = require('./followModel')
 
 const userSchema = new mongoose.Schema(
   {
@@ -60,7 +61,17 @@ const userSchema = new mongoose.Schema(
       default: true,
       select: false,
     },
-    followedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+    following: {
+      //<-- user follows them
+      type: Number,
+      default: 0,
+    },
+    followers: {
+      type: Number, //<--they follow user
+      default: 0,
+    },
+    // followedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+
     createdAt: {
       type: Date,
       default: Date.now(),
@@ -82,6 +93,19 @@ const userSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 )
+// userSchema.pre(/^find/, async function (next) {
+//   const follows = await Follow.countDocuments({ followed: this.getQuery()._id })
+//   // console.log('ID: ', this.getQuery()._id)
+//   console.log('FOLLOWS: ', follows)
+//   // return follows
+//   console.log(this.follows)
+//   // this.getQuery().follows = follows // this// this.updateOne({ follows })
+//   this.update({ follows })
+//   console.log(this.follows)
+
+//   // return 'test'
+//   next()
+// })
 
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next()
