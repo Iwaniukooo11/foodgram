@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const User = require('./userModel')
 const Comment = require('./commentModel')
+const Follow = require('./followModel')
 const Reaction = require('./reactionModel')
 const AppError = require('./../utils/appError')
 
@@ -37,6 +38,28 @@ const postSchema = new mongoose.Schema(
       ref: 'User',
       required: [true, 'Post must have an user'],
     },
+    likesQuantity: {
+      type: Number,
+      default: 0,
+    },
+    commentsQuantity: {
+      type: Number,
+      default: 0,
+    },
+    reactions: {
+      like: {
+        type: Number,
+        default: 0,
+      },
+      love: {
+        type: Number,
+        default: 0,
+      },
+      tasty: {
+        type: Number,
+        default: 0,
+      },
+    },
   },
   {
     toJSON: { virtuals: true },
@@ -49,6 +72,18 @@ postSchema.pre(/^find/, function (next) {
     path: 'user',
     select: 'nick _id',
   })
+  next()
+})
+postSchema.pre(/^find/, async function (next) {
+  const postId = this.getQuery()._id
+
+  const allReactions = await Reaction.countDocuments({ post: postId })
+  const allComments = await Comment.countDocuments({ post: postId })
+  await this.updateOne(
+    {},
+    { $set: { likesQuantity: allReactions, commentsQuantity: allComments } }
+  )
+
   next()
 })
 

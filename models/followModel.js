@@ -22,28 +22,28 @@ const followSchema = new mongoose.Schema(
   }
 )
 
-followSchema.pre('save', async function (next) {
-  const followedUser = await User.findById(this.followed)
-  followedUser.followers += 1
-  console.log('followedUser.follower=', followedUser.follower)
-  followedUser.save({ validateBeforeSave: false })
+// followSchema.pre('save', async function (next) {
+//   const followedUser = await User.findById(this.followed)
+//   followedUser.followers += 1
+//   console.log('followedUser.follower=', followedUser.follower)
+//   followedUser.save({ validateBeforeSave: false })
 
-  const author = await User.findById(this.user)
-  author.following += 1
-  author.save({ validateBeforeSave: false })
-})
+//   const author = await User.findById(this.user)
+//   author.following += 1
+//   author.save({ validateBeforeSave: false })
+// })
 
-followSchema.pre('remove', async function (next) {
-  console.log(this.followed)
-  const user = await User.findById(this.followed)
-  user.follows -= 1
-  console.log('user.follows=', user.follows)
-  user.save({ validateBeforeSave: false })
+// followSchema.pre('remove', async function (next) {
+//   console.log(this.followed)
+//   const user = await User.findById(this.followed)
+//   user.follows -= 1
+//   console.log('user.follows=', user.follows)
+//   user.save({ validateBeforeSave: false })
 
-  const author = await User.findById(this.user)
-  author.following += 1
-  author.save({ validateBeforeSave: false })
-})
+//   const author = await User.findById(this.user)
+//   author.following += 1
+//   author.save({ validateBeforeSave: false })
+// })
 
 const Follow = mongoose.model('Follow', followSchema)
 
