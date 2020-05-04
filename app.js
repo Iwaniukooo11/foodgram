@@ -12,12 +12,15 @@ const postRoutes = require('./routes/postRoutes')
 const commentRoutes = require('./routes/commentRoutes')
 const reactionRoutes = require('./routes/reactionRoutes')
 const userRoutes = require('./routes/userRoutes')
+const viewRoutes = require('./routes/viewRoutes')
 
 const globalErrorHandler = require('./controllers/errorController')
 
 const app = express()
+app.set('view engine', 'pug')
+app.set('views', path.join(__dirname, 'views'))
 
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public/dist')))
 app.use(helmet())
 
 if (process.env.NODE_ENV === 'development') {
@@ -49,10 +52,10 @@ app.get('/api/test', (req, res) => {
 })
 
 app.use('/api/v1/users', userRoutes)
-
 app.use('/api/v1/posts', postRoutes)
 app.use('/api/v1/comments', commentRoutes)
 app.use('/api/v1/reactions', reactionRoutes)
+app.use('', viewRoutes)
 
 app.use(globalErrorHandler)
 
