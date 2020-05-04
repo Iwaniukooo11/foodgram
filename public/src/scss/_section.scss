@@ -1,0 +1,38 @@
+.section {
+    &__header {
+        font-size: 45px;
+        color: $color-red;
+        font-weight: bold;
+        background: -webkit-linear-gradient($color-orange, $color-red);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+
+    &__input {
+        background: $color-grey;
+        color: $color-grey-dark;
+        padding: 10px 20px;
+        border-radius: 10px;
+        // font-size: 0.85em;
+        font-size: 18px;
+    }
+
+
+    &__subtext {
+        font-size: 18px;
+    }
+
+    &__button {
+        padding: 8px 40px;
+        border-radius: 10px;
+        color: $color-white;
+        font-size: 0.8em;
+
+        &--background {
+            background: linear-gradient($color-orange, $color-red);
+        }
+
+    }
+
+}

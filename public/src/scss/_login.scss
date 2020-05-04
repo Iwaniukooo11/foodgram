@@ -1,0 +1,19 @@
+.login-section {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    row-gap: 30px;
+    text-align: center;
+    padding: 15vh 5vw;
+
+    &__form {
+        display: grid;
+        row-gap: 20px;
+        justify-items: center;
+    }
+
+    &__button {
+        margin-top: 50px;
+    }
+}

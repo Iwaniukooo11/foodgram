@@ -29,7 +29,7 @@ function copy() {
 function assets() {
   return src('./public/src/assets/**/*')
     .pipe(wait(time))
-    .pipe(dest('./public/dist//assets'))
+    .pipe(dest('./public/dist/assets'))
 }
 
 function images() {
@@ -50,7 +50,7 @@ function js() {
         },
       })
     )
-    .pipe(dest('./public/dist//assets/js'))
+    .pipe(dest('./public/dist/js/'))
 }
 
 function css() {
@@ -73,7 +73,7 @@ function css() {
         compatibility: 'ie8',
       })
     )
-    .pipe(dest('./public/dist/assets/css/'))
+    .pipe(dest('./public/dist/css/'))
 }
 
 function reload() {

@@ -1,3 +1,49 @@
+@import './variables';
+@import './section';
+
 .test {
-    color: red
+    color: red;
 }
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.box-shadow {
+    // box-shadow: inset 18px 18px 30px 1px #d1d9e6;
+}
+
+form,
+input,
+textarea,
+button {
+    font: inherit;
+    border: none;
+}
+
+
+body {
+    font-family: 'Jost';
+    font-size: 22px;
+    word-spacing: 1px;
+    letter-spacing: 0.5px;
+    color: $color-grey-dark;
+    font-weight: normal;
+    background: $color-white;
+    height: 100%;
+}
+
+a {
+    // color: $color-orange;
+    font-weight: bold;
+    background: -webkit-linear-gradient($color-orange, $color-red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@import './login';
