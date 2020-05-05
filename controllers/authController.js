@@ -36,7 +36,17 @@ const createsSendToken = (user, statusCode, res) => {
   })
 }
 
-exports.signUp = factory.createOne(User)
+exports.signUp = catchAsync(async (req, res, next) => {
+  const doc = await User.create(req.body)
+  createsSendToken(doc, 201, res)
+
+  // res.status(201).json({
+  //   status: 'success',
+  //   data: {
+  //     data: doc,
+  //   },
+  // })
+})
 
 exports.login = catchAsync(async (req, res, next) => {
   const { nick, password } = req.body
