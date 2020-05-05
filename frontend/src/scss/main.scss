@@ -25,11 +25,12 @@ textarea,
 button {
     font: inherit;
     border: none;
+    outline: none;
 }
 
 
 body {
-    font-family: 'Jost';
+    font-family: 'Jost', Arial, "Helvetica Neue", Helvetica, sans-serif;
     font-size: 18px;
     word-spacing: 1px;
     letter-spacing: 0.5px;

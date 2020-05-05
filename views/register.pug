@@ -1,0 +1,17 @@
+extends base
+
+
+block content 
+
+  main.main.login-section.section
+    h1.section__header Sign Up
+    p.section__subtext Already have an account? 
+     a(href="/login")  Log in
+
+    form.login-section__form
+      input.section__input.section__input(type="text", placeholder='Nickname', name='nick')
+      input.section__input.section__input(type="text", placeholder='Email', name='meail')
+      input.section__input.section__input(type="text", placeholder='Password', name='password')
+      input.section__input.section__input.box-shadow(type="password", placeholder='Confirm Password', name='passwordConfirm')
+     
+      button.section__button.section__button--background.login-section__button(type="submit") Sign up
