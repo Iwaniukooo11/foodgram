@@ -9,8 +9,11 @@
     &__img {
         width: 100px;
         height: 100px;
+        // width: 30vw;
+        // height: 30vw;
         border-radius: 50%;
         object-fit: cover;
+        // border-radius: 10px;
     }
 
     &__header {
@@ -26,9 +29,10 @@
         display: flex;
         justify-content: space-between;
         align-content: center;
-        margin: 10px 0;
+        margin: 10px 0 20px;
         padding: 8px 30px;
-        box-sizing: content-box;
+        // min-width: 80%;
+        // box-sizing: content-box;
         border-radius: 15px;
 
         // background: linear-gradient(145deg, #f0f0f0, #ffffff);
@@ -36,6 +40,7 @@
         //     -21px -21px 59px #ffffff;
 
         &__li {
+            padding: 0 8px;
             display: flex;
             flex-direction: column;
             align-content: center;
@@ -51,7 +56,26 @@
     &__follow-btn {
         width: 100%;
         padding: 8px 30px;
-        box-sizing: content-box;
+        // box-sizing: content-box;
 
+    }
+
+    &__post-list,
+    .post-list {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        min-width: 90vw;
+
+        &__img {
+            width: 40vw;
+            height: 40vw;
+            object-fit: cover;
+            border-radius: 10%;
+            margin: 5px 10px;
+
+        }
     }
 }

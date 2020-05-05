@@ -90,11 +90,11 @@
 /*!**********************************!*\
   !*** ./frontend/src/js/login.js ***!
   \**********************************/
-/*! exports provided: login */
+/*! exports provided: auth */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"login\", function() { return login; });\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nconst login = async obj => {\n  try {\n    const res = await axios({\n      method: 'POST',\n      url: `${document.location.origin}/api/v1/users/login`,\n      data: obj\n    });\n\n    if (res.data.status === 'OK') {\n      //   showAlert('success', 'logged in!')\n      alert('git');\n      window.setTimeout(() => {\n        location.assign('/me');\n      }, 1000);\n    }\n  } catch (err) {\n    console.log('err: ', err); // showAlert('error', 'NOT logged in!')\n  }\n};\n\n//# sourceURL=webpack:///./frontend/src/js/login.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"auth\", function() { return auth; });\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nconst auth = async (obj, type) => {\n  try {\n    const res = await axios({\n      method: 'POST',\n      url: `${document.location.origin}/api/v1/users/${type}`,\n      data: obj\n    });\n\n    if (res.data.status === 'OK') {\n      //   showAlert('success', 'logged in!')\n      alert('git majonez');\n      window.setTimeout(() => {\n        location.assign('/me');\n      }, 1000);\n    }\n  } catch (err) {\n    console.log('err: ', err); // showAlert('error', 'NOT logged in!')\n  }\n};\n\n//# sourceURL=webpack:///./frontend/src/js/login.js?");
 
 /***/ }),
 
@@ -105,7 +105,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("console.log('hello client side!');\n\nconst {\n  login\n} = __webpack_require__(/*! ./login */ \"./frontend/src/js/login.js\");\n\nconst loginForm = document.getElementById('form-login');\nconsole.log(loginForm);\n\nif (loginForm) {\n  loginForm.addEventListener('submit', async e => {\n    e.preventDefault();\n    const nick = document.getElementById('nick').value;\n    const password = document.getElementById('password').value;\n    console.log('before login action');\n    login({\n      nick,\n      password\n    });\n  });\n}\n\n//# sourceURL=webpack:///./frontend/src/js/main.js?");
+eval("console.log('hello client side!');\n\nconst {\n  auth\n} = __webpack_require__(/*! ./login */ \"./frontend/src/js/login.js\");\n\nconst loginForm = document.getElementById('form-login');\nconst signUpForm = document.getElementById('form-signup');\n\nif (loginForm) {\n  loginForm.addEventListener('submit', async e => {\n    e.preventDefault();\n    const nick = document.getElementById('nick').value;\n    const password = document.getElementById('password').value;\n    console.log('before login action');\n    auth({\n      nick,\n      password\n    }, 'login');\n  });\n}\n\nif (signUpForm) {\n  signUpForm.addEventListener('submit', async e => {\n    e.preventDefault();\n    const nick = document.getElementById('nick').value;\n    const password = document.getElementById('password').value;\n    const passwordConfirm = document.getElementById('passwordConfirm').value;\n    const name = document.getElementById('name').value;\n    const email = document.getElementById('email').value;\n    console.log('before login action');\n    auth({\n      nick,\n      password,\n      email,\n      passwordConfirm,\n      name\n    }, 'signup');\n  });\n}\n\n//# sourceURL=webpack:///./frontend/src/js/main.js?");
 
 /***/ }),
 

@@ -8,10 +8,11 @@ block content
     p.section__subtext Already have an account? 
      a(href="/login")  Log in
 
-    form.login-section__form
-      input.section__input.section__input(type="text", placeholder='Nickname', name='nick')
-      input.section__input.section__input(type="text", placeholder='Email', name='meail')
-      input.section__input.section__input(type="text", placeholder='Password', name='password')
-      input.section__input.section__input.box-shadow(type="password", placeholder='Confirm Password', name='passwordConfirm')
+    form.login-section__form#form-signup
+      input#nick.section__input.section__input(type="text", placeholder='Nickname', name='nick')
+      input#name.section__input.section__input(type="text", placeholder='Name', name='nick')
+      input#email.section__input.section__input(type="text", placeholder='Email', name='email')
+      input#password.section__input.section__input(type="password", placeholder='Password', name='password')
+      input#passwordConfirm.section__input.section__input.box-shadow(type="password", placeholder='Confirm Password', name='passwordConfirm')
      
       button.section__button.section__button--background.login-section__button(type="submit") Sign up
