@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"auth\", function() { return auth; });\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nconst auth = async (obj, type) => {\n  try {\n    const res = await axios({\n      method: 'POST',\n      url: `${document.location.origin}/api/v1/users/${type}`,\n      data: obj\n    });\n\n    if (res.data.status === 'OK') {\n      //   showAlert('success', 'logged in!')\n      alert('git majonez');\n      window.setTimeout(() => {\n        location.assign('/me');\n      }, 1000);\n    }\n  } catch (err) {\n    console.log('err: ', err); // showAlert('error', 'NOT logged in!')\n  }\n};\n\n//# sourceURL=webpack:///./frontend/src/js/login.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"auth\", function() { return auth; });\nconst axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nconst auth = async (obj, type) => {\n  try {\n    const res = await axios({\n      method: 'POST',\n      url: `${document.location.origin}/api/v1/users/${type}`,\n      data: obj\n    });\n\n    if (res.data.status === 'OK') {\n      //   showAlert('success', 'logged in!')\n      alert('git majonez'); // window.setTimeout(() => {\n\n      location.assign('/me'); // }, 1000)\n    }\n  } catch (err) {\n    console.log('err: ', err); // showAlert('error', 'NOT logged in!')\n  }\n};\n\n//# sourceURL=webpack:///./frontend/src/js/login.js?");
 
 /***/ }),
 
