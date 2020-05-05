@@ -21,26 +21,26 @@ exports.hello = hello
 
 function copy() {
   console.log('COPY!!!')
-  return src('./public/src/html/*.html')
+  return src('./frontend/src/html/*.html')
     .pipe(wait(time))
     .pipe(dest('./public/dist/'))
 }
 
 function assets() {
-  return src('./public/src/assets/**/*')
+  return src('./frontend/src/assets/**/*')
     .pipe(wait(time))
     .pipe(dest('./public/dist/assets'))
 }
 
 function images() {
-  return src('./public/src/images/*')
+  return src('./frontend/src/images/*')
     .pipe(wait(time))
     .pipe(imagemin())
     .pipe(dest('dist/assets/images'))
 }
 
 function js() {
-  return src('./public/src/js/*.js')
+  return src('./frontend/src/js/*.js')
     .pipe(wait(time))
     .pipe(webpackStream(webpackConfig), webpack)
     .pipe(
@@ -54,7 +54,7 @@ function js() {
 }
 
 function css() {
-  return src('./public/src/scss/*.scss')
+  return src('./frontend/src/scss/*.scss')
     .pipe(wait(time))
     .pipe(sass().on('error', sass.logError))
     .pipe(
@@ -90,18 +90,18 @@ function log() {
 }
 
 function watcher() {
-  // watch("./public/src/html/**/*.html").on(
+  // watch("./frontend/src/html/**/*.html").on(
   //   "change",
   //   series(copy, browserSync.reload, log)
   // );
-  // watch('./public/src/html/**/*.html').on('change', series(copy))
-  watch('./public/src/js/**/*').on('change', series(js))
-  watch('./public/src/scss/**/*.scss').on(
+  // watch('./frontend/src/html/**/*.html').on('change', series(copy))
+  watch('./frontend/src/js/**/*').on('change', series(js))
+  watch('./frontend/src/scss/**/*.scss').on(
     'change',
     series(css)
     // parallel(css, browserSync.reload)
   )
-  watch('./public/src/assets/**/*').on('change', assets)
+  watch('./frontend/src/assets/**/*').on('change', assets)
 }
 
 function clean() {
