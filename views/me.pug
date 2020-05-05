@@ -1,0 +1,14 @@
+extends base
+
+mixin statsItem(num,desc)
+  li.stats__li
+    span.stats__num= num
+    p.stats__desc=desc
+
+block content
+  main.main.section.section-me.me
+    img.me__img(src="", alt="user image")
+    h1.section__header Andre Sandro
+    p.section__subtext
+
+    ul.me__stats.stats
