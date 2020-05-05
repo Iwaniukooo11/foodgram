@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.668.0",
+    "axios": "^0.19.2",
     "babel-loader": "^8.1.0",
     "bcryptjs": "^2.4.3",
     "connect-livereload": "^0.6.1",

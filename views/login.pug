@@ -7,7 +7,8 @@ block content
     p.section__subtext Don't have an account? 
      a(href="/signup")  Sign up
 
-    form.login-section__form
-      input.section__input.section__input--email(type="text", placeholder='Nickname')
-      input.section__input.section__input--password.box-shadow(type="password", placeholder='Password')
+    form.login-section__form#form-login
+      input#nick.section__input.section__input--email(type="text", placeholder='Nickname')
+      input#password.section__input.section__input--password.box-shadow(type="password", placeholder='Password')
+     
       button.section__button.section__button--background.login-section__button(type="submit") Log In
