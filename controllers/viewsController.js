@@ -1,5 +1,6 @@
 const catchAsync = require('./../utils/catchAsync')
 const Post = require('../models/postModel')
+const Follow = require('../models/followModel')
 
 exports.getLogin = catchAsync(async (req, res) => {
   res.status(200).render('login', {})
@@ -23,4 +24,19 @@ exports.getMe = catchAsync(async (req, res) => {
     posts,
     isMe: true,
   })
+})
+
+exports.getAll = catchAsync(async (req, res) => {
+  const following = await Follow.find({ user: req.user.id })
+  const orTab = following.map((obj) => {
+    return {
+      user: obj.followed,
+    }
+  })
+
+  const posts = await Post.find({ $or: orTab })
+    .sort({ createdAt: 'asc' })
+    .limit(10)
+  console.log('POSTS: ', posts)
+  res.status(200).render('all', { posts })
 })

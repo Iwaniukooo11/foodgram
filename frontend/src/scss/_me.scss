@@ -6,6 +6,24 @@
     justify-items: center;
     row-gap: 10px;
 
+    &__img-wrap {
+        position: relative;
+
+        // &::before {
+        //     content: "";
+        //     width: 110px;
+        //     height: 110px;
+        //     position: absolute;
+        //     transform: translate(-50%, -50%);
+        //     border-radius: 50%;
+        //     // @include createGradientBox;
+        //     background-color: red;
+        //     top: 48%;
+        //     left: 50%;
+        //     z-index: -1;
+        // }
+    }
+
     &__img {
         width: 100px;
         height: 100px;
@@ -13,6 +31,9 @@
         // height: 30vw;
         border-radius: 50%;
         object-fit: cover;
+        position: relative;
+
+
         // border-radius: 10px;
     }
 
