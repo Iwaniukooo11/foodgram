@@ -1,14 +1,33 @@
 extends base
 
+
+
 mixin statsItem(num,desc)
   li.stats__li
     span.stats__num= num
     p.stats__desc=desc
 
-block content
-  main.main.section.section-me.me
-    img.me__img(src="", alt="user image")
-    h1.section__header Andre Sandro
-    p.section__subtext
+mixin imgItem(id,src,likesQuantity,commentsQuantity)
+  li.post-list__li
+    img.post__img(src=`${src}`,alt='post image',data-id=`${id}`)
+    .post-list__stats-wrap
+      .post-list__likes.post-list__likes--like=likesQuantity
+      .post-list__likes.post-list__likes--comment=commentsQuantity
 
-    ul.me__stats.stats
+
+block content
+  - const followStats=[{num:10,desc:'test'},{num:10,desc:'test'},{num:10,desc:'test'},]
+
+  main.main.section.section-me.me
+    img.me__img.box-shadow(src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg", alt="user image")
+    h1.section__header.me__header Andre Sandro
+    p.section__subtext Lorem ipsum desc
+
+    ul.me__stats.stats.box-shadow
+      each element in followStats
+        +statsItem(element.num,element.desc)
+    
+    button.section__button.section__button--background.me__follow-btn Follow
+
+    ul.me__post-list.post-list
+
