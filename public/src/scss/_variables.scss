@@ -6,11 +6,11 @@ $color-grey:#f0f0f0;
 $color-grey-dark:#8a8a8a;
 $color-black:#525252;
 
-@mixin createGradientBox($a, $b) {
-    background: linear-gradient($a, $b);
+@mixin createGradientBox {
+    background: linear-gradient($color-orange, $color-red);
 }
 
-@mixin createGradientText($a, $b) {
+@mixin createGradientText {
     background: -webkit-linear-gradient($color-orange, $color-red);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
