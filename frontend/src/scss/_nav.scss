@@ -1,9 +1,20 @@
 .nav {
-    // height: 40px;
-    // @include createGradientBox;
+    height: $nav-height;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    @include createGradientBox;
+
     // background: linear-gradient(to right, $color-orange, $color-red);
     // background-color: $color-orange;
     // border-bottom-left-radius: 10px;
     // border-bottom-right-radius: 10px;
+    &__link {
+        color: $color-white;
+        -webkit-text-fill-color: unset;
+        font-weight: normal;
+
+    }
 
 }

@@ -12,6 +12,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 
@@ -51,11 +52,11 @@ body {
 a {
     // color: $color-orange;
     text-decoration: none;
-    font-weight: bold;
+    // font-weight: bold;
     // background: -webkit-linear-gradient($color-orange, $color-red);
     // -webkit-background-clip: text;
-    // -webkit-text-fill-color: transparent;
-    @include createGradientText;
+    -webkit-text-fill-color: transparent;
+    // @include createGradientText;
 }
 
 @import './login';

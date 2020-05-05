@@ -6,8 +6,12 @@ $color-grey:#f0f0f0;
 $color-grey-dark:#8a8a8a;
 $color-black:#525252;
 
+$nav-height:35px;
+
 @mixin createGradientBox {
-    background: linear-gradient($color-orange, $color-red);
+    background: linear-gradient(to left, $color-orange, $color-red);
+    -webkit-text-fill-color: unset;
+
 }
 
 @mixin createGradientText {
