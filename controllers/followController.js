@@ -20,7 +20,7 @@ exports.unFollow = catchAsync(async (req, res, next) => {
   }
 
   res.status(204).json({
-    status: 'success',
+    status: 'OK',
     data: {
       data: doc,
     },

@@ -17,7 +17,7 @@ exports.deleteOne = (Model) =>
     }
 
     res.status(204).json({
-      status: 'success',
+      status: 'OK',
       data: {
         data: doc,
       },
@@ -33,7 +33,7 @@ exports.disactiveOne = (Model) =>
       return next(new AppError('No document found with that ID', 404))
     }
     res.status(204).json({
-      status: 'success',
+      status: 'OK',
       data: {
         data: doc,
       },
@@ -51,7 +51,7 @@ exports.updateOne = (Model) =>
     }
 
     res.status(200).json({
-      status: 'success',
+      status: 'OK',
       data: {
         data: doc,
       },
@@ -66,7 +66,7 @@ exports.createOne = (Model) =>
     const doc = await Model.create(req.body)
 
     res.status(201).json({
-      status: 'success',
+      status: 'OK',
       data: {
         data: doc,
       },
@@ -87,7 +87,7 @@ exports.getOne = (Model, populateOptions) =>
     // const doc = docs.find(el => el.id === id)
 
     res.status(200).json({
-      status: 'success',
+      status: 'OK',
       data: {
         data: doc,
       },
@@ -108,7 +108,7 @@ exports.getAll = (Model) =>
     const doc = await features.query
 
     res.status(200).json({
-      status: 'success',
+      status: 'OK',
       results: doc.length,
       data: {
         data: doc,

@@ -28,7 +28,7 @@ const createsSendToken = (user, statusCode, res) => {
   userToShow.password = undefined
 
   res.status(statusCode).json({
-    status: 'success',
+    status: 'OK',
     token,
     data: {
       user: user.nick,
@@ -41,7 +41,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
   createsSendToken(doc, 201, res)
 
   // res.status(201).json({
-  //   status: 'success',
+  //   status: 'OK',
   //   data: {
   //     data: doc,
   //   },
@@ -65,7 +65,7 @@ exports.login = catchAsync(async (req, res, next) => {
 exports.logout = (req, res) => {
   res.cookie('jwt', 'loggedout')
   res.status(200).json({
-    status: 'success',
+    status: 'OK',
     data: 'unloged!',
   })
 }
