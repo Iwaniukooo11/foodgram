@@ -8,5 +8,8 @@ router.route('/signup').get(viewsController.getRegister)
 router.route('/me').get(authController.protect, viewsController.getMe)
 router.route('/feed').get(authController.protect, viewsController.getFeed)
 router.route('/recent').get(authController.protect, viewsController.getRecent)
+router
+  .route('/notifications')
+  .get(authController.protect, viewsController.getNotifications)
 
 module.exports = router
