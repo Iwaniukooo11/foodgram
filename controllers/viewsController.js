@@ -26,7 +26,7 @@ exports.getMe = catchAsync(async (req, res) => {
   })
 })
 
-exports.getAll = catchAsync(async (req, res) => {
+exports.getFeed = catchAsync(async (req, res) => {
   const following = await Follow.find({ user: req.user.id })
   const orTab = following.map((obj) => {
     return {
@@ -38,5 +38,5 @@ exports.getAll = catchAsync(async (req, res) => {
     .sort({ createdAt: 'asc' })
     .limit(10)
   console.log('POSTS: ', posts)
-  res.status(200).render('all', { posts })
+  res.status(200).render('feed', { posts })
 })

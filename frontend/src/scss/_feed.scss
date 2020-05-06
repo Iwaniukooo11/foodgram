@@ -1,0 +1,22 @@
+.feed {
+    padding: 20px;
+
+    &__posts-list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    &__post,
+    .post {
+
+        &__img {
+            width: 40vw;
+            height: 40vw;
+            border-radius: 10%;
+
+        }
+    }
+
+}
