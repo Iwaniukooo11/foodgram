@@ -1,9 +1,26 @@
 const Comment = require('./../models/commentModel')
+const User = require('./../models/userModel')
+const catchAsync = require('../utils/catchAsync')
+
 const factory = require('./handlerFactory')
 
 exports.getAllComments = factory.getAll(Comment)
 
 exports.createComment = factory.createOne(Comment)
+
+///TODO - FIX THIS AND WORK FROM NESTE
+exports.setIdOfPost = catchAsync(async (req, res, next) => {
+  // if (req.params.postId)
+  req.body.post = req.params.postId
+  next()
+})
+exports.setIdOfPostAuthor = catchAsync(async (req, res, next) => {
+  // console.log(await User.findOne({ posts: req.body.post }))
+  const author = await User.findOne({ posts: req.body.post })
+  req.body.postAuthor = author._id
+  // req.body.userAuthor
+  next()
+})
 
 exports.getComment = factory.getOne(Comment)
 

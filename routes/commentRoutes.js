@@ -11,6 +11,8 @@ router
   .post(
     authController.protect,
     hanlderFactory.setUserIdAsUser,
+    commentController.setIdOfPost,
+    commentController.setIdOfPostAuthor,
     commentController.createComment
   )
 

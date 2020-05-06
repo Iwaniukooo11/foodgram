@@ -22,6 +22,11 @@ const commentSchema = new mongoose.Schema({
     ref: 'Post',
     required: [true, 'Comment must have a post'],
   },
+  postAuthor: {
+    type: mongoose.Schema.ObjectId,
+    refPath: 'User',
+    required: [true, 'Comment must have a postAuthor'],
+  },
 })
 
 const Comment = mongoose.model('Comment', commentSchema)

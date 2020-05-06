@@ -11,6 +11,7 @@ exports.createReaction = factory.createOne(Reaction)
 
 exports.getReaction = factory.getOne(Reaction)
 
+///TODO - FIX THIS AND WORK FROM NESTE
 exports.setIdOfPost = catchAsync(async (req, res, next) => {
   // if (req.params.postId)
   req.body.post = req.params.postId
