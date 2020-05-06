@@ -12,6 +12,8 @@ router
     authController.protect,
     hanlderFactory.setUserIdAsUser,
     reactionController.checkIfUserGaveReaction,
+    reactionController.setIdOfPost,
+    reactionController.setIdOfPostAuthor,
     reactionController.createReaction
   )
 

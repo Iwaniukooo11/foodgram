@@ -7,9 +7,17 @@ const APIFeatures = require('../utils/apiFeatures')
 exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findById(req.params.id)
-    console.log('DELETING: ', doc.user.id, req.user.id)
-    if (doc.user.id !== req.user.id)
-      return next(new AppError('removed a doc, that you warent an author', 500))
+    console.log('DELETING: ', doc.user, req.user.id)
+    if (typeof doc.user.id === 'string' && req.user.id)
+      if (doc.user.id !== req.user.id)
+        return next(
+          new AppError('removed a doc, that you warent an authorA', 500)
+        )
+      else if (doc.user && req.user.id)
+        if (doc.user !== req.user.id)
+          return next(
+            new AppError('removed a doc, that you warent an authorB', 500)
+          )
 
     doc.delete()
     if (!doc) {
@@ -60,10 +68,10 @@ exports.updateOne = (Model) =>
 
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    console.log('TESTT')
+    // if (req.params.postId) req.body.post = req.params.postId
 
-    if (req.params.postId) req.body.post = req.params.postId
     const doc = await Model.create(req.body)
+    console.log('CREATE FROM BODY: ', req.body)
 
     res.status(201).json({
       status: 'OK',

@@ -1,6 +1,8 @@
 const catchAsync = require('./../utils/catchAsync')
 const Post = require('../models/postModel')
 const Follow = require('../models/followModel')
+const Reaction = require('../models/reactionModel')
+const Comment = require('../models/commentModel')
 
 exports.getLogin = catchAsync(async (req, res) => {
   res.status(200).render('login', {})
@@ -42,5 +44,10 @@ exports.getFeed = catchAsync(async (req, res) => {
 })
 exports.getRecent = catchAsync(async (req, res) => {
   const posts = await Post.find().sort({ createdAt: 'asc' }).limit(10)
+  res.status(200).render('recent', { posts })
+})
+exports.getNotifications = catchAsync(async (req, res) => {
+  const reactions = await Reaction.find().sort({ createdAt: 'asc' }).limit(10)
+  const comments = await Comment.find().sort({ createdAt: 'asc' }).limit(10)
   res.status(200).render('recent', { posts })
 })
