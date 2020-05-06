@@ -37,4 +37,15 @@
 
     }
 
+    &__post,
+    .post {
+
+        &__img {
+            width: 40vw;
+            height: 40vw;
+            border-radius: 10%;
+
+        }
+    }
+
 }

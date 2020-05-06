@@ -40,3 +40,7 @@ exports.getFeed = catchAsync(async (req, res) => {
   console.log('POSTS: ', posts)
   res.status(200).render('feed', { posts })
 })
+exports.getRecent = catchAsync(async (req, res) => {
+  const posts = await Post.find().sort({ createdAt: 'asc' }).limit(10)
+  res.status(200).render('recent', { posts })
+})
