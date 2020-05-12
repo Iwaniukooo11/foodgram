@@ -26,8 +26,8 @@ block content
     ul.me__stats.stats.box-shadow
       each element in stats
         +statsItem(element.num,element.desc)
-      //- if isMe == false
-    button.section__button.section__button--background.me__follow-btn Follow
+    if isMe == false
+      button.section__button.section__button--background.me__follow-btn#follow-btn(data-user=`${user.id}`) Follow
 
     ul.me__post-list.post-list
       each post in posts

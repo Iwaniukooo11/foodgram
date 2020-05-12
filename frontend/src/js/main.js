@@ -1,11 +1,13 @@
 console.log('hello client side!')
 import { auth } from './login'
 import * as postActions from './postActions'
+import * as followActions from './follow'
 
 const loginForm = document.getElementById('form-login')
 const signUpForm = document.getElementById('form-signup')
 const addReactionBtns = [...document.querySelectorAll('.add-reaction')]
 const sendCommentForms = [...document.querySelectorAll('.send-comment-form')]
+const followBtn = document.getElementById('follow-btn')
 
 if (loginForm) {
   loginForm.addEventListener('submit', async (e) => {
@@ -51,4 +53,11 @@ if (sendCommentForms) {
       })
     // console.log(el)
   )
+}
+
+if (followBtn) {
+  followBtn.addEventListener('click', async (e) => {
+    await followActions.followUser(followBtn.dataset.user)
+    location.reload() //TD
+  })
 }
