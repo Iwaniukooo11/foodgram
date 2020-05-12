@@ -102,10 +102,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*!*********************************!*\
   !*** ./frontend/src/js/main.js ***!
   \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("console.log('hello client side!');\n\nconst {\n  auth\n} = __webpack_require__(/*! ./login */ \"./frontend/src/js/login.js\");\n\nconst loginForm = document.getElementById('form-login');\nconst signUpForm = document.getElementById('form-signup');\n\nif (loginForm) {\n  loginForm.addEventListener('submit', async e => {\n    e.preventDefault();\n    const nick = document.getElementById('nick').value;\n    const password = document.getElementById('password').value;\n    console.log('before login action');\n    auth({\n      nick,\n      password\n    }, 'login');\n  });\n}\n\nif (signUpForm) {\n  signUpForm.addEventListener('submit', async e => {\n    e.preventDefault();\n    const nick = document.getElementById('nick').value;\n    const password = document.getElementById('password').value;\n    const passwordConfirm = document.getElementById('passwordConfirm').value;\n    const name = document.getElementById('name').value;\n    const email = document.getElementById('email').value;\n    console.log('before login action');\n    auth({\n      nick,\n      password,\n      email,\n      passwordConfirm,\n      name\n    }, 'signup');\n  });\n}\n\n//# sourceURL=webpack:///./frontend/src/js/main.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./login */ \"./frontend/src/js/login.js\");\n/* harmony import */ var _postActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./postActions */ \"./frontend/src/js/postActions.js\");\nconsole.log('hello client side!');\n\n\nconst loginForm = document.getElementById('form-login');\nconst signUpForm = document.getElementById('form-signup');\nconst addReactionBtns = [...document.querySelectorAll('.add-reaction')];\nconst sendCommentForms = [...document.querySelectorAll('.send-comment-form')];\nconsole.log(sendCommentForms);\n\nif (loginForm) {\n  loginForm.addEventListener('submit', async e => {\n    e.preventDefault();\n    const nick = document.getElementById('nick').value;\n    const password = document.getElementById('password').value;\n    console.log('before login action');\n    Object(_login__WEBPACK_IMPORTED_MODULE_0__[\"auth\"])({\n      nick,\n      password\n    }, 'login');\n  });\n}\n\nif (signUpForm) {\n  signUpForm.addEventListener('submit', async e => {\n    e.preventDefault();\n    const nick = document.getElementById('nick').value;\n    const password = document.getElementById('password').value;\n    const passwordConfirm = document.getElementById('passwordConfirm').value;\n    const name = document.getElementById('name').value;\n    const email = document.getElementById('email').value;\n    console.log('before login action');\n    Object(_login__WEBPACK_IMPORTED_MODULE_0__[\"auth\"])({\n      nick,\n      password,\n      email,\n      passwordConfirm,\n      name\n    }, 'signup');\n  });\n}\n\nif (addReactionBtns) {\n  addReactionBtns.forEach(el => el.addEventListener('click', async e => {\n    // e.preventDefault()\n    console.log('click!!');\n    await _postActions__WEBPACK_IMPORTED_MODULE_1__[\"addReaction\"](el.dataset.post, 'tasty'); // alert('posted?')\n  }));\n}\n\nif (sendCommentForms) {\n  sendCommentForms.forEach(el => el.addEventListener('submit', async e => {\n    console.log(e.target[0].value);\n    e.preventDefault();\n    await _postActions__WEBPACK_IMPORTED_MODULE_1__[\"addComment\"](el.dataset.post, e.target[0].value); // alert('posted?')\n\n    e.target[0].value = '';\n  }) // console.log(el)\n  );\n}\n\n//# sourceURL=webpack:///./frontend/src/js/main.js?");
+
+/***/ }),
+
+/***/ "./frontend/src/js/postActions.js":
+/*!****************************************!*\
+  !*** ./frontend/src/js/postActions.js ***!
+  \****************************************/
+/*! exports provided: addReaction, addComment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"addReaction\", function() { return addReaction; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"addComment\", function() { return addComment; });\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);\n\nconst addReaction = async (postId, reaction) => {\n  try {\n    await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(`${document.location.origin}/api/v1/posts/${postId}/reactions`, {\n      reaction\n    });\n  } catch (err) {\n    console.log(err);\n    alert(err.message);\n  }\n};\nconst addComment = async (postId, content) => {\n  try {\n    await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(`${document.location.origin}/api/v1/posts/${postId}/comments`, {\n      content\n    });\n  } catch (err) {\n    console.log('ERR!: ', err);\n    alert(err.message);\n  }\n};\n\n//# sourceURL=webpack:///./frontend/src/js/postActions.js?");
 
 /***/ }),
 
@@ -432,13 +445,13 @@ eval("// shim for using process in browser\nvar process = module.exports = {};\n
 /***/ }),
 
 /***/ 0:
-/*!******************************************************************!*\
-  !*** multi ./frontend/src/js/login.js ./frontend/src/js/main.js ***!
-  \******************************************************************/
+/*!***************************************************************************************************!*\
+  !*** multi ./frontend/src/js/login.js ./frontend/src/js/main.js ./frontend/src/js/postActions.js ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! /home/iwaniuk/Documents/Projects/foodgram/frontend/src/js/login.js */\"./frontend/src/js/login.js\");\nmodule.exports = __webpack_require__(/*! /home/iwaniuk/Documents/Projects/foodgram/frontend/src/js/main.js */\"./frontend/src/js/main.js\");\n\n\n//# sourceURL=webpack:///multi_./frontend/src/js/login.js_./frontend/src/js/main.js?");
+eval("__webpack_require__(/*! /home/iwaniuk/Documents/Projects/foodgram/frontend/src/js/login.js */\"./frontend/src/js/login.js\");\n__webpack_require__(/*! /home/iwaniuk/Documents/Projects/foodgram/frontend/src/js/main.js */\"./frontend/src/js/main.js\");\nmodule.exports = __webpack_require__(/*! /home/iwaniuk/Documents/Projects/foodgram/frontend/src/js/postActions.js */\"./frontend/src/js/postActions.js\");\n\n\n//# sourceURL=webpack:///multi_./frontend/src/js/login.js_./frontend/src/js/main.js_./frontend/src/js/postActions.js?");
 
 /***/ })
 

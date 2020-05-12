@@ -1,8 +1,12 @@
 console.log('hello client side!')
-const { auth } = require('./login')
+import { auth } from './login'
+import * as postActions from './postActions'
 
 const loginForm = document.getElementById('form-login')
 const signUpForm = document.getElementById('form-signup')
+const addReactionBtns = [...document.querySelectorAll('.add-reaction')]
+const sendCommentForms = [...document.querySelectorAll('.send-comment-form')]
+console.log(sendCommentForms)
 
 if (loginForm) {
   loginForm.addEventListener('submit', async (e) => {
@@ -24,4 +28,28 @@ if (signUpForm) {
     console.log('before login action')
     auth({ nick, password, email, passwordConfirm, name }, 'signup')
   })
+}
+
+if (addReactionBtns) {
+  addReactionBtns.forEach((el) =>
+    el.addEventListener('click', async (e) => {
+      // e.preventDefault()
+      console.log('click!!')
+      await postActions.addReaction(el.dataset.post, 'tasty')
+      // alert('posted?')
+    })
+  )
+}
+if (sendCommentForms) {
+  sendCommentForms.forEach(
+    (el) =>
+      el.addEventListener('submit', async (e) => {
+        console.log(e.target[0].value)
+        e.preventDefault()
+        await postActions.addComment(el.dataset.post, e.target[0].value)
+        // alert('posted?')
+        e.target[0].value = ''
+      })
+    // console.log(el)
+  )
 }

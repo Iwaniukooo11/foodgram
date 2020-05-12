@@ -39,12 +39,38 @@
 
     &__post,
     .post {
+        display: grid;
+        justify-items: center;
+        max-width: 40vw;
 
         &__img {
             width: 40vw;
             height: 40vw;
             border-radius: 10%;
+        }
 
+        &__form {
+            display: flex;
+            width: 100%;
+        }
+
+        &__reaction-add {
+            cursor: pointer;
+            padding: 5px;
+            // flex-shrink: 3;
+
+        }
+
+        &__input {
+            background-color: $color-grey-dark;
+            border-radius: 6px;
+            flex-grow: 1;
+            width: 20px;
+        }
+
+        &__send-btn {
+            padding: 8px;
+            cursor: pointer;
         }
     }
 

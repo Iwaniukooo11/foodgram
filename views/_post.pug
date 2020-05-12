@@ -1,6 +1,11 @@
 mixin postItem(post)
-  li.section_post.post
+  li.section__post.post
     img.post__img.box-shadow(src=`${post.image}`,alt='post image',data-id=`${id}`)
+    //- .post__actions-wrap
+    span.post__reaction-add.add-reaction(data-post=`${post.id}`)= 'daj kciuka!'
+    form.post__form.send-comment-form#comment-form(data-post=`${post.id}`)
+      input.post__input
+      button.post__send-btn.section__button.section__button--background(type='submit') S
   //- .post-list__stats-wrap
     .post-list__likes.post-list__likes--like=likesQuantity
     .post-list__likes.post-list__likes--comment=commentsQuantity
