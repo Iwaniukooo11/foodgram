@@ -9,7 +9,8 @@ export const addReaction = async (postId, reaction) => {
       }
     )
   } catch (err) {
-    console.log(err)
+    console.log('ERR!: ', err)
+
     alert(err.message)
   }
 }

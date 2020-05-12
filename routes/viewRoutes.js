@@ -12,4 +12,6 @@ router
   .route('/notifications')
   .get(authController.protect, viewsController.getNotifications)
 
+router.route('/users/:userId').get(viewsController.getUser)
+
 module.exports = router

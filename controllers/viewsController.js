@@ -3,6 +3,7 @@ const Post = require('../models/postModel')
 const Follow = require('../models/followModel')
 const Reaction = require('../models/reactionModel')
 const Comment = require('../models/commentModel')
+const User = require('../models/userModel')
 
 exports.getLogin = catchAsync(async (req, res) => {
   res.status(200).render('login', {})
@@ -20,7 +21,7 @@ exports.getMe = catchAsync(async (req, res) => {
   ]
   const posts = await Post.find({ user: user.id })
 
-  res.status(200).render('me', {
+  res.status(200).render('user', {
     user: req.user,
     stats,
     posts,
@@ -59,4 +60,20 @@ exports.getNotifications = catchAsync(async (req, res) => {
   console.log(notifications)
   console.log(reactions, comments)
   res.status(200).render('notifications', { notifications })
+})
+
+exports.getUser = catchAsync(async (req, res) => {
+  const user = await User.findById(req.params.userId)
+  const stats = [
+    { desc: 'Posts', num: user.posts.length },
+    { desc: 'Followers', num: user.followers },
+    { desc: 'Follows', num: user.following },
+  ]
+  const posts = await Post.find({ user: user.id })
+  res.status(200).render('user', {
+    user,
+    isMe: false,
+    stats,
+    posts,
+  })
 })

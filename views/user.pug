@@ -1,6 +1,5 @@
 extends base
-
-
+include _post
 
 mixin statsItem(num,desc)
   li.stats__li
@@ -32,5 +31,6 @@ block content
 
     ul.me__post-list.post-list
       each post in posts
-        +imgItem(post.id,post.image,post.likesQuantity,post.commentsQuantity)
+        //- +imgItem(post.id,post.image,post.likesQuantity,post.commentsQuantity)
+        +postItem(post)
 

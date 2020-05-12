@@ -6,7 +6,6 @@ const loginForm = document.getElementById('form-login')
 const signUpForm = document.getElementById('form-signup')
 const addReactionBtns = [...document.querySelectorAll('.add-reaction')]
 const sendCommentForms = [...document.querySelectorAll('.send-comment-form')]
-console.log(sendCommentForms)
 
 if (loginForm) {
   loginForm.addEventListener('submit', async (e) => {
