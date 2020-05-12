@@ -77,3 +77,12 @@ exports.getUser = catchAsync(async (req, res) => {
     posts,
   })
 })
+exports.getPost = catchAsync(async (req, res) => {
+  console.log('HERE', req.params.postId)
+  const posts = await Post.find({ _id: req.params.postId })
+  console.log(posts)
+  res.status(200).render('recent', {
+    posts,
+    isSingle: true,
+  })
+})

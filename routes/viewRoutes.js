@@ -13,5 +13,6 @@ router
   .get(authController.protect, viewsController.getNotifications)
 
 router.route('/users/:userId').get(viewsController.getUser)
+router.route('/posts/:postId').get(viewsController.getPost)
 
 module.exports = router
