@@ -58,6 +58,6 @@ if (sendCommentForms) {
 if (followBtn) {
   followBtn.addEventListener('click', async (e) => {
     await followActions.followUser(followBtn.dataset.user)
-    location.reload() //TD
+    // location.reload() //TD
   })
 }

@@ -1,10 +1,13 @@
 extends base
 include _post
 
-mixin statsItem(num,desc)
+mixin statsItem(obj)
   li.stats__li
-    span.stats__num= num
-    p.stats__desc=desc
+    if obj.link
+      a.stats__num(href=`/users/${user.id}/${obj.link}`)= obj.num
+    else
+      span.stats__num= obj.num
+    p.stats__desc= obj.desc
 
 mixin imgItem(id,src,likesQuantity,commentsQuantity)
   li.post-list__li
@@ -25,7 +28,7 @@ block content
 
     ul.me__stats.stats.box-shadow
       each element in stats
-        +statsItem(element.num,element.desc)
+        +statsItem(element)
     if isMe == false
       button.section__button.section__button--background.me__follow-btn#follow-btn(data-user=`${user.id}`) Follow
 

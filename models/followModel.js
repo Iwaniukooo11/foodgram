@@ -5,11 +5,11 @@ const followSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.ObjectId,
-      //  ref: 'User'
+      ref: 'User',
     },
     followed: {
       type: mongoose.Schema.ObjectId,
-      //  ref: 'User'
+      ref: 'User',
     },
     createdAt: {
       type: Date,
@@ -44,6 +44,17 @@ const followSchema = new mongoose.Schema(
 //   author.following += 1
 //   author.save({ validateBeforeSave: false })
 // })
+followSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'followed',
+    select: 'nick photo',
+  })
+  this.populate({
+    path: 'user',
+    select: 'nick photo',
+  })
+  next()
+})
 
 const Follow = mongoose.model('Follow', followSchema)
 

@@ -66,8 +66,8 @@ exports.getUser = catchAsync(async (req, res) => {
   const user = await User.findById(req.params.userId)
   const stats = [
     { desc: 'Posts', num: user.posts.length },
-    { desc: 'Followers', num: user.followers },
-    { desc: 'Follows', num: user.following },
+    { desc: 'Followers', num: user.followers, link: 'followers' },
+    { desc: 'Follows', num: user.following, link: 'follows' },
   ]
   const posts = await Post.find({ user: user.id })
   res.status(200).render('user', {
@@ -84,5 +84,23 @@ exports.getPost = catchAsync(async (req, res) => {
   res.status(200).render('recent', {
     posts,
     isSingle: true,
+  })
+})
+exports.getFollows = catchAsync(async (req, res) => {
+  console.log('HERE', req.params.userId)
+  const users = await Follow.find({ user: req.params.userId })
+  console.log(users)
+  res.status(200).render('followList', {
+    follows: true,
+    users,
+  })
+})
+exports.getFollowers = catchAsync(async (req, res) => {
+  console.log('HERE', req.params.userId)
+  const users = await Follow.find({ followed: req.params.userId })
+  console.log(users)
+  res.status(200).render('followList', {
+    followers: true,
+    users,
   })
 })

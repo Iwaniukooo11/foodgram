@@ -1,0 +1,15 @@
+extends base
+
+mixin userElement(obj)
+  li.follow-list__element
+    span= obj.nick
+
+block content
+  main.main.section.follow-list
+    ul.follow-list__list
+    each user in users
+      if follows
+        +userElement(user.followed)
+      else
+        +userElement(user.user)
+
