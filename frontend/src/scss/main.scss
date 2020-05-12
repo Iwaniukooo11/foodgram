@@ -52,6 +52,7 @@ body {
 a {
     // color: $color-orange;
     text-decoration: none;
+    color: inherit;
     // font-weight: bold;
     // background: -webkit-linear-gradient($color-orange, $color-red);
     // -webkit-background-clip: text;
@@ -62,4 +63,5 @@ a {
 @import './login';
 @import './feed';
 @import './recent';
+@import './notifications';
 @import './me';

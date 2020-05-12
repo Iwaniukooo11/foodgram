@@ -15,6 +15,7 @@ const commentSchema = new mongoose.Schema({
     //author
     type: mongoose.Schema.ObjectId,
     ref: 'User',
+    // refPath: 'User',
     required: [true, 'Comment must have an author'],
   },
   post: {
@@ -27,6 +28,13 @@ const commentSchema = new mongoose.Schema({
     refPath: 'User',
     required: [true, 'Comment must have a postAuthor'],
   },
+})
+commentSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'user',
+    select: 'nick photo',
+  })
+  next()
 })
 
 const Comment = mongoose.model('Comment', commentSchema)

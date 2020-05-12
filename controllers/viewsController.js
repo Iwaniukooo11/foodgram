@@ -35,10 +35,10 @@ exports.getFeed = catchAsync(async (req, res) => {
       user: obj.followed,
     }
   })
+  let posts = []
+  if (orTab)
+    posts = await Post.find({ $or: orTab }).sort({ createdAt: 'asc' }).limit(10)
 
-  const posts = await Post.find({ $or: orTab })
-    .sort({ createdAt: 'asc' })
-    .limit(10)
   console.log('POSTS: ', posts)
   res.status(200).render('feed', { posts })
 })
@@ -56,7 +56,7 @@ exports.getNotifications = catchAsync(async (req, res) => {
     .limit(10)
 
   const notifications = reactions.concat(comments)
-  // console.log(notifications)
+  console.log(notifications)
   console.log(reactions, comments)
   res.status(200).render('notifications', { notifications })
 })

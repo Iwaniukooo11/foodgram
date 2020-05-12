@@ -47,6 +47,14 @@ const reactionSchema = new mongoose.Schema(
 //   })
 // })
 
+reactionSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'user',
+    select: 'nick photo',
+  })
+  next()
+})
+
 const Reaction = mongoose.model('Reaction', reactionSchema)
 
 module.exports = Reaction

@@ -2,7 +2,12 @@ extends base
 
 mixin nottfElement(obj)
   li.notff_list-element
-    p.notff__name=obj.user
+    a.notff__link(href=`posts/${obj.post}`)
+      if obj.content
+        p.notff__name.section__subtext #{obj.user.nick} commented your post!
+
+      else 
+        p.notff__name.section__subtext= `${obj.user.nick} reacted to your post with "${obj.reaction}"`
 
 block content
 
