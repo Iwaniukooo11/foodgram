@@ -8,15 +8,21 @@ router.use('/:id/follows', followRouter)
 
 router.post('/signup', authController.signUp)
 router.post('/login', authController.login)
-router.get('/logout')
+router.get('/logout', authController.logout)
 router.get('/me')
+router.patch(
+  '/me',
+  authController.protect,
+  userController.setUserIdToParams,
+  userController.updateUser
+)
 
 router.route('/').get(userController.getAllUsers)
 
 router
   .route('/:id')
   .get(userController.getUser)
-  .patch(userController.updateUser)
-  .delete(userController.deleteUser)
+  // .patch(authController.protect, userController.updateUser)
+  .delete(authController.protect, userController.deleteUser)
 
 module.exports = router

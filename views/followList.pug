@@ -2,7 +2,7 @@ extends base
 
 mixin userElement(obj)
   li.follow-list__element
-    span= obj.nick
+    a(href=`/users/${obj.id}`)= obj.nick
 
 block content
   main.main.section.follow-list

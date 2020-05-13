@@ -19,3 +19,13 @@ export const auth = async (obj, type) => {
     // showAlert('error', 'NOT logged in!')
   }
 }
+
+export const logout = async () => {
+  try {
+    await axios.get(`${document.location.origin}/api/v1/users/logout`)
+    // location.reload(true)
+    location.assign('/login')
+  } catch (err) {
+    console.log(err)
+  }
+}

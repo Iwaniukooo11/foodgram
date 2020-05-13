@@ -1,13 +1,17 @@
 console.log('hello client side!')
-import { auth } from './login'
+import * as loginActions from './login'
 import * as postActions from './postActions'
 import * as followActions from './follow'
+import * as updateActions from './update'
 
 const loginForm = document.getElementById('form-login')
 const signUpForm = document.getElementById('form-signup')
+const logoutBtn = document.getElementById('logout-btn')
 const addReactionBtns = [...document.querySelectorAll('.add-reaction')]
 const sendCommentForms = [...document.querySelectorAll('.send-comment-form')]
 const followBtn = document.getElementById('follow-btn')
+const updateForms = [...document.querySelectorAll('.update-form')]
+// console.log(updateForms)
 
 if (loginForm) {
   loginForm.addEventListener('submit', async (e) => {
@@ -15,7 +19,7 @@ if (loginForm) {
     const nick = document.getElementById('nick').value
     const password = document.getElementById('password').value
     console.log('before login action')
-    auth({ nick, password }, 'login')
+    loginActions.auth({ nick, password }, 'login')
   })
 }
 if (signUpForm) {
@@ -27,7 +31,16 @@ if (signUpForm) {
     const name = document.getElementById('name').value
     const email = document.getElementById('email').value
     console.log('before login action')
-    auth({ nick, password, email, passwordConfirm, name }, 'signup')
+    loginActions.auth(
+      { nick, password, email, passwordConfirm, name },
+      'signup'
+    )
+  })
+}
+
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', async (e) => {
+    loginActions.logout()
   })
 }
 
@@ -60,4 +73,15 @@ if (followBtn) {
     await followActions.followUser(followBtn.dataset.user)
     // location.reload() //TD
   })
+}
+
+if (updateForms) {
+  updateForms.forEach((form) =>
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault()
+      await updateActions.update({
+        [e.target[0].name]: e.target[0].value,
+      })
+    })
+  )
 }

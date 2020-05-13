@@ -90,5 +90,6 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   res.locals.user = currentUser //<--save to locals
   req.user = currentUser
+  console.log('did protect')
   next()
 })

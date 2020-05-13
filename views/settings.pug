@@ -1,0 +1,12 @@
+extends base
+
+block content
+
+  main.main.section.settings
+    form.settings__form.update-form
+      input.settings__input(type='text',name='name',id='name',placeholder=`${user.name}`)
+      button.section__button.section__button--background(type='submit') Update
+    form.settings__form.update-form
+      input.settings__input(type='text',name='description',id='description',placeholder=`${user.description}`)
+      button.section__button.section__button--background(type='submit') Update
+    button.section__button.section__button--background#logout-btn Log out

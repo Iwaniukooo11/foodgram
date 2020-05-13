@@ -29,3 +29,8 @@ exports.getTotalsPosted = catchAsync(async (req, res, next) => {
 exports.getTotalsReceived = catchAsync(async (req, res) => {
   //  THIS ROUTE IS NOT DEFINED
 })
+
+exports.setUserIdToParams = catchAsync(async (req, res, next) => {
+  req.params.id = req.user.id
+  next()
+})
