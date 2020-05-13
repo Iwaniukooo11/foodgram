@@ -457,13 +457,13 @@ eval("// shim for using process in browser\nvar process = module.exports = {};\n
 /***/ }),
 
 /***/ 0:
-/*!***************************************************************************************************!*\
-  !*** multi ./frontend/src/js/login.js ./frontend/src/js/main.js ./frontend/src/js/postActions.js ***!
-  \***************************************************************************************************/
+/*!*******************************************************************************************************************************!*\
+  !*** multi ./frontend/src/js/follow.js ./frontend/src/js/login.js ./frontend/src/js/main.js ./frontend/src/js/postActions.js ***!
+  \*******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! /home/iwaniuk/Documents/Projects/foodgram/frontend/src/js/login.js */\"./frontend/src/js/login.js\");\n__webpack_require__(/*! /home/iwaniuk/Documents/Projects/foodgram/frontend/src/js/main.js */\"./frontend/src/js/main.js\");\nmodule.exports = __webpack_require__(/*! /home/iwaniuk/Documents/Projects/foodgram/frontend/src/js/postActions.js */\"./frontend/src/js/postActions.js\");\n\n\n//# sourceURL=webpack:///multi_./frontend/src/js/login.js_./frontend/src/js/main.js_./frontend/src/js/postActions.js?");
+eval("__webpack_require__(/*! /home/iwaniuk/Documents/Projects/foodgram/frontend/src/js/follow.js */\"./frontend/src/js/follow.js\");\n__webpack_require__(/*! /home/iwaniuk/Documents/Projects/foodgram/frontend/src/js/login.js */\"./frontend/src/js/login.js\");\n__webpack_require__(/*! /home/iwaniuk/Documents/Projects/foodgram/frontend/src/js/main.js */\"./frontend/src/js/main.js\");\nmodule.exports = __webpack_require__(/*! /home/iwaniuk/Documents/Projects/foodgram/frontend/src/js/postActions.js */\"./frontend/src/js/postActions.js\");\n\n\n//# sourceURL=webpack:///multi_./frontend/src/js/follow.js_./frontend/src/js/login.js_./frontend/src/js/main.js_./frontend/src/js/postActions.js?");
 
 /***/ })
 

@@ -70,9 +70,14 @@ exports.getUser = catchAsync(async (req, res) => {
     { desc: 'Follows', num: user.following, link: 'follows' },
   ]
   const posts = await Post.find({ user: user.id })
+  console.log(req.user)
+  const isMe = req.user.id === req.params.userId
+  if (isMe) return res.redirect('/me')
+
+  // console.log('isme: ', isMe)
   res.status(200).render('user', {
     user,
-    isMe: false,
+    isMe,
     stats,
     posts,
   })

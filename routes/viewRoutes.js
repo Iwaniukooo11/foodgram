@@ -12,9 +12,17 @@ router
   .route('/notifications')
   .get(authController.protect, viewsController.getNotifications)
 
-router.route('/users/:userId').get(viewsController.getUser)
-router.route('/users/:userId/follows').get(viewsController.getFollows)
-router.route('/users/:userId/followers').get(viewsController.getFollowers)
-router.route('/posts/:postId').get(viewsController.getPost)
+router
+  .route('/users/:userId')
+  .get(authController.protect, viewsController.getUser)
+router
+  .route('/users/:userId/follows')
+  .get(authController.protect, viewsController.getFollows)
+router
+  .route('/users/:userId/followers')
+  .get(authController.protect, viewsController.getFollowers)
+router
+  .route('/posts/:postId')
+  .get(authController.protect, viewsController.getPost)
 
 module.exports = router
