@@ -11,6 +11,7 @@ const addReactionBtns = [...document.querySelectorAll('.add-reaction')]
 const sendCommentForms = [...document.querySelectorAll('.send-comment-form')]
 const followBtn = document.getElementById('follow-btn')
 const updateForms = [...document.querySelectorAll('.update-form')]
+const searchUserBtn = document.getElementById('search-user-btn')
 // console.log(updateForms)
 
 if (loginForm) {
@@ -84,4 +85,14 @@ if (updateForms) {
       })
     })
   )
+}
+if (searchUserBtn) {
+  searchUserBtn.addEventListener('click', (e) => {
+    const input = document.getElementById('search-user-input')
+    try {
+      location.assign(`/users/${input.value}?type=nick`)
+    } catch {
+      alert('not')
+    }
+  })
 }

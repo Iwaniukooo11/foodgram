@@ -106,6 +106,7 @@ exports.getAll = (Model) =>
   catchAsync(async (req, res) => {
     let filter = {}
     if (req.params.postId) filter = { post: req.params.postId }
+    else if (req.params.userId) filter = { nick: req.params.userId }
 
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()

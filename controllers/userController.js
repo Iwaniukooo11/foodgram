@@ -34,3 +34,10 @@ exports.setUserIdToParams = catchAsync(async (req, res, next) => {
   req.params.id = req.user.id
   next()
 })
+
+// exports.checkType = catchAsync(async(req,res,next)=>{
+//   if (req.query.type==='name'){
+//     delete req.query.type
+//     req.params.id=
+//   }
+// })

@@ -63,7 +63,16 @@ exports.getNotifications = catchAsync(async (req, res) => {
 })
 
 exports.getUser = catchAsync(async (req, res) => {
-  const user = await User.findById(req.params.userId)
+  let user
+  if (req.query.type)
+    user = await User.findOne({ [req.query.type]: req.params.userId })
+  else user = await User.findById(req.params.userId)
+
+  if (!user)
+    res.status(404).json({
+      status: 'ERROR',
+      message: `Such user doesen't exist!`,
+    })
   const stats = [
     { desc: 'Posts', num: user.posts.length },
     { desc: 'Followers', num: user.followers, link: 'followers' },
@@ -71,7 +80,9 @@ exports.getUser = catchAsync(async (req, res) => {
   ]
   const posts = await Post.find({ user: user.id })
   console.log(req.user)
-  const isMe = req.user.id === req.params.userId
+  const isMe =
+    req.user.id === req.params.userId ||
+    req.user[req.query.type] === req.params.userId
   if (isMe) return res.redirect('/me')
 
   // console.log('isme: ', isMe)
