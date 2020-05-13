@@ -20,6 +20,9 @@ exports.getMe = catchAsync(async (req, res) => {
     { desc: 'Follows', num: user.following, link: 'follows' },
   ]
   const posts = await Post.find({ user: user.id })
+    .sort({ createdAt: -1 })
+    .exec()
+  console.log('me,exec pls')
 
   res.status(200).render('user', {
     user: req.user,
@@ -38,15 +41,17 @@ exports.getFeed = catchAsync(async (req, res) => {
   })
   let posts = []
   if (orTab)
-    posts = await Post.find({ $or: orTab }).sort({ createdAt: 'asc' }).limit(10)
+    posts = await Post.find({ $or: orTab }).sort({ createdAt: -1 }).limit(10)
 
   // console.log('POSTS: ', posts)
   res.status(200).render('feed', { posts })
 })
+
 exports.getRecent = catchAsync(async (req, res) => {
-  const posts = await Post.find().sort({ createdAt: 'asc' }).limit(10)
+  const posts = await Post.find().sort({ createdAt: -1 }).limit(10)
   res.status(200).render('recent', { posts })
 })
+
 exports.getNotifications = catchAsync(async (req, res) => {
   console.log(req.user.id)
   const reactions = await Reaction.find({ postAuthor: req.user.id })
@@ -79,6 +84,11 @@ exports.getUser = catchAsync(async (req, res) => {
     { desc: 'Follows', num: user.following, link: 'follows' },
   ]
   const posts = await Post.find({ user: user.id })
+    .sort({ createdAt: -1 })
+    .exec()
+  // .exec((err, docs) => console.log('sorted: ', docs))
+  console.log('sorted, i guess')
+
   console.log(req.user)
   const isMe =
     req.user.id === req.params.userId ||
