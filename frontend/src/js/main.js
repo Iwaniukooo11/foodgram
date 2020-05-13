@@ -12,6 +12,7 @@ const sendCommentForms = [...document.querySelectorAll('.send-comment-form')]
 const followBtn = document.getElementById('follow-btn')
 const updateForms = [...document.querySelectorAll('.update-form')]
 const searchUserBtn = document.getElementById('search-user-btn')
+const addPostForm = document.getElementById('add-post-form')
 // console.log(updateForms)
 
 if (loginForm) {
@@ -94,5 +95,18 @@ if (searchUserBtn) {
     } catch {
       alert('not')
     }
+  })
+}
+
+if (addPostForm) {
+  addPostForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const descInput = document.getElementById('description')
+    const imgInput = document.getElementById('image')
+    const form = new FormData()
+    form.append('description', descInput.value)
+    form.append('image', imgInput.files[0])
+
+    postActions.createPost(form)
   })
 }

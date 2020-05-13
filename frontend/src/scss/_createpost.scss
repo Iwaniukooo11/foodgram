@@ -1,0 +1,12 @@
+.create-post {
+    &__form {
+        display: grid;
+        justify-items: center;
+        row-gap: 20px;
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+}

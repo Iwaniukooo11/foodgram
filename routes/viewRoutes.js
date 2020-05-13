@@ -28,4 +28,8 @@ router
   .route('/posts/:postId')
   .get(authController.protect, viewsController.getPost)
 
+router
+  .route('/create-post')
+  .get(authController.protect, viewsController.getPostCreator)
+
 module.exports = router

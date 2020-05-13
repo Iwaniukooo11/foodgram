@@ -1,0 +1,14 @@
+extends base
+
+block content
+  main.main.section.create-post
+    form.create-post__form#add-post-form
+      .create-post__wrapper
+        input.create-post__input#description(name='description')
+        label.create-post__label(for='description') Describe your img
+     
+      .create-post__wrapper
+        input.create-post__input#image(type='file')
+        label(for="image") Choose your img
+      
+      button.section__button.section__button--background(type='submit') Post1

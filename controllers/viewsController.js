@@ -40,7 +40,7 @@ exports.getFeed = catchAsync(async (req, res) => {
   if (orTab)
     posts = await Post.find({ $or: orTab }).sort({ createdAt: 'asc' }).limit(10)
 
-  console.log('POSTS: ', posts)
+  // console.log('POSTS: ', posts)
   res.status(200).render('feed', { posts })
 })
 exports.getRecent = catchAsync(async (req, res) => {
@@ -122,6 +122,11 @@ exports.getFollowers = catchAsync(async (req, res) => {
 
 exports.getSettings = catchAsync(async (req, res) => {
   res.status(200).render('settings', {
+    user: req.user,
+  })
+})
+exports.getPostCreator = catchAsync(async (req, res) => {
+  res.status(200).render('createPost', {
     user: req.user,
   })
 })
