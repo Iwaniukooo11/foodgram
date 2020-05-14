@@ -22,7 +22,6 @@ exports.getMe = catchAsync(async (req, res) => {
   const posts = await Post.find({ user: user.id })
     .sort({ createdAt: -1 })
     .exec()
-  console.log('me,exec pls')
 
   res.status(200).render('user', {
     user: req.user,
@@ -43,7 +42,10 @@ exports.getFeed = catchAsync(async (req, res) => {
   if (orTab)
     posts = await Post.find({ $or: orTab }).sort({ createdAt: -1 }).limit(10)
 
+  // console.log(posts[0])
   // console.log('POSTS: ', posts)
+  posts.forEach((el) => console.log(el.likesQuantity))
+
   res.status(200).render('feed', { posts })
 })
 

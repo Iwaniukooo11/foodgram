@@ -75,16 +75,29 @@ postSchema.pre(/^find/, function (next) {
   next()
 })
 postSchema.pre(/^find/, async function (next) {
-  const postId = this.getQuery()._id
+  // const postId = this.getQuery()
+  // console.log(postId, this)
 
-  const allReactions = await Reaction.countDocuments({ post: postId })
-  const allComments = await Comment.countDocuments({ post: postId })
-  await this.updateOne(
-    {},
-    { $set: { likesQuantity: allReactions, commentsQuantity: allComments } }
-  )
+  // const allReactions = await Reaction.countDocuments({ post: postId })
+  // const allComments = await Comment.countDocuments({ post: postId })
+  // console.log('HERE COUNTS!', postId, allReactions)
+  // await this.updateOne(
+  //   {},
+  //   { $set: { likesQuantity: allReactions, commentsQuantity: allComments } }
+  // )
 
   next()
+})
+
+postSchema.post('init', async function (doc) {
+  console.log('THIS IS MY DOC!!', doc._id)
+
+  const allReactions = await Reaction.countDocuments({ post: doc._id })
+  const allComments = await Comment.countDocuments({ post: doc._id })
+  console.log('HERE COUNTS!', allComments, allReactions)
+  doc.likesQuantity = allReactions
+  doc.commentsQuantity = allComments
+  await doc.save()
 })
 
 postSchema.pre('save', async function (next) {
