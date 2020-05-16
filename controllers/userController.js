@@ -12,6 +12,20 @@ exports.getAllUsers = factory.getAll(User)
 
 exports.getUser = factory.getOne(User, 'posts')
 
+exports.checkIfIsFollowed = catchAsync(async (req, res, next) => {
+  // console.log('\x1b[36m', 'start')
+  // let follow = null
+  // if (req.user)
+  //   follow = await Follow.findOne({
+  //     user: req.user.id,
+  //     followed: req.params.id,
+  //   })
+
+  // console.log('FOLLOW: ', follow)
+  // req.clientData.isFollowed = !!follow
+  next()
+})
+
 exports.deleteUser = factory.disactiveOne(User)
 
 exports.updateUser = factory.updateOne(User)

@@ -77,7 +77,11 @@ if (sendCommentForms) {
 
 if (followBtn) {
   followBtn.addEventListener('click', async (e) => {
-    await followActions.followUser(followBtn.dataset.user)
+    if (followBtn.dataset.follow_action === 'unfollow')
+      await followActions.followUser(followBtn.dataset.user, 'DELETE')
+    else if (followBtn.dataset.follow_action === 'follow')
+      await followActions.followUser(followBtn.dataset.user)
+
     // location.reload() //TD
   })
 }

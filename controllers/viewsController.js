@@ -84,12 +84,13 @@ exports.getNotifications = catchAsync(async (req, res) => {
     .limit(10)
 
   const notifications = reactions.concat(comments)
-  console.log(notifications)
-  console.log(reactions, comments)
+  // console.log(notifications)
+  // console.log(reactions, comments)
   res.status(200).render('notifications', { notifications })
 })
 
 exports.getUser = catchAsync(async (req, res) => {
+  //finding user
   let user
   if (req.query.type)
     user = await User.findOne({ [req.query.type]: req.params.userId })
@@ -100,6 +101,7 @@ exports.getUser = catchAsync(async (req, res) => {
       status: 'ERROR',
       message: `Such user doesen't exist!`,
     })
+  //managing stats
   const stats = [
     { desc: 'Posts', num: user.posts.length },
     { desc: 'Followers', num: user.followers, link: 'followers' },
@@ -108,16 +110,24 @@ exports.getUser = catchAsync(async (req, res) => {
   const posts = await Post.find({ user: user.id })
     .sort({ createdAt: -1 })
     .exec()
-  // .exec((err, docs) => console.log('sorted: ', docs))
-  console.log('sorted, i guess')
 
-  // console.log(req.user)
+  //is it me?
   const isMe =
     req.user.id === req.params.userId ||
     req.user[req.query.type] === req.params.userId
   if (isMe) return res.redirect('/me')
 
-  // console.log('isme: ', isMe)
+  console.log('\x1b[36m', 'start')
+  let follow = null
+  if (req.user)
+    follow = await Follow.findOne({
+      user: req.user.id,
+      followed: req.params.userId,
+    })
+
+  console.log('FOLLOW: ', follow)
+  user.isFollowed = !!follow
+
   res.status(200).render('user', {
     user,
     isMe,

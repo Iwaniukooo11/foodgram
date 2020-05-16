@@ -18,7 +18,6 @@ mixin imgItem(id,src,likesQuantity,commentsQuantity)
 
 
 block content
-  - const followStats=[{num:10,desc:'test'},{num:10,desc:'test'},{num:10,desc:'test'},]
 
   main.main.section.section-me.me
     .me__img-wrap
@@ -33,7 +32,7 @@ block content
       each element in stats
         +statsItem(element)
     if isMe == false
-      button.section__button.section__button--background.me__follow-btn#follow-btn(data-user=`${user.id}`) Follow
+      button.section__button.section__button--background.me__follow-btn#follow-btn(data-user=`${user.id}`,data-follow_action=`${user.isFollowed? 'unfollow':'follow'}`)=`${user.isFollowed? 'Unfollow':'Follow'}`
 
     ul.me__post-list.post-list
       each post in posts

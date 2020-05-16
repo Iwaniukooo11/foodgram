@@ -10,7 +10,7 @@ exports.getAllComments = factory.getAll(Comment)
 // exports.createComment = factory.createOne(Comment)
 exports.createComment = catchAsync(async (req, res) => {
   const doc = await Comment.create(req.body)
-  const dupa = await Post.findById(req.body.post)
+  await Post.findById(req.body.post)
   console.log('CREATE FROM BODY IN COMMENT: ', req.body)
 
   res.status(201).json({

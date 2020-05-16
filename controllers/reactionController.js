@@ -9,7 +9,18 @@ exports.getAllReactions = factory.getAll(Reaction)
 
 exports.createReaction = factory.createOne(Reaction)
 
-exports.getReaction = factory.getOne(Reaction)
+exports.getReaction = catchAsync(async (req, res) => {
+  const doc = await Reaction.create(req.body)
+  await Post.findById(req.body.post)
+  console.log('CREATE FROM BODY IN COMMENT: ', req.body)
+
+  res.status(201).json({
+    status: 'OK',
+    data: {
+      data: doc,
+    },
+  })
+})
 
 ///TODO - FIX THIS AND WORK FROM NESTE
 exports.setIdOfPost = catchAsync(async (req, res, next) => {

@@ -21,7 +21,10 @@ router.route('/').get(userController.getAllUsers)
 
 router
   .route('/:id')
-  .get(userController.getUser)
+  .get(
+    // userController.checkIfIsFollowed,
+    userController.getUser
+  )
   // .patch(authController.protect, userController.updateUser)
   .delete(authController.protect, userController.deleteUser)
 

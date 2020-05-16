@@ -84,6 +84,7 @@ exports.createOne = (Model) =>
 exports.getOne = (Model, populateOptions) =>
   catchAsync(async (req, res, next) => {
     // console.log('\x1b[31m', 'get one: ', Model)
+    if (!req.clientData) req.clientData = {}
     let query = Model.findById(req.params.id)
     if (populateOptions) query = query.populate(populateOptions)
 
@@ -94,11 +95,11 @@ exports.getOne = (Model, populateOptions) =>
     }
 
     // const doc = docs.find(el => el.id === id)
-
+    console.log('\x1b[36m%s\x1b[0m', 'client data:', req.clientData)
     res.status(200).json({
       status: 'OK',
       data: {
-        data: doc,
+        data: { ...doc, ...req.clientData },
       },
     })
   })
