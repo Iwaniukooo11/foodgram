@@ -21,15 +21,8 @@ const postSchema = new mongoose.Schema(
     image: {
       type: String,
       required: [true, 'must have a cover img'],
-      //add img
     },
-    // testComments: [
-    //   {
-    //     // type: mongoose.Schema.ObjectId,
-    //     // refPath: 'Comment',
-    //     ref: 'Comment',
-    //   },
-    // ],
+
     testCommentsLength: {
       type: Number,
       default: 0,
@@ -85,60 +78,16 @@ postSchema.pre(/^find/, function (next) {
   next()
 })
 
-postSchema.pre(/^find/, async function (next) {
-  console.log('test-IMG: ', this.image, this.id)
-  next()
-})
-
-//nie działa
-postSchema.pre(/^findOneAnd/, async function (next) {
-  const post = await this.findOne()
-  this.r = post
-  console.log('\x1b[31m', 'still in pre: ', post)
-  next()
-})
-
-postSchema.pre('save', async function (next) {
-  const allReactions = await Reaction.countDocuments({ post: this.id })
-  const allComments = await Comment.countDocuments({ post: this.id })
-  // console.log('HERE COUNTS!', allReactions, allComments)
-  this.likesQuantity = allReactions
-  this.commentsQuantity = allComments
-
-  await this.updateOne(
-    {},
-    { $set: { likesQuantity: allReactions, commentsQuantity: allComments } }
-  )
-
-  console.log('\x1b[31m', 'end of pre func', this.commentsQuantity)
-
-  next()
-})
-postSchema.post(/^findOneAnd/, async function () {
-  console.log('\x1b[31m', 'post findoneAnd!')
-})
-
-postSchema.post('save', async function (doc) {
-  console.log('\x1b[31m', 'post func')
-})
-
 postSchema.post('init', async function (doc) {
   console.log('THIS IS MY DOC!!', doc._id)
 
   const allReactions = await Reaction.countDocuments({ post: doc._id })
   const allComments = await Comment.countDocuments({ post: doc._id })
-  // console.log('HERE COUNTS!', allReactions, allComments)
+
   doc.likesQuantity = allReactions
   doc.commentsQuantity = allComments
   await doc.save()
 })
-// chyba nie potrzebne
-// postSchema.pre('save', async function (next) {
-//   const user = await User.findById(this.user._id)
-//   if (!user) return next(new AppError('Given user doesnt exist', 404))
-
-//   next()
-// })
 
 postSchema.pre('save', async function (next) {
   console.log(this.user._id, this.id)
