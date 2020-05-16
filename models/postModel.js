@@ -1,9 +1,7 @@
 const mongoose = require('mongoose')
 const User = require('./userModel')
 const Comment = require('./commentModel')
-const Follow = require('./followModel')
 const Reaction = require('./reactionModel')
-const AppError = require('./../utils/appError')
 const postSchema = new mongoose.Schema(
   {
     description: {

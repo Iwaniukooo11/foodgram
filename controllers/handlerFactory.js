@@ -83,6 +83,7 @@ exports.createOne = (Model) =>
 
 exports.getOne = (Model, populateOptions) =>
   catchAsync(async (req, res, next) => {
+    // console.log('\x1b[31m', 'get one: ', Model)
     let query = Model.findById(req.params.id)
     if (populateOptions) query = query.populate(populateOptions)
 
@@ -104,6 +105,8 @@ exports.getOne = (Model, populateOptions) =>
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res) => {
+    console.log('\x1b[31m', 'get all: ', Model)
+
     let filter = {}
     if (req.params.postId) filter = { post: req.params.postId }
     else if (req.params.userId) filter = { nick: req.params.userId }

@@ -9,7 +9,7 @@ mixin postItem(post)
       button.post__send-btn.section__button.section__button--background(type='submit') S
     ul.post__stats-list.stats-list
       li.stats-list__element
-        span.post__reaction-add.add-reaction(data-post=`${post.id}`)= '<3'
+        span.post__reaction-add.add-reaction(data-post=`${post.id}`)= `${post.isLiked? '|<3|' : '<33'}`
         .stats-list__likes.post-list__likes--like=post.likesQuantity
       li.stats-list__element
         span.stats-list__reaction-add.add-reaction(data-post=`${post.id}`)= 'Com'
