@@ -42,9 +42,20 @@ exports.getFeed = catchAsync(async (req, res) => {
   if (orTab)
     posts = await Post.find({ $or: orTab }).sort({ createdAt: -1 }).limit(10)
 
+  // posts = posts.map((el) => el.checkIsActual())
+  // posts = await Promise.all(posts)
+  // console.log('posts after fc: ', posts)
+
   // console.log(posts[0])
   // console.log('POSTS: ', posts)
-  posts.forEach((el) => console.log(el.likesQuantity))
+  // posts.forEach((el) =>
+  //   console.log(
+  //     el.likesQuantity,
+  //     el.commentsQuantity
+  //     // el.testComments.length
+  //   )
+  // )
+  console.log('\x1b[36m', 'before render...')
 
   res.status(200).render('feed', { posts })
 })
@@ -91,7 +102,7 @@ exports.getUser = catchAsync(async (req, res) => {
   // .exec((err, docs) => console.log('sorted: ', docs))
   console.log('sorted, i guess')
 
-  console.log(req.user)
+  // console.log(req.user)
   const isMe =
     req.user.id === req.params.userId ||
     req.user[req.query.type] === req.params.userId

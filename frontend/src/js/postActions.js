@@ -14,7 +14,7 @@ export const addReaction = async (postId, reaction) => {
     alert(err.message)
   }
 }
-export const addComment = async (postId, content) => {
+export const addComment = async (postId, content, socket) => {
   try {
     await axios.post(
       `${document.location.origin}/api/v1/posts/${postId}/comments`,
@@ -22,6 +22,7 @@ export const addComment = async (postId, content) => {
         content,
       }
     )
+    socket.emit('socket| add comment')
   } catch (err) {
     console.log('ERR!: ', err)
     alert(err.message)

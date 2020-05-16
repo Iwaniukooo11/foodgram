@@ -1,12 +1,10 @@
 const dotenv = require('dotenv')
 const mongoose = require('mongoose')
-// const livereload = require('livereload')
-// const connectLivereload = require('connect-livereload')
-// const path = require('path')
 
 dotenv.config({ path: './config.env' })
 const app = require('./app')
-// app.use(connectLivereload())
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
 
 const DB = process.env.DB.replace('<PASSWORD>', process.env.DB_PASSWORD)
 mongoose
@@ -20,8 +18,19 @@ mongoose
   .catch((err) => console.log('error'))
 
 const port = process.env.PORT || 3000
-const server = app.listen(port, () => {
+// const server = app.listen(port, () => {
+//   console.log(`App running on port ${port}...`)
+// })
+
+// console.log('io created', io)
+io.on('connection', (socket) => {
+  console.log('\x1b[36m%s\x1b[0m', 'socket user connected')
+
+  socket.on('socket| add comment', () =>
+    console.log('\x1b[36m%s\x1b[0m', 'socket-comment was added')
+  )
+})
+
+http.listen(port, () => {
   console.log(`App running on port ${port}...`)
 })
-// const liveReloadServer = livereload.createServer()
-// liveReloadServer.watch(path.join(__dirname, 'public'))

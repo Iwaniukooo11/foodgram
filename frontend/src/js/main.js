@@ -3,6 +3,7 @@ import * as loginActions from './login'
 import * as postActions from './postActions'
 import * as followActions from './follow'
 import * as updateActions from './update'
+import io from 'socket.io-client'
 
 const loginForm = document.getElementById('form-login')
 const signUpForm = document.getElementById('form-signup')
@@ -13,7 +14,11 @@ const followBtn = document.getElementById('follow-btn')
 const updateForms = [...document.querySelectorAll('.update-form')]
 const searchUserBtn = document.getElementById('search-user-btn')
 const addPostForm = document.getElementById('add-post-form')
-// console.log(updateForms)
+// console.log(updateForms)\
+// const socket = io.connect('http://localhost:3000')
+// socket.on('connect', (data) => socket.emit('join'))
+const socket = io()
+console.log('front-end socket: ', socket)
 
 if (loginForm) {
   loginForm.addEventListener('submit', async (e) => {
@@ -62,7 +67,7 @@ if (sendCommentForms) {
       el.addEventListener('submit', async (e) => {
         console.log(e.target[0].value)
         e.preventDefault()
-        await postActions.addComment(el.dataset.post, e.target[0].value)
+        await postActions.addComment(el.dataset.post, e.target[0].value, socket)
         // alert('posted?')
         e.target[0].value = ''
       })
