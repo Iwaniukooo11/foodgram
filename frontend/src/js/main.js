@@ -54,10 +54,13 @@ if (logoutBtn) {
 if (addReactionBtns) {
   addReactionBtns.forEach((el) =>
     el.addEventListener('click', async (e) => {
-      // e.preventDefault()
-      console.log('click!!')
-      await postActions.addReaction(el.dataset.post, 'tasty')
-      // alert('posted?')
+      console.log('clicked!!!')
+      let method = 'POST'
+
+      if (el.dataset.is_liked === 'true') method = 'DELETE'
+
+      if (await postActions.manageReaction(el.dataset.post, 'tasty', method))
+        el.dataset.is_liked = (el.dataset.is_liked !== 'true').toString()
     })
   )
 }

@@ -16,11 +16,20 @@ router
     reactionController.setIdOfPostAuthor,
     reactionController.createReaction
   )
+  .delete(
+    authController.protect,
+    reactionController.setIdOfReactionToRemove,
+    reactionController.deleteReaction
+  )
 
 router
   .route('/:id')
   .get(reactionController.getReaction)
   .patch(authController.protect, reactionController.updateReaction)
-  .delete(authController.protect, reactionController.deleteReaction)
+  .delete(
+    authController.protect,
+    // reactionController.setIdOfReactionToRemove,
+    reactionController.deleteReaction
+  )
 
 module.exports = router

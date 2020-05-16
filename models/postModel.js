@@ -84,8 +84,20 @@ postSchema.post('init', async function (doc) {
 
   doc.likesQuantity = allReactions
   doc.commentsQuantity = allComments
+  console.log('THIS IS LIKES:', allReactions)
   await doc.save()
 })
+// postSchema.post('remove', async function (doc) {
+//   console.log('\x1b[31m','THIS IS MY DOC!!', doc._id)
+
+//   const allReactions = await Reaction.countDocuments({ post: doc._id })
+//   const allComments = await Comment.countDocuments({ post: doc._id })
+
+//   doc.likesQuantity = allReactions
+//   doc.commentsQuantity = allComments
+//   console.log('\x1b[31m','THIS IS LIKES:', allReactions)
+//   await doc.save()
+// })
 
 postSchema.pre('save', async function (next) {
   console.log(this.user._id, this.id)

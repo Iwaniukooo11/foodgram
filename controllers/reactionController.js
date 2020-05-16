@@ -1,15 +1,16 @@
 const Reaction = require('./../models/reactionModel')
 const AppError = require('../utils/appError')
 const User = require('../models/userModel')
+const Post = require('../models/postModel')
 const catchAsync = require('../utils/catchAsync')
 
 const factory = require('./handlerFactory')
 
 exports.getAllReactions = factory.getAll(Reaction)
 
-exports.createReaction = factory.createOne(Reaction)
+exports.getReaction = factory.getOne(Reaction)
 
-exports.getReaction = catchAsync(async (req, res) => {
+exports.createReaction = catchAsync(async (req, res) => {
   const doc = await Reaction.create(req.body)
   await Post.findById(req.body.post)
   console.log('CREATE FROM BODY IN COMMENT: ', req.body)
@@ -22,22 +23,34 @@ exports.getReaction = catchAsync(async (req, res) => {
   })
 })
 
-///TODO - FIX THIS AND WORK FROM NESTE
 exports.setIdOfPost = catchAsync(async (req, res, next) => {
-  // if (req.params.postId)
   req.body.post = req.params.postId
   next()
 })
 exports.setIdOfPostAuthor = catchAsync(async (req, res, next) => {
-  // console.log(await User.findOne({ posts: req.body.post }))
   const author = await User.findOne({ posts: req.body.post })
   req.body.postAuthor = author._id
-  // req.body.userAuthor
   next()
 })
 
 exports.updateReaction = factory.updateOne(Reaction)
 
+exports.setIdOfReactionToRemove = catchAsync(async (req, res, next) => {
+  const reaction = await Reaction.findOne({
+    post: req.params.postId,
+    user: req.user.id,
+  })
+  req.params.id = reaction.id
+  console.log('\x1b[31m', 'fucken post id: ', req.params.postId)
+
+  req.updatePost = {
+    query: {
+      _id: req.params.postId,
+    },
+  }
+  // console.log('found reaction: ', reaction)
+  next()
+})
 exports.deleteReaction = factory.deleteOne(Reaction)
 
 exports.checkIfUserGaveReaction = catchAsync(async (req, res, next) => {
@@ -45,9 +58,6 @@ exports.checkIfUserGaveReaction = catchAsync(async (req, res, next) => {
     user: req.user.id,
     post: req.params.postId,
   })
-
-  console.log('REACTION: ', reaction)
-
   if (reaction) {
     return next(new AppError('you already gave a reaction', 500))
   }

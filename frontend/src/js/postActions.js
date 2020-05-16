@@ -1,17 +1,21 @@
 import axios from 'axios'
 
-export const addReaction = async (postId, reaction) => {
+export const manageReaction = async (postId, reaction, method = 'POST') => {
+  console.log('received method: ', method)
   try {
-    const resp = await axios.post(
-      `${document.location.origin}/api/v1/posts/${postId}/reactions`,
-      {
+    const resp = await axios({
+      method,
+      url: `${document.location.origin}/api/v1/posts/${postId}/reactions`,
+      data: {
         reaction,
-      }
-    )
+      },
+    })
+    return 'OK'
   } catch (err) {
-    console.log('ERR!: ', err)
+    console.log('ERR!: ', err.response.data)
 
-    alert(err.message)
+    alert(err.response.data.message)
+    return ''
   }
 }
 export const addComment = async (postId, content, socket) => {

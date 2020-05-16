@@ -3,25 +3,37 @@
 const catchAsync = require('../utils/catchAsync')
 const AppError = require('../utils/appError')
 const APIFeatures = require('../utils/apiFeatures')
+const Post = require('../models/postModel')
 
 exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findById(req.params.id)
-    console.log('DELETING: ', doc.user, req.user.id)
-    if (typeof doc.user.id === 'string' && req.user.id)
-      if (doc.user.id !== req.user.id)
+    console.log('req: ', req.params.id)
+    // console.log('DELETING: ', doc, req.user.id)
+    // console.log(doc.user.id, req.user.id)
+
+    if (typeof doc.user.id === 'string' && req.user.id) {
+      if (doc.user.id !== req.user.id) {
         return next(
           new AppError('removed a doc, that you warent an authorA', 500)
         )
-      else if (doc.user && req.user.id)
-        if (doc.user !== req.user.id)
-          return next(
-            new AppError('removed a doc, that you warent an authorB', 500)
-          )
+      }
+    } else if (doc.user && req.user.id) {
+      if (doc.user !== req.user.id) {
+        return next(
+          new AppError('removed a doc, that you warent an authorB', 500)
+        )
+      }
+    }
 
-    doc.delete()
+    await doc.delete()
     if (!doc) {
       return next(new AppError('No document found with that ID', 404))
+    }
+    if (req.updatePost) {
+      console.log(req.updatePost.query)
+      const test = await Post.findOne(req.updatePost.query)
+      console.log('update req', test)
     }
 
     res.status(204).json({
@@ -68,8 +80,6 @@ exports.updateOne = (Model) =>
 
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    // if (req.params.postId) req.body.post = req.params.postId
-
     const doc = await Model.create(req.body)
     console.log('CREATE FROM BODY: ', req.body)
 
