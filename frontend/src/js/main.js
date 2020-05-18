@@ -9,7 +9,10 @@ const loginForm = document.getElementById('form-login')
 const signUpForm = document.getElementById('form-signup')
 const logoutBtn = document.getElementById('logout-btn')
 const addReactionBtns = [...document.querySelectorAll('.add-reaction')]
+const reactionContentBtns = [...document.querySelectorAll('.likes-quantity')]
 const sendCommentForms = [...document.querySelectorAll('.send-comment-form')]
+const commentsContentBtns = [...document.querySelectorAll('.comments-quantity')]
+
 const followBtn = document.getElementById('follow-btn')
 const updateForms = [...document.querySelectorAll('.update-form')]
 const searchUserBtn = document.getElementById('search-user-btn')
@@ -52,25 +55,41 @@ if (logoutBtn) {
 }
 
 if (addReactionBtns) {
-  addReactionBtns.forEach((el) =>
-    el.addEventListener('click', async (e) => {
-      console.log('clicked!!!')
-      let method = 'POST'
+  addReactionBtns.forEach((el, index) =>
+    // console.log(index, reactionContentBtns[index])
 
+    el.addEventListener('click', async (e) => {
+      let method = 'POST'
       if (el.dataset.is_liked === 'true') method = 'DELETE'
 
-      if (await postActions.manageReaction(el.dataset.post, 'tasty', method))
-        el.dataset.is_liked = (el.dataset.is_liked !== 'true').toString()
+      // if (await postActions.manageReaction(el.dataset.post, 'tasty', method)) {
+      postActions.manageReaction(el.dataset.post, 'tasty', method)
+      let text = reactionContentBtns[index].innerText * 1
+
+      if (method === 'POST') {
+        el.innerText = '|<3|'
+        reactionContentBtns[index].innerText = text + 1
+      } else {
+        el.innerText = '<3'
+        reactionContentBtns[index].innerText = text - 1
+      }
+
+      el.dataset.is_liked = (el.dataset.is_liked !== 'true').toString()
+      // }
     })
   )
 }
+
 if (sendCommentForms) {
   sendCommentForms.forEach(
-    (el) =>
+    (el, index) =>
       el.addEventListener('submit', async (e) => {
-        console.log(e.target[0].value)
         e.preventDefault()
         await postActions.addComment(el.dataset.post, e.target[0].value, socket)
+
+        commentsContentBtns[index].innerText =
+          commentsContentBtns[index].innerText * 1 + 1
+
         // alert('posted?')
         e.target[0].value = ''
       })

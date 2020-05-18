@@ -10,7 +10,7 @@ mixin postItem(post)
     ul.post__stats-list.stats-list
       li.stats-list__element
         span.post__reaction-add.add-reaction(data-post=`${post.id}`, data-is_liked=`${!!post.isLiked}`)= `${post.isLiked? '|<3|' : '<33'}`
-        .stats-list__likes.post-list__likes--like=post.likesQuantity
+        .stats-list__likes.post-list__likes--like.likes-quantity=post.likesQuantity
       li.stats-list__element
-        span.stats-list__reaction-add.add-reaction(data-post=`${post.id}`)= 'Com'
-        .stats-list__likes.post-list__likes--comment=post.commentsQuantity
+        span.stats-list__reaction-add.add-comment(data-post=`${post.id}`)= 'Com'
+        .stats-list__likes.post-list__likes--comment.comments-quantity=post.commentsQuantity

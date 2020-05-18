@@ -42,15 +42,7 @@ exports.getFeed = catchAsync(async (req, res) => {
   if (orTab)
     posts = await Post.find({ $or: orTab }).sort({ createdAt: -1 }).limit(10)
 
-  //  posts.forEach(async (post) => {
-  //   post.isLiked = false
-  //   const reaction = await Reaction.findOne({
-  //     post: post.id,
-  //     user: req.user.id,
-  //   })
-  //   if (reaction) post.isLiked = true
-  //   console.log('post-data:', post.id, req.user.id, post.isLiked)
-  // })
+  //----
   const reactions = posts.map((post) => {
     const reaction = Reaction.findOne({
       post: post.id,
@@ -61,9 +53,10 @@ exports.getFeed = catchAsync(async (req, res) => {
   await Promise.all(reactions).then((values) => {
     values.forEach((element, i) => {
       if (element) posts[i].isLiked = true
-      console.log(posts[i].isLiked)
     })
   })
+  //----
+
   console.log('\x1b[36m', 'before render...')
 
   res.status(200).render('feed', { posts })
