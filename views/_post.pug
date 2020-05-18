@@ -14,3 +14,6 @@ mixin postItem(post)
       li.stats-list__element
         span.stats-list__reaction-add.add-comment(data-post=`${post.id}`)= 'Com'
         .stats-list__likes.post-list__likes--comment.comments-quantity=post.commentsQuantity
+
+    each comment in post.testComments
+      #test= comment.content
