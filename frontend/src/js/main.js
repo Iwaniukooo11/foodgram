@@ -99,10 +99,24 @@ if (sendCommentForms) {
 
 if (followBtn) {
   followBtn.addEventListener('click', async (e) => {
-    if (followBtn.dataset.follow_action === 'unfollow')
-      await followActions.followUser(followBtn.dataset.user, 'DELETE')
-    else if (followBtn.dataset.follow_action === 'follow')
-      await followActions.followUser(followBtn.dataset.user)
+    const followersButton = document.getElementById('followers-btn')
+    let text = followersButton.innerText * 1
+    console.log(text)
+
+    if (followBtn.dataset.follow_action === 'unfollow') {
+      // await followActions.followUser(followBtn.dataset.user, 'DELETE')
+      followActions.followUser(followBtn.dataset.user, 'DELETE')
+      followBtn.innerText = 'follow'
+      followBtn.dataset.follow_action = 'follow'
+      text -= 1
+    } else if (followBtn.dataset.follow_action === 'follow') {
+      // await followActions.followUser(followBtn.dataset.user)
+      followActions.followUser(followBtn.dataset.user)
+      followBtn.innerText = 'unfollow'
+      followBtn.dataset.follow_action = 'unfollow'
+      text += 1
+    }
+    followersButton.innerText = text
 
     // location.reload() //TD
   })

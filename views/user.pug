@@ -4,7 +4,7 @@ include _post
 mixin statsItem(obj)
   li.stats__li
     if obj.link
-      a.stats__num(href=`/users/${user.id}/${obj.link}`)= obj.num
+      a.stats__num(href=`/users/${user.id}/${obj.link}`,id=`${obj.desc}-btn`)= obj.num
     else
       span.stats__num= obj.num
     p.stats__desc= obj.desc

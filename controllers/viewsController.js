@@ -15,9 +15,9 @@ exports.getRegister = catchAsync(async (req, res) => {
 exports.getMe = catchAsync(async (req, res) => {
   const { user } = req
   const stats = [
-    { desc: 'Posts', num: user.posts.length },
-    { desc: 'Followers', num: user.followers, link: 'followers' },
-    { desc: 'Follows', num: user.following, link: 'follows' },
+    { desc: 'posts', num: user.posts.length },
+    { desc: 'followers', num: user.followers, link: 'followers' },
+    { desc: 'follows', num: user.following, link: 'follows' },
   ]
   const posts = await Post.find({ user: user.id })
     .sort({ createdAt: -1 })
@@ -89,20 +89,26 @@ exports.getUser = catchAsync(async (req, res) => {
     user = await User.findOne({ [req.query.type]: req.params.userId })
   else user = await User.findById(req.params.userId)
 
+  if (req.query.type) user = await User.findById(user.id)
+
   if (!user)
     res.status(404).json({
       status: 'ERROR',
       message: `Such user doesen't exist!`,
     })
   //managing stats
+  console.log('found user: ', user)
   const stats = [
-    { desc: 'Posts', num: user.posts.length },
-    { desc: 'Followers', num: user.followers, link: 'followers' },
-    { desc: 'Follows', num: user.following, link: 'follows' },
+    { desc: 'posts', num: user.posts.length },
+    { desc: 'followers', num: user.followers, link: 'followers' },
+    { desc: 'follows', num: user.following, link: 'follows' },
   ]
+
   const posts = await Post.find({ user: user.id })
     .sort({ createdAt: -1 })
     .exec()
+
+  // console.log('found posts: ', posts)
 
   //is it me?
   const isMe =
@@ -112,13 +118,13 @@ exports.getUser = catchAsync(async (req, res) => {
 
   console.log('\x1b[36m', 'start')
   let follow = null
+
   if (req.user)
     follow = await Follow.findOne({
       user: req.user.id,
-      followed: req.params.userId,
+      followed: user.id,
     })
 
-  console.log('FOLLOW: ', follow)
   user.isFollowed = !!follow
 
   res.status(200).render('user', {
