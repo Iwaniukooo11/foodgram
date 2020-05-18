@@ -149,3 +149,9 @@ exports.setUserIdAsUser = (req, res, next) => {
 
   next()
 }
+
+exports.setUserIdAsParam = (req, res, next) => {
+  if (req.user) req.params.id = req.user.id
+
+  next()
+}

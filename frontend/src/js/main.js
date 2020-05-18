@@ -133,19 +133,21 @@ if (updateForms) {
       })
     })
   )
+  const imgForm = document.querySelector('.update-img-form')
+  if (imgForm)
+    imgForm.addEventListener('submit', async (e) => {
+      e.preventDefault()
+
+      const imgInput = document.getElementById('image')
+      const form = new FormData()
+      form.append('image', imgInput.files[0] || '')
+      updateActions.updateUserImage(form)
+    })
 }
 if (searchUserBtn) {
   searchUserBtn.addEventListener('click', async (e) => {
     const input = document.getElementById('search-user-input')
-    // try {
-    //   const user = await axios.get(
-    //     `${document.location.origin}/api/v1/users/${input.value}?type=nick`
-    //   )
-    //   if (!user) throw new Error('no user like this')
-    //   location.assign(`/users/${input.value}?type=nick`)
-    // } catch {
-    //   alert('not')
-    // }
+
     await searchActions.searchUser(input.value)
   })
 }
@@ -158,6 +160,7 @@ if (addPostForm) {
     const form = new FormData()
     form.append('description', descInput.value)
     form.append('image', imgInput.files[0] || '')
+    console.log(form)
 
     postActions.createPost(form)
   })

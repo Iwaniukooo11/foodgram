@@ -8,3 +8,15 @@ export const update = async (obj) => {
     console.log('err: ', err)
   }
 }
+export const updateUserImage = async (form) => {
+  try {
+    await axios.patch(
+      `${document.location.origin}/api/v1/users/update-user-img`,
+      // { image: form }
+      form
+    )
+    console.log('updated', form)
+  } catch (err) {
+    console.log('err: ', err)
+  }
+}

@@ -6,7 +6,14 @@ block content
     form.settings__form.update-form
       input.settings__input(type='text',name='name',id='name',placeholder=`${user.name}`)
       button.section__button.section__button--background(type='submit') Update
+    
     form.settings__form.update-form
       input.settings__input(type='text',name='description',id='description',placeholder=`${user.description}`)
       button.section__button.section__button--background(type='submit') Update
+
+    form.settings__form.update-img-form
+      input.settings__input(type='file',name='image',id='image')
+      label(for="image") Choose your img
+      button.section__button.section__button--background(type='submit') Update
+      
     button.section__button.section__button--background#logout-btn Log out

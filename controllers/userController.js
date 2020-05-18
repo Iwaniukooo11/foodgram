@@ -2,33 +2,17 @@ const User = require('../models/userModel')
 const Reaction = require('../models/reactionModel')
 const Comment = require('../models/commentModel')
 const Post = require('../models/postModel')
-const Follow = require('../models/followModel')
 const catchAsync = require('../utils/catchAsync')
 const AppError = require('../utils/appError')
+const multer = require('multer')
+const AWS = require('aws-sdk')
+const sharp = require('sharp')
 
 const factory = require('./handlerFactory')
 
 exports.getAllUsers = factory.getAll(User)
 
 exports.getUser = factory.getOne(User, 'posts')
-
-// exports.changeQueryOption = catchAsync(async(req,res)=>{
-//   // if(req.query.type)
-// })
-
-exports.checkIfIsFollowed = catchAsync(async (req, res, next) => {
-  // console.log('\x1b[36m', 'start')
-  // let follow = null
-  // if (req.user)
-  //   follow = await Follow.findOne({
-  //     user: req.user.id,
-  //     followed: req.params.id,
-  //   })
-
-  // console.log('FOLLOW: ', follow)
-  // req.clientData.isFollowed = !!follow
-  next()
-})
 
 exports.deleteUser = factory.disactiveOne(User)
 
@@ -53,9 +37,51 @@ exports.setUserIdToParams = catchAsync(async (req, res, next) => {
   next()
 })
 
-// exports.checkType = catchAsync(async(req,res,next)=>{
-//   if (req.query.type==='name'){
-//     delete req.query.type
-//     req.params.id=
-//   }
-// })
+const multerStorage = multer.memoryStorage()
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true)
+  } else cb(new AppError('not an img!', 400), false)
+}
+
+const upload = multer({ storage: multerStorage, fileFilter: multerFilter })
+
+exports.uploadImage = upload.single('image')
+
+exports.resizeImg = catchAsync(async (req, res, next) => {
+  if (!req.file) return next()
+  const id = process.env.AWS_ACCES_ID
+  const secret = process.env.AWS_ACCES_SECRET
+  const bucket_name = 'foodgram-users'
+  const s3 = new AWS.S3({
+    accessKeyId: id,
+    secretAccessKey: secret,
+  })
+
+  //https://foodgram-users.s3.eu-north-1.amazonaws.com/aws-5eb1765bab8090033020d832-1589821809660-post.jpeg
+  const adress = 'https://foodgram-users.s3.eu-north-1.amazonaws.com/'
+  const path = `aws-${req.user.id}-${Date.now()}-img.jpeg`
+  const image = adress + path
+
+  req.file.buffer = await sharp(req.file.buffer)
+    .resize(400, 400)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+
+  const params = {
+    Bucket: bucket_name,
+    Key: path,
+    Body: req.file.buffer,
+    ACL: 'public-read',
+  }
+
+  await s3.upload(params, async (err, data) => {
+    if (err) {
+      throw err
+    }
+    console.log(`uploaded at ${data.Location}`)
+  })
+
+  req.body.image = image
+  next()
+})

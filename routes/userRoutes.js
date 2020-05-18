@@ -1,6 +1,8 @@
 const express = require('express')
 const userController = require('../controllers/userController')
 const authController = require('../controllers/authController')
+const handlerFactory = require('../controllers/handlerFactory')
+
 const followRouter = require('./followRoutes')
 
 const router = express.Router()
@@ -17,15 +19,20 @@ router.patch(
   userController.updateUser
 )
 
+router.patch(
+  '/update-user-img',
+  authController.protect,
+  userController.uploadImage,
+  userController.resizeImg,
+  handlerFactory.setUserIdAsParam,
+  userController.updateUser
+)
+
 router.route('/').get(userController.getAllUsers)
 
 router
   .route('/:id')
-  .get(
-    // userController.checkIfIsFollowed,
-    userController.getUser
-  )
-  // .patch(authController.protect, userController.updateUser)
+  .get(userController.getUser)
   .delete(authController.protect, userController.deleteUser)
 
 module.exports = router
