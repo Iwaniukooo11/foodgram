@@ -3,7 +3,9 @@ import * as loginActions from './login'
 import * as postActions from './postActions'
 import * as followActions from './follow'
 import * as updateActions from './update'
+import * as searchActions from './search'
 import io from 'socket.io-client'
+import axios from 'axios'
 
 const loginForm = document.getElementById('form-login')
 const signUpForm = document.getElementById('form-signup')
@@ -133,13 +135,18 @@ if (updateForms) {
   )
 }
 if (searchUserBtn) {
-  searchUserBtn.addEventListener('click', (e) => {
+  searchUserBtn.addEventListener('click', async (e) => {
     const input = document.getElementById('search-user-input')
-    try {
-      location.assign(`/users/${input.value}?type=nick`)
-    } catch {
-      alert('not')
-    }
+    // try {
+    //   const user = await axios.get(
+    //     `${document.location.origin}/api/v1/users/${input.value}?type=nick`
+    //   )
+    //   if (!user) throw new Error('no user like this')
+    //   location.assign(`/users/${input.value}?type=nick`)
+    // } catch {
+    //   alert('not')
+    // }
+    await searchActions.searchUser(input.value)
   })
 }
 

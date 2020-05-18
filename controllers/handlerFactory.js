@@ -93,9 +93,12 @@ exports.createOne = (Model) =>
 
 exports.getOne = (Model, populateOptions) =>
   catchAsync(async (req, res, next) => {
-    // console.log('\x1b[31m', 'get one: ', Model)
+    // console.log('\x1b[31m', 'get one: ', req.)
     if (!req.clientData) req.clientData = {}
-    let query = Model.findById(req.params.id)
+
+    let query = req.query.type
+      ? Model.findOne({ [req.query.type]: req.params.id })
+      : Model.findById(req.params.id)
     if (populateOptions) query = query.populate(populateOptions)
 
     const doc = await query
@@ -109,7 +112,7 @@ exports.getOne = (Model, populateOptions) =>
     res.status(200).json({
       status: 'OK',
       data: {
-        data: { ...doc, ...req.clientData },
+        data: { ...doc._doc, ...req.clientData },
       },
     })
   })

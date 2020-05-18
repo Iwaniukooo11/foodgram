@@ -12,6 +12,10 @@ exports.getAllUsers = factory.getAll(User)
 
 exports.getUser = factory.getOne(User, 'posts')
 
+// exports.changeQueryOption = catchAsync(async(req,res)=>{
+//   // if(req.query.type)
+// })
+
 exports.checkIfIsFollowed = catchAsync(async (req, res, next) => {
   // console.log('\x1b[36m', 'start')
   // let follow = null
