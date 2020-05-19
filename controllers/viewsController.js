@@ -96,6 +96,7 @@ exports.getNotifications = catchAsync(async (req, res) => {
     .limit(10)
 
   const notifications = reactions.concat(comments)
+  console.log('nott', notifications[0])
   res.status(200).render('notifications', { notifications })
 })
 

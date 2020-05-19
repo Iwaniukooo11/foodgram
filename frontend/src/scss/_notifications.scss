@@ -1,7 +1,25 @@
 .notff {
     &__link {
         -webkit-text-fill-color: inherit;
-        text-decoration: underline;
+        // text-decoration: underline;
+        color: $color-red;
+        font-weight: bold;
         // -webkit-text-fill-color: transparent;
+    }
+
+    &__list-element {
+        display: flex;
+        align-items: center;
+        padding: 15px 5px;
+        margin: 10px;
+        border-radius: 10px;
+        box-shadow: 5px 5px 60px #e0e0e0,
+            -5px -5px 60px #ffffff;
+    }
+
+    &__image {
+        @include makeSquare(35px);
+        margin-right: 10px;
+        border-radius: 50%;
     }
 }

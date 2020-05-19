@@ -1,12 +1,13 @@
 extends base
 
 mixin nottfElement(obj)
-  li.notff_list-element
+  li.notff__list-element
+      img.notff__image(src=`${obj.user.image}`, alt="foto")
       if obj.content
         span.notff__name.section__subtext 
           a.notff__link(href=`users/${obj.user._id}`) #{obj.user.nick}
-          |  commented your 
-          a.notff__link(href=`posts/${obj.post}`) post!
+          |  commented on your 
+          a.notff__link(href=`posts/${obj.post}`) post
           
 
       else 
@@ -14,7 +15,7 @@ mixin nottfElement(obj)
          a.notff__link(href=`users/${obj.user._id}`) #{obj.user.nick}
          |  reacted to your  
          a.notff__link(href=`posts/${obj.post}`) post
-         |  with "#{obj.reaction}"
+        //-  |  with "#{obj.reaction}"
 
 block content
 
