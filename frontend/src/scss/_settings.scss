@@ -1,0 +1,65 @@
+.settings {
+    display: grid;
+    justify-items: flex-start;
+    row-gap: 30px;
+
+    &__form {
+        display: grid;
+        grid-template-areas: 'label button''input button';
+        align-items: center;
+        align-content: center;
+        width: 100%;
+
+        &--update-img {
+            display: grid;
+            grid-template-areas: 'label button';
+
+            .settings {
+                &__input {
+                    grid-area: input;
+                    border: none;
+                    overflow: hidden;
+                    display: none;
+                }
+
+                &__label {
+                    grid-area: label;
+                    width: 90%;
+                    background-color: $color-grey-dark;
+                    color: $color-white;
+                    text-transform: uppercase;
+                }
+
+                &__submit {
+                    grid-area: button;
+                }
+            }
+        }
+    }
+
+    &__input {
+        width: 90%;
+        grid-area: input;
+    }
+
+    &__submit {
+        grid-area: button;
+    }
+
+    &__label {
+        grid-area: label;
+        margin-left: 15px;
+
+        &--upload {
+            margin-left: 0;
+        }
+
+    }
+
+    &__logout {
+        justify-self: center;
+        margin-top: 50px;
+    }
+
+
+}

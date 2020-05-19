@@ -4,16 +4,19 @@ block content
 
   main.main.section.settings
     form.settings__form.update-form
-      input.settings__input(type='text',name='name',id='name',placeholder=`${user.name}`)
-      button.section__button.section__button--background(type='submit') Update
+      input.section__input.settings__input(type='text',name='name',id='name',placeholder=`${user.name}`)
+      label.settings__label(for="name") name
+      button.section__button.section__button--background.settings__submit(type='submit') Update
     
     form.settings__form.update-form
-      input.settings__input(type='text',name='description',id='description',placeholder=`${user.description}`)
-      button.section__button.section__button--background(type='submit') Update
+      textarea.section__input.settings__input(type='text',name='description',id='description',placeholder=`${user.description}`)
+      label.settings__label(for="description") description
 
-    form.settings__form.update-img-form
+      button.section__button.section__button--background.settings__submit(type='submit') Update
+
+    form.settings__form.settings__form--update-img.update-img-form
       input.settings__input(type='file',name='image',id='image')
-      label(for="image") Choose your img
-      button.section__button.section__button--background(type='submit') Update
+      label.section__input.settings__label.settings__label--upload(for="image") Upload image
+      button.section__button.section__button--background.settings__submit(type='submit') Update
       
-    button.section__button.section__button--background#logout-btn Log out
+    button.section__button.section__button--background.settings__logout#logout-btn Log out
