@@ -2,11 +2,20 @@ extends base
 
 mixin nottfElement(obj)
   li.notff__list-element
+      - const day = obj.createdAt.getDate()*1+1 <10 ? '0'+(obj.createdAt.getDate()*1+1) :obj.createdAt.getDate()+1
+      - const month = obj.createdAt.getMonth()*1+1 <10 ? '0'+(obj.createdAt.getMonth()*1+1) :obj.createdAt.getMonth()+1
+      - const year = obj.createdAt.getYear()+1900
+      - const hour = obj.createdAt.getHours()<10 ? '0'+(obj.createdAt.getHours()*1) :obj.createdAt.getHours()
+      - const minute = obj.createdAt.getMinutes()<10 ? '0'+(obj.createdAt.getMinutes()*1) :obj.createdAt.getMinutes()
+
+      span.notff__date.notff__date--month= `${day}-${month}-${year}`
+      span.notff__date.notff__date--clock= `${hour}:${minute}`
+      
       img.notff__image(src=`${obj.user.image}`, alt="foto")
       if obj.content
         span.notff__name.section__subtext 
           a.notff__link(href=`users/${obj.user._id}`) #{obj.user.nick}
-          |  commented on your 
+          |  commented your 
           a.notff__link(href=`posts/${obj.post}`) post
           
 

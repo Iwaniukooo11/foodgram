@@ -51,7 +51,7 @@ exports.getMe = catchAsync(async (req, res) => {
     { desc: 'followers', num: user.followers, link: 'followers' },
     { desc: 'follows', num: user.following, link: 'follows' },
   ]
-  let posts = await Post.find({ user: user.id }).sort({ createdAt: -1 }).exec()
+  let posts = await Post.find({ user: user.id }).sort({ createdAt: 1 }).exec()
 
   posts = await prepareDataPost(posts, req.user.id)
 
@@ -72,7 +72,7 @@ exports.getFeed = catchAsync(async (req, res) => {
   })
   let posts = []
   if (orTab)
-    posts = await Post.find({ $or: orTab }).sort({ createdAt: -1 }).limit(10)
+    posts = await Post.find({ $or: orTab }).sort({ createdAt: 1 }).limit(10)
 
   posts = await prepareDataPost(posts, req.user.id)
   console.log('before render: ', posts[0])
@@ -80,7 +80,7 @@ exports.getFeed = catchAsync(async (req, res) => {
 })
 
 exports.getRecent = catchAsync(async (req, res) => {
-  let posts = await Post.find().sort({ createdAt: -1 }).limit(10)
+  let posts = await Post.find().sort({ createdAt: 1 }).limit(10)
 
   posts = await prepareDataPost(posts, req.user.id)
 
@@ -89,13 +89,16 @@ exports.getRecent = catchAsync(async (req, res) => {
 
 exports.getNotifications = catchAsync(async (req, res) => {
   const reactions = await Reaction.find({ postAuthor: req.user.id })
-    .sort({ createdAt: 'asc' })
+    .sort({ createdAt: 'desc' })
     .limit(10)
   const comments = await Comment.find({ postAuthor: req.user.id })
-    .sort({ createdAt: 'asc' })
+    .sort({ createdAt: 'desc' })
     .limit(10)
 
-  const notifications = reactions.concat(comments)
+  const notifications = reactions
+    .concat(comments)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+
   console.log('nott', notifications[0])
   res.status(200).render('notifications', { notifications })
 })
@@ -121,7 +124,7 @@ exports.getUser = catchAsync(async (req, res) => {
     { desc: 'follows', num: user.following, link: 'follows' },
   ]
 
-  let posts = await Post.find({ user: user.id }).sort({ createdAt: -1 }).exec()
+  let posts = await Post.find({ user: user.id }).sort({ createdAt: 1 }).exec()
 
   posts = await prepareDataPost(posts, req.user.id)
   //is it me?

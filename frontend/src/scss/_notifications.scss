@@ -1,25 +1,42 @@
 .notff {
-    &__link {
-        -webkit-text-fill-color: inherit;
-        // text-decoration: underline;
-        color: $color-red;
-        font-weight: bold;
-        // -webkit-text-fill-color: transparent;
-    }
 
     &__list-element {
+        position: relative;
         display: flex;
         align-items: center;
-        padding: 15px 5px;
+        padding: 20px 5px 10px;
         margin: 10px;
         border-radius: 10px;
         box-shadow: 5px 5px 60px #e0e0e0,
             -5px -5px 60px #ffffff;
+        font-size: 16px;
+
+    }
+
+    &__link {
+        -webkit-text-fill-color: inherit;
+        color: $color-red;
+        font-weight: bold;
     }
 
     &__image {
         @include makeSquare(35px);
         margin-right: 10px;
         border-radius: 50%;
+        margin-top: 3px;
+    }
+
+    &__date {
+        font-size: 10px;
+        position: absolute;
+        top: 2px;
+
+        &--month {
+            left: 3px;
+        }
+
+        &--clock {
+            right: 10px;
+        }
     }
 }
