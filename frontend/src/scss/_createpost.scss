@@ -2,11 +2,29 @@
     &__form {
         display: grid;
         justify-items: center;
+        justify-content: center;
         row-gap: 20px;
+        text-align: center;
+
     }
 
     &__wrapper {
         display: flex;
         flex-direction: column;
+    }
+
+    &__input {
+        &--file {
+            display: none;
+        }
+    }
+
+    &__label-file {
+        text-transform: uppercase;
+        // @include createGradientBox;
+        color: $color-white;
+        background-color: $color-red;
+        padding: 5px 20px;
+        border-radius: 5px;
     }
 }

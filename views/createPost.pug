@@ -4,11 +4,11 @@ block content
   main.main.section.create-post
     form.create-post__form#add-post-form
       .create-post__wrapper
-        input.create-post__input#description(name='description')
+        input.section__input.create-post__input#description(name='description')
         label.create-post__label(for='description') Describe your img
      
       .create-post__wrapper
-        input.create-post__input#image(type='file')
-        label(for="image") Choose your img
+        input.create-post__input.create-post__input--file#image(type='file')
+        label.create-post__label-file(for="image") upload image
       
       button.section__button.section__button--background(type='submit') Post1
