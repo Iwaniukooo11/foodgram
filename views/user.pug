@@ -23,9 +23,10 @@ block content
     .me__img-wrap
       img.me__img.box-shadow(src=`${user.image || 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg'}`, alt="user image")
     h1.section__header.me__header 
-      | #{user.name} 
+      span= user.name
       if isMe
-        a(href='/me/settings') **
+        a.me__settings-link(href='/me/settings')
+          i.im.im-gear.me__icon
     p.section__subtext=user.description
 
     ul.me__stats.stats.box-shadow

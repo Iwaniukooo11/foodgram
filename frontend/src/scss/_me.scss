@@ -39,9 +39,25 @@
 
     &__header {
         font-size: 30px;
-        background: none;
+        @include createGradientText;
+
+        // background: none;
+        // color: $color-grey-dark;
+        // -webkit-text-fill-color: inherit;
+    }
+
+    &__settings-link {
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+    }
+
+    &__icon {
+        -webkit-background-clip: border-box;
+        -webkit-text-fill-color: $color-grey-dark;
         color: $color-grey-dark;
-        -webkit-text-fill-color: inherit;
+        margin-left: 10px;
+
     }
 
     &__stats,
