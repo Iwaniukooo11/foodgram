@@ -1,0 +1,11 @@
+.follow-list {
+    &__element {
+        @include createCard;
+    }
+
+    &__img {
+        @include makeSquare($small-user-img);
+        border-radius: 50%;
+        margin: 0 10px;
+    }
+}

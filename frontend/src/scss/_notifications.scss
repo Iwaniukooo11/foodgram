@@ -1,15 +1,16 @@
 .notff {
 
     &__list-element {
-        position: relative;
-        display: flex;
-        align-items: center;
-        padding: 20px 5px 10px;
-        margin: 10px;
-        border-radius: 10px;
-        box-shadow: 5px 5px 60px #e0e0e0,
-            -5px -5px 60px #ffffff;
-        font-size: 16px;
+        // position: relative;
+        // display: flex;
+        // align-items: center;
+        // padding: 20px 5px 10px;
+        // margin: 10px;
+        // border-radius: 10px;
+        // box-shadow: 5px 5px 60px #e0e0e0,
+        //     -5px -5px 60px #ffffff;
+        // font-size: 16px;
+        @include createCard;
 
     }
 
@@ -20,7 +21,7 @@
     }
 
     &__image {
-        @include makeSquare(35px);
+        @include makeSquare($small-user-img);
         margin-right: 10px;
         border-radius: 50%;
         margin-top: 3px;

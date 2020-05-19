@@ -2,6 +2,7 @@ extends base
 
 mixin userElement(obj)
   li.follow-list__element
+    img.follow-list__img(src=`${obj.image}`, alt="user photo")
     a(href=`/users/${obj.id}`)= obj.nick
 
 block content

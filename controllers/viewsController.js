@@ -159,6 +159,7 @@ exports.getPost = catchAsync(async (req, res) => {
 })
 exports.getFollows = catchAsync(async (req, res) => {
   const users = await Follow.find({ user: req.params.userId })
+  console.log(users[0])
   res.status(200).render('followList', {
     follows: true,
     users,

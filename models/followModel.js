@@ -47,11 +47,11 @@ const followSchema = new mongoose.Schema(
 followSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'followed',
-    select: 'nick photo',
+    select: 'nick image',
   })
   this.populate({
     path: 'user',
-    select: 'nick photo',
+    select: 'nick image',
   })
   next()
 })
