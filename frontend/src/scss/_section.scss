@@ -44,10 +44,24 @@
         max-width: 40vw;
         margin: 30px 0;
 
+        &__user-data-wrap {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            // justify-content: space-between;
+            width: 100%;
+        }
+
         &__img {
             width: 40vw;
             height: 40vw;
             border-radius: 10%;
+        }
+
+        &__user-img {
+            @include makeSquare(30px);
+            border-radius: 50%;
+            margin-right: 15px;
         }
 
         &__form {
@@ -58,8 +72,37 @@
         &__reaction-add {
             cursor: pointer;
             padding: 5px;
-            // flex-shrink: 3;
 
+            // flex-shrink: 3;
+            &.liked {
+                .full {
+                    display: block;
+                }
+
+                .empty {
+                    display: none;
+                }
+            }
+
+            &.not-liked {
+                .full {
+                    display: none;
+                }
+
+                .empty {
+                    display: block;
+                }
+            }
+        }
+
+        &__love {
+            &-full {
+                color: #b33939;
+            }
+
+            &-empty {
+                color: $color-grey-dark;
+            }
         }
 
         &__input {
@@ -73,18 +116,34 @@
             padding: 5px;
             cursor: pointer;
             margin-left: 3px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            padding: 7px;
+        }
+
+        &__send-icon {
+            transform: scale(0.9);
+        }
+
+        &__comment-icon {
+            margin-right: 4px;
         }
 
         &__stats-list,
         .stats-list {
             display: flex;
-            justify-content: space-evenly;
+            // justify-content: space-evenly;
+            // justify-content: space-between;
             width: 100%;
+            // font-size: 20px;
+            margin: 7px 0;
 
             &__element {
                 display: flex;
                 align-content: center;
                 align-items: center;
+                margin-right: 25px;
             }
         }
 

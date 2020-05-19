@@ -49,7 +49,7 @@ const userSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      //TD add img
+      default: 'https://image.flaticon.com/icons/svg/17/17004.svg',
     },
     createdAt: {
       type: Date,

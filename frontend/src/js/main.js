@@ -69,14 +69,16 @@ if (addReactionBtns) {
       let text = reactionContentBtns[index].innerText * 1
 
       if (method === 'POST') {
-        el.innerText = '|<3|'
+        // el.innerText = '|<3|'
         reactionContentBtns[index].innerText = text + 1
       } else {
-        el.innerText = '<3'
+        // el.innerText = '<3'
         reactionContentBtns[index].innerText = text - 1
       }
 
       el.dataset.is_liked = (el.dataset.is_liked !== 'true').toString()
+      el.classList.toggle('liked')
+      el.classList.toggle('not-liked')
       // }
     })
   )

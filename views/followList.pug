@@ -1,9 +1,10 @@
 extends base
 
 mixin userElement(obj)
-  li.follow-list__element
-    img.follow-list__img(src=`${obj.image}`, alt="user photo")
-    a(href=`/users/${obj.id}`)= obj.nick
+  li
+    a.follow-list__element(href=`/users/${obj.id}`)
+      img.follow-list__img(src=`${obj.image}`, alt="user photo")
+      span= obj.nick
 
 block content
   main.main.section.follow-list
