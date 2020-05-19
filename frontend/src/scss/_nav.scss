@@ -4,7 +4,19 @@
     bottom: 0;
     left: 0;
     width: 100%;
+    display: flex;
+    padding: 5px 0;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+
     @include createGradientBox;
+    // background-color: $color-grey;
+    // background-color: rgb(240, 240, 240);
+    // padding: 10px;
+
 
     // background: linear-gradient(to right, $color-orange, $color-red);
     // background-color: $color-orange;
@@ -14,7 +26,58 @@
         color: $color-white;
         -webkit-text-fill-color: unset;
         font-weight: normal;
+    }
 
+    &__list {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        align-content: center;
+        width: 100%;
+    }
+
+    &__list-element {
+        background-color: #fff;
+        border-radius: 20%;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        margin: 0 10px;
+
+
+        box-shadow: 34px 34px 80px #8a8a8a,
+            -34px -34px 80px #ffffff;
+
+        @include makeSquare(38px);
+
+        &--create {
+            transform: scale(1.13);
+            @include createGradientBox;
+
+        }
+    }
+
+    &__icon {
+        font-size: 16px;
+        color: $color-grey-dark;
+
+        // padding: 10px;
+
+        &--home {
+            padding-top: 7px;
+        }
+
+        &--search {
+            padding-top: 8px;
+        }
+
+        &--create {
+            padding-top: 8px;
+            color: $color-red;
+            color: $color-white;
+
+        }
     }
 
 }

@@ -3,10 +3,10 @@ $color-white:#fff;
 $color-orange:#f7924c;
 $color-red:#e74366;
 $color-grey:#f0f0f0;
-$color-grey-dark:#8a8a8a;
+$color-grey-dark:#9b9b9b;
 $color-black:#525252;
 
-$nav-height:35px;
+$nav-height:60px;
 
 @mixin createGradientBox {
     background: linear-gradient(to left, $color-orange, $color-red);
@@ -18,4 +18,9 @@ $nav-height:35px;
     background: -webkit-linear-gradient($color-orange, $color-red);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+@mixin makeSquare($a) {
+    width: $a;
+    height: $a;
 }

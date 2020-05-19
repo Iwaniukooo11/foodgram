@@ -1,9 +1,18 @@
 nav.nav
-	ul.nav__list
-		li.nav__list-element
-			a.nav__link(href="/feed") home -
-			a.nav__link(href="/recent") recent -
-			a.nav__link(href="/create-post") CREATE -
-			a.nav__link(href="/notifications") notifications -
-			a.nav__link(href="/me") me -
+  ul.nav__list
+    li.nav__list-element
+      a.nav__link(href="/feed") 
+        i.im.im-home.nav__icon.nav__icon--home
+    li.nav__list-element
+      a.nav__link(href="/recent")
+        i.im.im-magnifier.nav__icon.nav__icon--search
+    li.nav__list-element.nav__list-element--create
+      a.nav__link(href="/create-post") 
+        i.im.im-plus.nav__icon.nav__icon--create
+    li.nav__list-element
+      a.nav__link(href="/notifications")
+        i.far.fa-heart.nav__icon.nav__icon--notifications
+    li.nav__list-element
+      a.nav__link(href="/me")
+        i.far.fa-user.nav__icon.nav__icon--me
 
