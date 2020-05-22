@@ -31,6 +31,7 @@ const prepareDataPost = async (posts, userId, currentUser) => {
       posts[i].currentUser = {
         nick: currentUser.nick,
         image: currentUser.image,
+        id: currentUser.id,
       }
       // console.log('EL: ', posts[i].testComments)
     })

@@ -3,13 +3,14 @@
 
     &__posts-list {
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
     }
 
     &__search-btn {
-        margin-bottom: 40px;
+        // margin-bottom: 40px;
     }
 
     &__search {
@@ -24,5 +25,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
+        padding: 15px 0;
     }
 }

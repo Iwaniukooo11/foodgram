@@ -9,6 +9,7 @@ mixin postItem(post)
     //- form.post__form.send-comment-form#comment-form(data-post=`${post.id}`)
     //-   input.post__input
     //-   button.post__send-btn.section__button.section__button--background(type='submit') S
+    p.post__desc= post.description
     ul.post__stats-list.stats-list
       li.stats-list__element
         span.post__reaction-add.add-reaction(data-post=`${post.id}`, data-is_liked=`${!!post.isLiked}`,class=`${post.isLiked? 'liked' :'not-liked'}`)
@@ -20,19 +21,19 @@ mixin postItem(post)
           i.post__comment-icon.far.fa-comment
         .stats-list__likes.post-list__likes--comment.comments-quantity=post.commentsQuantity
     
-    ul.post__comment-list.comment-list(data-comments_list_id=`${post.id}`,data-test='test')
+    ul.post__comment-list.comment-list(data-comments_list_id=`${post.id}`)
       if post.testComments
         each comment in post.testComments
           li.post__comment.comment
-            a.comment__link(href=`/users/${post.user.id}`)
+            a.comment__link(href=`/users/${comment.user._id}`)
               img.comment__user-photo(src=`${comment.user.image}`,alt='photo of user')
             p.comment__content 
-              span.comment__user= `${comment.user.nick } `
+              span.comment__user= `${comment.user.nick } ` 
               | #{comment.content }
         else
-          span.comment__no-coms= `No comments yet!`
+          span.comment__no-coms(data-span_post_id=`${post.id}`)= `No comments yet!`
 
-    form.post__form.send-comment-form#comment-form(data-post=`${post.id}`,data-nick=`${post.currentUser.nick}`,data-image=`${post.currentUser.image}`)
+    form.post__form.send-comment-form#comment-form(data-post=`${post.id}`,data-nick=`${post.currentUser.nick}`,data-image=`${post.currentUser.image}`,data-current_user_id=`${post.currentUser.id}`)
       input.post__input
       button.post__send-btn.section__button.section__button--background(type='submit')
         i.im.im-paperplane.post__send-icon

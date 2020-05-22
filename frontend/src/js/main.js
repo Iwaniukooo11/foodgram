@@ -108,7 +108,7 @@ if (sendCommentForms) {
       const li = document.createElement('li')
       li.classList.add('post__comment', 'comment')
       li.innerHTML = `
-        <a href="/users/${el.dataset.post}" class="comment__link">
+        <a href="/users/${el.dataset.current_user_id}" class="comment__link">
           <img src="${el.dataset.image}" alt="" class="comment__user-photo">
         </a>
         <p class="comment__content">
@@ -122,6 +122,10 @@ if (sendCommentForms) {
 
       commentsList.append(li)
       commentsList.scrollTop = commentsList.scrollHeight
+      const spanNoComs = document.querySelector(
+        `[data-span_post_id="${el.dataset.post}"]`
+      )
+      if (spanNoComs) spanNoComs.remove()
     })
   )
 }
