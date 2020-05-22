@@ -156,7 +156,8 @@ exports.getUser = catchAsync(async (req, res) => {
   })
 })
 exports.getPost = catchAsync(async (req, res) => {
-  const posts = await Post.find({ _id: req.params.postId })
+  let posts = await Post.find({ _id: req.params.postId })
+  posts = await prepareDataPost(posts, req.user.id, req.user)
   res.status(200).render('recent', {
     posts,
     isSingle: true,
