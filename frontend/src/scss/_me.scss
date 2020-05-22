@@ -8,49 +8,22 @@
 
     &__img-wrap {
         position: relative;
-
-        // &::before {
-        //     content: "";
-        //     width: 110px;
-        //     height: 110px;
-        //     position: absolute;
-        //     transform: translate(-50%, -50%);
-        //     border-radius: 50%;
-        //     // @include createGradientBox;
-        //     background-color: red;
-        //     top: 48%;
-        //     left: 50%;
-        //     z-index: -1;
-        // }
     }
 
     &__img {
         width: 100px;
         height: 100px;
-        // width: 30vw;
-        // height: 30vw;
         border-radius: 50%;
         object-fit: cover;
         position: relative;
-
-
-        // border-radius: 10px;
     }
 
     &__header {
         font-size: 30px;
         @include createGradientText;
-
-        // background: none;
-        // color: $color-grey-dark;
-        // -webkit-text-fill-color: inherit;
     }
 
-    &__settings-link {
-        // display: flex;
-        // align-items: center;
-        // justify-content: center;
-    }
+    &__settings-link {}
 
     &__icon {
         -webkit-background-clip: border-box;
@@ -63,19 +36,14 @@
     &__stats,
     .stats {
         width: 100%;
+        max-width: $post-size-medium;
         display: flex;
         justify-content: space-between;
         align-content: center;
         margin: 10px 0 20px;
         padding: 8px 30px;
-        // min-width: 80%;
-        // box-sizing: content-box;
         border-radius: 15px;
         text-transform: capitalize;
-
-        // background: linear-gradient(145deg, #f0f0f0, #ffffff);
-        // box-shadow: 21px 21px 59px #ececec,
-        //     -21px -21px 59px #ffffff;
 
         &__li {
             padding: 0 8px;
@@ -95,7 +63,6 @@
     &__follow-btn {
         width: 100%;
         padding: 8px 30px;
-        // box-sizing: content-box;
 
     }
 
@@ -104,7 +71,6 @@
         margin-top: 20px;
         display: flex;
         flex-wrap: wrap;
-        // justify-content: space-between;
         justify-content: center;
         align-items: center;
         min-width: 90vw;
