@@ -8,7 +8,9 @@ block content
         label.create-post__label(for='description') Describe your img
      
       .create-post__wrapper
-        input.create-post__input.create-post__input--file#image(type='file')
+        input.create-post__input.create-post__input--file#image(type='file',accept='.jpg,.png,.jpeg')
         label.create-post__label-file(for="image") upload image
       
-      button.section__button.section__button--background(type='submit') Post1
+      button.create-post__send.section__button.section__button--background(type='submit') 
+        span.create-post__post-txt= 'Post'
+        i.im.im-paperplane

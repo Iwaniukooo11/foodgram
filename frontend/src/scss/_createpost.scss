@@ -27,4 +27,15 @@
         padding: 5px 20px;
         border-radius: 5px;
     }
+
+    &__send {
+        display: flex;
+        align-content: center;
+        align-items: center;
+    }
+
+    &__post-txt {
+        margin-right: 5px;
+    }
+
 }
