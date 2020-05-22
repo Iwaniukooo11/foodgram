@@ -56,7 +56,7 @@ exports.getMe = catchAsync(async (req, res) => {
     { desc: 'followers', num: user.followers, link: 'followers' },
     { desc: 'follows', num: user.following, link: 'follows' },
   ]
-  let posts = await Post.find({ user: user.id }).sort({ createdAt: 1 }).exec()
+  let posts = await Post.find({ user: user.id }).sort({ createdAt: -1 }).exec()
 
   posts = await prepareDataPost(posts, req.user.id, req.user)
 
@@ -129,7 +129,7 @@ exports.getUser = catchAsync(async (req, res) => {
     { desc: 'follows', num: user.following, link: 'follows' },
   ]
 
-  let posts = await Post.find({ user: user.id }).sort({ createdAt: 1 }).exec()
+  let posts = await Post.find({ user: user.id }).sort({ createdAt: -1 }).exec()
 
   posts = await prepareDataPost(posts, req.user.id, req.user)
   //is it me?

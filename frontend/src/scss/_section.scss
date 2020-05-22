@@ -43,6 +43,7 @@
         justify-items: center;
         // max-width: 40vw;
         width: $post-size;
+        min-width: 55%;
         margin: 30px 0;
 
         &__user-data-wrap {
@@ -134,6 +135,7 @@
             border-radius: 6px;
             flex-grow: 1;
             width: 20px;
+            padding-left: 10px;
         }
 
         &__comment-list {
@@ -152,10 +154,11 @@
             margin: 10px 0;
             padding: 8px 5px 5px 0;
             border-radius: 10px;
+            background-color: #fff;
             // box-shadow: 5px 5px 60px #e0e0e0,
             //     -5px -5px 60px #ffffff;
-            box-shadow: 26px 26px 71px #e8e8e8,
-                -26px -26px 71px #ffffff;
+            box-shadow: 5px 5px 19px #f7f7f7,
+                -5px -5px 19px #ffffff;
 
             &__user-photo {
                 @include makeSquare($small-user-img);

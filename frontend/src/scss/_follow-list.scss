@@ -1,6 +1,8 @@
 .follow-list {
     &__element {
         @include createCard;
+        font-weight: bold;
+        color: $color-red;
     }
 
     &__img {

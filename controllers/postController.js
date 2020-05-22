@@ -31,7 +31,7 @@ exports.resizeImg = catchAsync(async (req, res, next) => {
   const image = adress + path
 
   req.file.buffer = await sharp(req.file.buffer)
-    .resize(100, 100)
+    .resize(400, 400)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
 
