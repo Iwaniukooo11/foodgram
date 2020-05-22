@@ -10,7 +10,7 @@ export const manageReaction = async (postId, reaction, method = 'POST') => {
         reaction,
       },
     })
-    return 'OK'
+    return resp
   } catch (err) {
     console.log('ERR!: ', err.response.data)
 
@@ -27,6 +27,8 @@ export const addComment = async (postId, content, socket) => {
       }
     )
     socket.emit('socket| add comment')
+    return resp
+
     console.log('resp: ', resp, resp.message)
   } catch (err) {
     console.log('fucking error: ', err.response.data.message)

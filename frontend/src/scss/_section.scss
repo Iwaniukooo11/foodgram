@@ -1,5 +1,5 @@
 .section {
-    padding: 35px 6vw calc(35px + #{$nav-height});
+    padding: 35px 6vw calc(10px + #{$nav-height});
     width: 100%;
 
     &__header {
@@ -49,7 +49,21 @@
             align-items: center;
             margin-bottom: 10px;
             // justify-content: space-between;
+            -webkit-text-fill-color: $color-red;
+            // -webkit-text-fill-color: unset;
+            background-clip: unset;
+            background: none;
+            color: $color-red;
+            font-weight: bold;
+
             width: 100%;
+        }
+
+        &__user-nick {
+            // -webkit-background-clip: text;
+            // -webkit-text-fill-color: $color-orange;
+            -webkit-text-fill-color: inherit;
+
         }
 
         &__img {
@@ -110,6 +124,54 @@
             border-radius: 6px;
             flex-grow: 1;
             width: 20px;
+        }
+
+        &__comment-list {
+            width: 100%;
+            height: 100px;
+            overflow: scroll;
+        }
+
+        &__comment,
+        .comment {
+            // display: flex;
+            display: grid;
+            grid-template-areas: 'img text';
+            grid-template-columns: auto 1fr;
+            margin: 10px 0;
+            padding: 8px 5px 5px 0;
+            border-radius: 10px;
+            // box-shadow: 5px 5px 60px #e0e0e0,
+            //     -5px -5px 60px #ffffff;
+            box-shadow: 26px 26px 71px #e8e8e8,
+                -26px -26px 71px #ffffff;
+
+            &__user-photo {
+                @include makeSquare($small-user-img);
+                border-radius: 50%;
+                margin: 0 10px 0 15px;
+                grid-area: img;
+            }
+
+            &__content {
+                grid-area: text;
+                font-size: 14px;
+                text-align: left;
+            }
+
+            &__user {
+                font-weight: bold;
+                color: $color-red;
+            }
+
+            &__no-coms {
+                font-size: 14px;
+                text-align: center;
+                // transform: translateY(30px);
+                color: $color-red;
+                font-weight: bold;
+
+            }
         }
 
         &__send-btn {

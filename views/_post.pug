@@ -2,7 +2,7 @@ mixin postItem(post)
   li.section__post.post
     .post__user-data-wrap
       img.post__user-img(src=`${post.user.image}`, alt="user image")
-      a(href=`/users/${post.user.id}`)= post.user.nick
+      a.post__user-nick(href=`/users/${post.user.id}`)= post.user.nick
     img.post__img.box-shadow(src=`${post.image}`,alt='post image',data-id=`${id}`)
     //- .post__actions-wrap
     //- span.post__reaction-add.add-reaction(data-post=`${post.id}`)= 'daj kciuka!'
@@ -19,11 +19,23 @@ mixin postItem(post)
         span.stats-list__reaction-add.add-comment(data-post=`${post.id}`)
           i.post__comment-icon.far.fa-comment
         .stats-list__likes.post-list__likes--comment.comments-quantity=post.commentsQuantity
-    form.post__form.send-comment-form#comment-form(data-post=`${post.id}`)
+    
+    ul.post__comment-list.comment-list(data-comments_list_id=`${post.id}`,data-test='test')
+      if post.testComments
+        each comment in post.testComments
+          li.post__comment.comment
+            a.comment__link(href=`/users/${post.user.id}`)
+              img.comment__user-photo(src=`${comment.user.image}`,alt='photo of user')
+            p.comment__content 
+              span.comment__user= `${comment.user.nick } `
+              | #{comment.content }
+        else
+          span.comment__no-coms= `No comments yet!`
+
+    form.post__form.send-comment-form#comment-form(data-post=`${post.id}`,data-nick=`${post.currentUser.nick}`,data-image=`${post.currentUser.image}`)
       input.post__input
       button.post__send-btn.section__button.section__button--background(type='submit')
         i.im.im-paperplane.post__send-icon
 
-    //- each comment in post.testComments
-      #test= comment.content
+    
       

@@ -19,6 +19,7 @@ const followBtn = document.getElementById('follow-btn')
 const updateForms = [...document.querySelectorAll('.update-form')]
 const searchUserBtn = document.getElementById('search-user-btn')
 const addPostForm = document.getElementById('add-post-form')
+const commentsList = [...document.querySelectorAll('.comment-list')]
 // console.log(updateForms)\
 // const socket = io.connect('http://localhost:3000')
 // socket.on('connect', (data) => socket.emit('join'))
@@ -85,19 +86,43 @@ if (addReactionBtns) {
 }
 
 if (sendCommentForms) {
-  sendCommentForms.forEach(
-    (el, index) =>
-      el.addEventListener('submit', async (e) => {
-        e.preventDefault()
-        await postActions.addComment(el.dataset.post, e.target[0].value, socket)
+  commentsList.forEach((el) => {
+    el.scrollTop = el.scrollHeight
+  })
 
-        commentsContentBtns[index].innerText =
-          commentsContentBtns[index].innerText * 1 + 1
+  sendCommentForms.forEach((el, index) =>
+    el.addEventListener('submit', async (e) => {
+      //api
+      e.preventDefault()
+      const res = await postActions.addComment(
+        el.dataset.post,
+        e.target[0].value,
+        socket
+      )
+      console.log(res)
+      commentsContentBtns[index].innerText =
+        commentsContentBtns[index].innerText * 1 + 1
 
-        // alert('posted?')
-        e.target[0].value = ''
-      })
-    // console.log(el)
+      e.target[0].value = ''
+      //front
+      const li = document.createElement('li')
+      li.classList.add('post__comment', 'comment')
+      li.innerHTML = `
+        <a href="/users/${el.dataset.post}" class="comment__link">
+          <img src="${el.dataset.image}" alt="" class="comment__user-photo">
+        </a>
+        <p class="comment__content">
+          <span class="comment__user">${el.dataset.nick}</span>
+          ${res.data.data.data.content}
+        </p>
+        `
+      const commentsList = document.querySelector(
+        `[data-comments_list_id='${el.dataset.post}']`
+      )
+
+      commentsList.append(li)
+      commentsList.scrollTop = commentsList.scrollHeight
+    })
   )
 }
 

@@ -5,7 +5,7 @@ const Reaction = require('../models/reactionModel')
 const Comment = require('../models/commentModel')
 const User = require('../models/userModel')
 
-const prepareDataPost = async (posts, userId) => {
+const prepareDataPost = async (posts, userId, currentUser) => {
   //----
 
   const reactions = posts.map((post) => {
@@ -28,6 +28,10 @@ const prepareDataPost = async (posts, userId) => {
   await Promise.all(commentsToPost).then((values) => {
     values.forEach((element, i) => {
       posts[i].testComments = [...element] || []
+      posts[i].currentUser = {
+        nick: currentUser.nick,
+        image: currentUser.image,
+      }
       // console.log('EL: ', posts[i].testComments)
     })
   })
@@ -53,7 +57,7 @@ exports.getMe = catchAsync(async (req, res) => {
   ]
   let posts = await Post.find({ user: user.id }).sort({ createdAt: 1 }).exec()
 
-  posts = await prepareDataPost(posts, req.user.id)
+  posts = await prepareDataPost(posts, req.user.id, req.user)
 
   res.status(200).render('user', {
     user: req.user,
@@ -74,7 +78,7 @@ exports.getFeed = catchAsync(async (req, res) => {
   if (orTab)
     posts = await Post.find({ $or: orTab }).sort({ createdAt: -1 }).limit(10)
 
-  posts = await prepareDataPost(posts, req.user.id)
+  posts = await prepareDataPost(posts, req.user.id, req.user)
   console.log('before render: ', posts[0])
   res.status(200).render('feed', { posts })
 })
@@ -82,7 +86,7 @@ exports.getFeed = catchAsync(async (req, res) => {
 exports.getRecent = catchAsync(async (req, res) => {
   let posts = await Post.find().sort({ createdAt: -1 }).limit(10)
 
-  posts = await prepareDataPost(posts, req.user.id)
+  posts = await prepareDataPost(posts, req.user.id, req.user)
 
   res.status(200).render('recent', { posts })
 })
@@ -126,7 +130,7 @@ exports.getUser = catchAsync(async (req, res) => {
 
   let posts = await Post.find({ user: user.id }).sort({ createdAt: 1 }).exec()
 
-  posts = await prepareDataPost(posts, req.user.id)
+  posts = await prepareDataPost(posts, req.user.id, req.user)
   //is it me?
   const isMe =
     req.user.id === req.params.userId ||
