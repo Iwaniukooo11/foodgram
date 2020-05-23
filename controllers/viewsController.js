@@ -179,3 +179,10 @@ exports.getPostCreator = catchAsync(async (req, res) => {
     user: req.user,
   })
 })
+
+exports.redirect = catchAsync(async (req, res) => {
+  console.log('REDIRECT HERE')
+  if (req.cookies.jwt) {
+    if (req.cookies.jwt !== 'loggedout') res.redirect('/feed')
+  } else res.redirect('/login')
+})
