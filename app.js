@@ -24,7 +24,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(cors())
 app.options('*', cors())
 
-app.use(express.static(path.join(__dirname, 'public/dist')))
+app.use(express.static(path.join(__dirname, 'public/')))
 app.use(helmet())
 
 if (process.env.NODE_ENV === 'development') {
