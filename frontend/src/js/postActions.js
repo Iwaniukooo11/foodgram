@@ -2,7 +2,6 @@ import axios from 'axios'
 import showAlert from './alert'
 
 export const manageReaction = async (postId, reaction, method = 'POST') => {
-  console.log('received method: ', method)
   try {
     const resp = await axios({
       method,
@@ -14,7 +13,6 @@ export const manageReaction = async (postId, reaction, method = 'POST') => {
     return resp
   } catch (err) {
     showAlert('error', err.response.data.message)
-
     return ''
   }
 }
@@ -28,8 +26,6 @@ export const addComment = async (postId, content, socket) => {
     )
     socket.emit('socket| add comment')
     return resp
-
-    console.log('resp: ', resp, resp.message)
   } catch (err) {
     showAlert('error', err.response.data.message)
   }
@@ -41,11 +37,9 @@ export const createPost = async (obj) => {
       `${document.location.origin}/api/v1/posts`,
       obj
     )
-    console.log(res)
 
     location.assign('/me')
   } catch (err) {
-    console.log(err)
     showAlert('error', err.response.data.message)
   }
 }

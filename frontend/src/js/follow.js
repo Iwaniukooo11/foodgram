@@ -7,7 +7,6 @@ export const followUser = async (userId, method = 'POST') => {
       method,
       url: `${document.location.origin}/api/v1/users/${userId}/follows`,
     })
-    // showAlert('ok', method==='POST'? 'followed succesfully':'unfollowed ')
   } catch (err) {
     showAlert('error', err.response.data.message)
   }

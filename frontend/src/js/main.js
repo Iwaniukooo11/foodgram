@@ -1,4 +1,3 @@
-console.log('hello client side!')
 import * as loginActions from './login'
 import * as postActions from './postActions'
 import * as followActions from './follow'
@@ -20,18 +19,13 @@ const updateForms = [...document.querySelectorAll('.update-form')]
 const searchUserBtn = document.getElementById('search-user-btn')
 const addPostForm = document.getElementById('add-post-form')
 const commentsList = [...document.querySelectorAll('.comment-list')]
-// console.log(updateForms)\
-// const socket = io.connect('http://localhost:3000')
-// socket.on('connect', (data) => socket.emit('join'))
 const socket = io()
-console.log('front-end socket: ', socket)
 
 if (loginForm) {
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault()
     const nick = document.getElementById('nick').value
     const password = document.getElementById('password').value
-    console.log('before login action')
     loginActions.auth({ nick, password }, 'login')
   })
 }
@@ -43,7 +37,6 @@ if (signUpForm) {
     const passwordConfirm = document.getElementById('passwordConfirm').value
     const name = document.getElementById('name').value
     const email = document.getElementById('email').value
-    console.log('before login action')
     loginActions.auth(
       { nick, password, email, passwordConfirm, name },
       'signup'
@@ -59,28 +52,22 @@ if (logoutBtn) {
 
 if (addReactionBtns) {
   addReactionBtns.forEach((el, index) =>
-    // console.log(index, reactionContentBtns[index])
-
     el.addEventListener('click', async (e) => {
       let method = 'POST'
       if (el.dataset.is_liked === 'true') method = 'DELETE'
 
-      // if (await postActions.manageReaction(el.dataset.post, 'tasty', method)) {
       postActions.manageReaction(el.dataset.post, 'tasty', method)
       let text = reactionContentBtns[index].innerText * 1
 
       if (method === 'POST') {
-        // el.innerText = '|<3|'
         reactionContentBtns[index].innerText = text + 1
       } else {
-        // el.innerText = '<3'
         reactionContentBtns[index].innerText = text - 1
       }
 
       el.dataset.is_liked = (el.dataset.is_liked !== 'true').toString()
       el.classList.toggle('liked')
       el.classList.toggle('not-liked')
-      // }
     })
   )
 }
@@ -99,7 +86,6 @@ if (sendCommentForms) {
         e.target[0].value,
         socket
       )
-      console.log(res)
       commentsContentBtns[index].innerText =
         commentsContentBtns[index].innerText * 1 + 1
 
@@ -134,24 +120,19 @@ if (followBtn) {
   followBtn.addEventListener('click', async (e) => {
     const followersButton = document.getElementById('followers-btn')
     let text = followersButton.innerText * 1
-    console.log(text)
 
     if (followBtn.dataset.follow_action === 'unfollow') {
-      // await followActions.followUser(followBtn.dataset.user, 'DELETE')
       followActions.followUser(followBtn.dataset.user, 'DELETE')
       followBtn.innerText = 'follow'
       followBtn.dataset.follow_action = 'follow'
       text -= 1
     } else if (followBtn.dataset.follow_action === 'follow') {
-      // await followActions.followUser(followBtn.dataset.user)
       followActions.followUser(followBtn.dataset.user)
       followBtn.innerText = 'unfollow'
       followBtn.dataset.follow_action = 'unfollow'
       text += 1
     }
     followersButton.innerText = text
-
-    // location.reload() //TD
   })
 }
 
@@ -200,7 +181,6 @@ if (addPostForm) {
     const form = new FormData()
     form.append('description', descInput.value)
     form.append('image', imgInput.files[0] || '')
-    console.log(form)
 
     postActions.createPost(form)
   })

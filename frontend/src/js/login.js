@@ -18,9 +18,8 @@ export const auth = async (obj, type) => {
 export const logout = async () => {
   try {
     await axios.get(`${document.location.origin}/api/v1/users/logout`)
-    // location.reload(true)
     location.assign('/login')
   } catch (err) {
-    console.log(err)
+    showAlert('error', err.response.data.message)
   }
 }

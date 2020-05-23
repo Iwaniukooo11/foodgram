@@ -14,10 +14,8 @@ export const updateUserImage = async (form) => {
     if (!form) throw new Error('No image selected!')
     await axios.patch(
       `${document.location.origin}/api/v1/users/update-user-img`,
-      // { image: form }
       form
     )
-    console.log('updated', form)
     showAlert('ok', 'updated succesfully')
   } catch (err) {
     showAlert('error', err.response.data.message)
