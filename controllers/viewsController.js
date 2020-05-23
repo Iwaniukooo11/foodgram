@@ -74,7 +74,6 @@ exports.getFeed = catchAsync(async (req, res) => {
     posts = await Post.find({ $or: orTab }).sort({ createdAt: -1 }).limit(10)
 
   posts = await prepareDataPost(posts, req.user.id, req.user)
-  console.log('before render: ', posts[0])
   res.status(200).render('feed', { posts })
 })
 

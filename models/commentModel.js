@@ -15,7 +15,6 @@ const commentSchema = new mongoose.Schema({
     //author
     type: mongoose.Schema.ObjectId,
     ref: 'User',
-    // refPath: 'User',
     required: [true, 'Comment must have an author'],
   },
   post: {

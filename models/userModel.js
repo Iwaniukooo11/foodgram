@@ -78,7 +78,6 @@ const userSchema = new mongoose.Schema(
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
-    // TD add posts
     posts: [
       {
         type: mongoose.Schema.ObjectId,

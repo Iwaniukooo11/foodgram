@@ -4,8 +4,6 @@ module.exports = (err, req, res, next) => {
   error.status = err.status || 'error'
 
   console.log('ERROR CONTROLLER', err.message, req.originalUrl)
-  //dev
-  // if (req.originalUrl.startsWith('/api')) {
   console.log('frist case')
   res.status(error.statusCode).json({
     test: 'mati',
@@ -13,13 +11,4 @@ module.exports = (err, req, res, next) => {
     status: 'ERROR',
     message: err.message || err.data.message,
   })
-  // }
-  // console.log('from web')
-  // res.status(error.statusCode).render('error', {
-  //   // title: 'pls',
-  //   // test: 'mati',
-  //   error,
-  //   // status: 'ERROR',
-  //   message: err.message || err.data.message,
-  // })
 }

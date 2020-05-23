@@ -27,17 +27,6 @@ exports.unFollow = catchAsync(async (req, res, next) => {
   })
 })
 
-// exports.countFollowers = catchAsync(async (req, res) => {
-//   console.log('COUNT', req.body.followed)
-//   const count = await Follow.count({ followed: req.body.followed })
-//   res.status(200).json({
-//     status: 'OK',
-//     data: {
-//       data: count,
-//     },
-//   })
-// })
-
 exports.countAllFollowers = catchAsync(async (req, res) => {
   const followers = await Follow.count({ followed: req.user.id })
   res.status(200).json({
@@ -54,22 +43,16 @@ exports.countAllFollowed = catchAsync(async (req, res) => {
 })
 
 exports.addIdToBody = catchAsync(async (req, res, next) => {
-  console.log('ADD ID TO BODY', req.params)
   if (req.params.id) req.body.followed = req.params.id
-  //   req.b
   next()
 })
 
 exports.checkIfUserGaveFollow = catchAsync(async (req, res, next) => {
   const follow = await Follow.findOne(req.body)
-  console.log(req.body)
-
-  console.log('Follow: ', follow)
 
   if (follow) {
     return next(new AppError('you already gave a Follow', 500))
   }
-  console.log('HERE WORKS')
 
   next()
 })

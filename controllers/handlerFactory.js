@@ -8,7 +8,6 @@ const Post = require('../models/postModel')
 exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findById(req.params.id)
-    console.log('req: ', req.params.id)
 
     if (typeof doc.user.id === 'string' && req.user.id) {
       if (doc.user.id !== req.user.id) {
@@ -25,7 +24,6 @@ exports.deleteOne = (Model) =>
       return next(new AppError('No document found with that ID', 404))
     }
     if (req.updatePost) {
-      console.log(req.updatePost.query)
       await Post.findOne(req.updatePost.query) //in order to update
     }
 

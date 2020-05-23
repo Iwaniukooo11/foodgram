@@ -7,7 +7,6 @@ const { src, dest, series, watch, parallel } = require('gulp'),
   imagemin = require('gulp-imagemin'),
   sass = require('gulp-sass'),
   autoprefixer = require('gulp-autoprefixer'),
-  // browserSync = require('browser-sync').create(),
   cleaner = require('gulp-clean'),
   wait = require('gulp-wait')
 
@@ -90,17 +89,8 @@ function log() {
 }
 
 function watcher() {
-  // watch("./frontend/src/html/**/*.html").on(
-  //   "change",
-  //   series(copy, browserSync.reload, log)
-  // );
-  // watch('./frontend/src/html/**/*.html').on('change', series(copy))
   watch('./frontend/src/js/**/*').on('change', series(js))
-  watch('./frontend/src/scss/**/*.scss').on(
-    'change',
-    series(css)
-    // parallel(css, browserSync.reload)
-  )
+  watch('./frontend/src/scss/**/*.scss').on('change', series(css))
   watch('./frontend/src/assets/**/*').on('change', assets)
 }
 
@@ -114,16 +104,6 @@ function clean() {
 }
 
 exports.js = js
-// exports.copy = copy
 exports.css = css
-// exports.reload = reload;
 exports.build = series(clean, js, css, images, assets)
-exports.default = series(
-  clean,
-  js,
-  // copy,
-  css,
-  images,
-  assets,
-  parallel(watcher)
-)
+exports.default = series(clean, js, css, images, assets, parallel(watcher))

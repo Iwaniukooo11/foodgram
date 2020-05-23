@@ -40,7 +40,6 @@ exports.setIdOfReactionToRemove = catchAsync(async (req, res, next) => {
     user: req.user.id,
   })
   req.params.id = reaction.id
-  console.log('\x1b[31m', 'post id: ', req.params.postId)
 
   req.updatePost = {
     query: {

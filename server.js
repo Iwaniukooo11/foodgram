@@ -18,18 +18,14 @@ mongoose
   .catch((err) => console.log('error'))
 
 const port = process.env.PORT || 3000
-// const server = app.listen(port, () => {
-//   console.log(`App running on port ${port}...`)
+
+// io.on('connection', (socket) => {
+//   console.log('\x1b[36m%s\x1b[0m', 'socket user connected')
+
+//   socket.on('socket| add comment', () =>
+//     console.log('\x1b[36m%s\x1b[0m', 'socket-comment was added')
+//   )
 // })
-
-// console.log('io created', io)
-io.on('connection', (socket) => {
-  console.log('\x1b[36m%s\x1b[0m', 'socket user connected')
-
-  socket.on('socket| add comment', () =>
-    console.log('\x1b[36m%s\x1b[0m', 'socket-comment was added')
-  )
-})
 
 http.listen(port, () => {
   console.log(`App running on port ${port}...`)
