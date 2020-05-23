@@ -182,7 +182,7 @@ if (addPostForm) {
     form.append('description', descInput.value)
     console.log(imgInput.files)
     form.append('image', imgInput.files[0] || null)
-    if (!imgInput.file) alert('kurde bele error')
+    if (!imgInput.files[0]) alert('kurde bele error')
     else await postActions.createPost(form)
   })
 }
