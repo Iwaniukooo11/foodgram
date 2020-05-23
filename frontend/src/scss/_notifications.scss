@@ -1,15 +1,7 @@
 .notff {
 
     &__list-element {
-        // position: relative;
-        // display: flex;
-        // align-items: center;
-        // padding: 20px 5px 10px;
-        // margin: 10px;
-        // border-radius: 10px;
-        // box-shadow: 5px 5px 60px #e0e0e0,
-        //     -5px -5px 60px #ffffff;
-        // font-size: 16px;
+
         @include createCard;
 
     }
@@ -39,5 +31,38 @@
         &--clock {
             right: 10px;
         }
+    }
+
+    @media(min-width:1024px) {
+        &__list-element {
+            font-size: 17px;
+        }
+
+        &__date {
+            font-size: 11px;
+        }
+    }
+
+    @media(min-width:1200px) {
+        &__list-element {
+            padding: 20px 0 20px 20px;
+        }
+
+        &__list-element {
+            font-size: 18px;
+        }
+
+        &__date {
+            font-size: 13px;
+
+            &--month {
+                left: 20px;
+            }
+
+            &--clock {
+                right: 20px;
+            }
+        }
+
     }
 }

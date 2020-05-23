@@ -80,4 +80,28 @@
         }
     }
 
+    // @media(min-width:1200px) {
+    //     top: 0;
+    //     bottom: auto;
+    // }
+    @media(min-width:768px) {
+
+        &__list {
+            // max-width: 800px;
+            justify-content: space-between;
+            max-width: $post-size-768;
+        }
+
+        &__list-element {
+            margin: 0;
+        }
+    }
+
+    @media(min-width:1024px) {
+        &__list {
+            // max-width: 800px;
+            max-width: $post-size-1024;
+        }
+    }
+
 }

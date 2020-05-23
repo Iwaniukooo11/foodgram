@@ -39,7 +39,7 @@
         justify-items: center;
         width: $post-img-size;
         min-width: 55%;
-        width: $post-size-medium;
+        width: 300px;
         margin: 30px 0;
 
         &__user-data-wrap {
@@ -64,6 +64,7 @@
             width: $post-img-size;
             height: $post-img-size;
             border-radius: 10%;
+            align-self: center;
         }
 
         &__user-img {
@@ -205,6 +206,24 @@
             }
         }
 
+        @media(min-width:768px) {
+            // width: 500px;
+            width: $post-size-768;
+
+            &__img {
+                margin-right: auto;
+                @include makeSquare($post-size-768);
+            }
+
+            &__desc {
+                margin: 15px 0;
+            }
+
+            &__user-nick {
+                margin-bottom: 10px;
+            }
+        }
+
         @media(min-width:1024px) {
             grid-template-areas:
                 'img user-box'
@@ -213,7 +232,9 @@
                 'img comments'
                 'img add-comment';
             column-gap: 30px;
-            max-height: 370px;
+            width: $post-size-1024;
+            // max-height: 370px;
+            max-height: 400px;
             grid-template-columns: auto 1fr;
             box-shadow: 20px 20px 40px #ededed,
                 -20px -20px 40px #ffffff;
@@ -224,8 +245,8 @@
             &__img {
                 grid-area: img;
                 border-radius: 5%;
-                // @include makeSquare($post-img-size-medium)
-                width: $post-img-size-medium;
+                // @include makeSquare($post-img-size-1024)
+                width: $post-img-size-1024;
                 height: 100%;
             }
 
@@ -248,8 +269,32 @@
 
             &__stats-list {
                 background: linear-gradient(145deg, #f5f5f5, #f8f8f8);
+                // @include createGradientBox;
+                // color: $color-white !important;
                 padding: 6px;
                 border-radius: 5px;
+            }
+        }
+
+        @media(min-width:1200px) {
+            width: $post-size-1200;
+            // height: 500px;
+            // max-height: 500px;
+
+            &__img {
+                @include makeSquare(350px);
+            }
+        }
+
+        @media(min-width:1400px) {
+            width: $post-size-1400;
+            height: 430px;
+            max-height: none;
+            padding: 0 10px 25px 0;
+            // row-gap: 20px;
+
+            &__img {
+                @include makeSquare(400px);
             }
         }
 

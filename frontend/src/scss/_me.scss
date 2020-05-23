@@ -36,7 +36,7 @@
     &__stats,
     .stats {
         width: 100%;
-        max-width: $post-size-medium;
+        max-width: $post-size-1024;
         display: flex;
         justify-content: space-between;
         align-content: center;
@@ -63,6 +63,8 @@
     &__follow-btn {
         width: 100%;
         padding: 8px 30px;
+        max-width: $post-size-1024;
+
 
     }
 

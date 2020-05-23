@@ -8,8 +8,11 @@ $color-black:#525252;
 
 $small-user-img:35px;
 $post-img-size:270px;
-$post-img-size-medium:300px;
-$post-size-medium:550px;
+$post-img-size-1024:300px;
+$post-size-768:400px;
+$post-size-1024:550px;
+$post-size-1200:730px;
+$post-size-1400:850px;
 $nav-height:60px;
 
 @mixin createGradientBox {
