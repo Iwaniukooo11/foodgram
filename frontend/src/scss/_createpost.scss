@@ -38,4 +38,52 @@
         margin-right: 5px;
     }
 
+    @media(min-width:768px) {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        margin-top: 30vh;
+
+        &__form {
+            max-width: $post-size-768;
+            row-gap: 35px;
+        }
+
+        &__label-file {
+            padding: 10px 0;
+            width: 100%;
+        }
+
+        &__wrapper {
+            width: 100%;
+        }
+
+        &__send {
+            // width: 100%;
+        }
+    }
+
+    @media(min-width:1024px) {
+        &__label {
+            margin-top: 15px;
+        }
+    }
+
+    @media(min-width:1200px) {
+        &__form {
+            width: $post-size-1024;
+            max-width: none;
+            row-gap: 45px;
+        }
+
+        &__wrapper {
+            width: $post-size-1024;
+        }
+
+        &__label-file {
+            padding: 15px 0;
+
+        }
+    }
 }
