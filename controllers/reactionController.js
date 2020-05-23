@@ -13,7 +13,6 @@ exports.getReaction = factory.getOne(Reaction)
 exports.createReaction = catchAsync(async (req, res) => {
   const doc = await Reaction.create(req.body)
   await Post.findById(req.body.post)
-  console.log('CREATE FROM BODY IN COMMENT: ', req.body)
 
   res.status(201).json({
     status: 'OK',
@@ -41,14 +40,13 @@ exports.setIdOfReactionToRemove = catchAsync(async (req, res, next) => {
     user: req.user.id,
   })
   req.params.id = reaction.id
-  console.log('\x1b[31m', 'fucken post id: ', req.params.postId)
+  console.log('\x1b[31m', 'post id: ', req.params.postId)
 
   req.updatePost = {
     query: {
       _id: req.params.postId,
     },
   }
-  // console.log('found reaction: ', reaction)
   next()
 })
 exports.deleteReaction = factory.deleteOne(Reaction)

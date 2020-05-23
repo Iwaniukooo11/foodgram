@@ -9,20 +9,14 @@ exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findById(req.params.id)
     console.log('req: ', req.params.id)
-    // console.log('DELETING: ', doc, req.user.id)
-    // console.log(doc.user.id, req.user.id)
 
     if (typeof doc.user.id === 'string' && req.user.id) {
       if (doc.user.id !== req.user.id) {
-        return next(
-          new AppError('removed a doc, that you warent an authorA', 500)
-        )
+        return next(new AppError('Tried to remove not your document', 500))
       }
     } else if (doc.user && req.user.id) {
       if (doc.user !== req.user.id) {
-        return next(
-          new AppError('removed a doc, that you warent an authorB', 500)
-        )
+        return next(new AppError('Tried to remove not your document', 500))
       }
     }
 
@@ -32,8 +26,7 @@ exports.deleteOne = (Model) =>
     }
     if (req.updatePost) {
       console.log(req.updatePost.query)
-      const test = await Post.findOne(req.updatePost.query)
-      console.log('update req', test)
+      await Post.findOne(req.updatePost.query) //in order to update
     }
 
     res.status(204).json({
@@ -81,7 +74,6 @@ exports.updateOne = (Model) =>
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.create(req.body)
-    console.log('CREATE FROM BODY: ', req.body)
 
     res.status(201).json({
       status: 'OK',
@@ -93,7 +85,6 @@ exports.createOne = (Model) =>
 
 exports.getOne = (Model, populateOptions) =>
   catchAsync(async (req, res, next) => {
-    // console.log('\x1b[31m', 'get one: ', req.)
     if (!req.clientData) req.clientData = {}
 
     let query = req.query.type
@@ -108,7 +99,6 @@ exports.getOne = (Model, populateOptions) =>
     }
 
     // const doc = docs.find(el => el.id === id)
-    console.log('\x1b[36m%s\x1b[0m', 'client data:', req.clientData)
     res.status(200).json({
       status: 'OK',
       data: {
@@ -119,8 +109,6 @@ exports.getOne = (Model, populateOptions) =>
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res) => {
-    console.log('\x1b[31m', 'get all: ', Model)
-
     let filter = {}
     if (req.params.postId) filter = { post: req.params.postId }
     else if (req.params.userId) filter = { nick: req.params.userId }
@@ -130,7 +118,6 @@ exports.getAll = (Model) =>
       .sort()
       .limit()
       .paginate()
-    // const doc = await features.query.explain()
     const doc = await features.query
 
     res.status(200).json({
@@ -146,12 +133,10 @@ exports.setUserIdAsUser = (req, res, next) => {
   if (req.user.id !== undefined) {
     req.body.user = req.user.id
   }
-
   next()
 }
 
 exports.setUserIdAsParam = (req, res, next) => {
   if (req.user) req.params.id = req.user.id
-
   next()
 }

@@ -39,19 +39,11 @@ const createsSendToken = (user, statusCode, res) => {
 exports.signUp = catchAsync(async (req, res, next) => {
   const doc = await User.create(req.body)
   createsSendToken(doc, 201, res)
-
-  // res.status(201).json({
-  //   status: 'OK',
-  //   data: {
-  //     data: doc,
-  //   },
-  // })
 })
 
 exports.login = catchAsync(async (req, res, next) => {
   const { nick, password } = req.body
   const candidatePassword = password
-  console.log(nick)
 
   const user = await User.findOne({ nick }).select('+password')
   if (!user) return next(new AppError('incorrect nick or password', 401))

@@ -28,10 +28,6 @@ exports.getTotalsPosted = catchAsync(async (req, res, next) => {
   })
 })
 
-exports.getTotalsReceived = catchAsync(async (req, res) => {
-  //  THIS ROUTE IS NOT DEFINED
-})
-
 exports.setUserIdToParams = catchAsync(async (req, res, next) => {
   req.params.id = req.user.id
   next()
@@ -58,7 +54,6 @@ exports.resizeImg = catchAsync(async (req, res, next) => {
     secretAccessKey: secret,
   })
 
-  //https://foodgram-users.s3.eu-north-1.amazonaws.com/aws-5eb1765bab8090033020d832-1589821809660-post.jpeg
   const adress = 'https://foodgram-users.s3.eu-north-1.amazonaws.com/'
   const path = `aws-${req.user.id}-${Date.now()}-img.jpeg`
   const image = adress + path

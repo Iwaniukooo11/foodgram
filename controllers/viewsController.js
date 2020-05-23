@@ -6,8 +6,6 @@ const Comment = require('../models/commentModel')
 const User = require('../models/userModel')
 
 const prepareDataPost = async (posts, userId, currentUser) => {
-  //----
-
   const reactions = posts.map((post) => {
     const reaction = Reaction.findOne({
       post: post.id,
@@ -24,7 +22,6 @@ const prepareDataPost = async (posts, userId, currentUser) => {
 
   const commentsToPost = posts.map((post) => Comment.find({ post: post.id }))
 
-  // console.log('before')
   await Promise.all(commentsToPost).then((values) => {
     values.forEach((element, i) => {
       posts[i].testComments = [...element] || []
@@ -33,13 +30,10 @@ const prepareDataPost = async (posts, userId, currentUser) => {
         image: currentUser.image,
         id: currentUser.id,
       }
-      // console.log('EL: ', posts[i].testComments)
     })
   })
-  // console.log('after', posts[0])
 
   return posts
-  //----
 }
 
 exports.getLogin = catchAsync(async (req, res) => {
@@ -86,7 +80,6 @@ exports.getFeed = catchAsync(async (req, res) => {
 
 exports.getRecent = catchAsync(async (req, res) => {
   let posts = await Post.find().sort({ createdAt: -1 }).limit(10)
-
   posts = await prepareDataPost(posts, req.user.id, req.user)
 
   res.status(200).render('recent', { posts })
@@ -104,7 +97,6 @@ exports.getNotifications = catchAsync(async (req, res) => {
     .concat(comments)
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 
-  // console.log('nott', notifications[0])
   res.status(200).render('notifications', { notifications })
 })
 
@@ -165,7 +157,6 @@ exports.getPost = catchAsync(async (req, res) => {
 })
 exports.getFollows = catchAsync(async (req, res) => {
   const users = await Follow.find({ user: req.params.userId })
-  // console.log(users[0])
   res.status(200).render('followList', {
     follows: true,
     users,
