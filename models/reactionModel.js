@@ -35,18 +35,6 @@ const reactionSchema = new mongoose.Schema(
   }
 )
 
-// reactionSchema.virtual('postAuthor', {
-//   ref: 'User',
-//   foreignField: 'posts',
-//   localField: 'post',
-// })
-// reactionSchema.pre('save', async function (next) {
-//   this.populate({
-//     path: 'postAuthor',
-//     select: 'name',
-//   })
-// })
-
 reactionSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',

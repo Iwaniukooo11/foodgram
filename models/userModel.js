@@ -7,24 +7,24 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, 'must have a name!'],
-      minlength: [3, 'name minimum 5 chars!'],
-      maxlength: [20, 'name maximum 20 chars!'],
+      required: [true, 'User must have a name!'],
+      minlength: [5, 'Name should have min 5 chars'],
+      maxlength: [20, 'Name should have max 20 chars'],
     },
     nick: {
       type: String,
       trim: true,
-      required: [true, 'must have a nick!'],
+      required: [true, 'User must have a nick!'],
       unique: true,
-      minlength: [3, 'nick minimum 5 chars!'],
-      maxlength: [20, 'nick maximum 20 chars!'],
+      minlength: [3, 'Nick should have min 3 chars'],
+      maxlength: [10, 'Nick should have max 10 chars'],
     },
     email: {
       type: String,
       required: [true, 'user must have an enmail'],
       unique: true,
       lowercase: true,
-      validate: [validator.isEmail, 'No valid email'],
+      validate: [validator.isEmail, 'Invalid email'],
     },
     password: {
       type: String,
@@ -70,7 +70,6 @@ const userSchema = new mongoose.Schema(
       type: Number, //<--they follow user
       default: 0,
     },
-    // followedUsers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
 
     createdAt: {
       type: Date,
@@ -83,7 +82,6 @@ const userSchema = new mongoose.Schema(
     posts: [
       {
         type: mongoose.Schema.ObjectId,
-        // ref: 'Post',
         refPath: 'Post',
       },
     ],
@@ -94,17 +92,12 @@ const userSchema = new mongoose.Schema(
   }
 )
 userSchema.pre(/^find/, async function (next) {
-  // console.log('\x1b[33m', 'getQuery: ', this.getQuery()._id)
   const followers = await Follow.countDocuments({
     followed: this.getQuery()._id,
   })
   const following = await Follow.countDocuments({ user: this.getQuery()._id })
-  // console.log('ID: ', this.getQuery()._id)
-  // return follows
-  // this.getQuery().follows = follows // this// this.updateOne({ follows })
   await this.updateOne({}, { $set: { followers, following } })
 
-  // return 'test'
   next()
 })
 
@@ -128,8 +121,6 @@ userSchema.methods.correctPassword = async function (
 ) {
   return await bcrypt.compare(candidatePassword, userPassword)
 }
-
-// userSchema.me
 
 const User = mongoose.model('User', userSchema)
 

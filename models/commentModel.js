@@ -3,9 +3,9 @@ const AppError = require('./../utils/appError')
 
 const commentSchema = new mongoose.Schema({
   content: {
-    required: [true, 'comment must have a content'],
+    required: [true, 'Comment must have a content'],
     type: String,
-    maxlength: [230, 'maxlengith in comment max 230!'],
+    maxlength: [230, 'Use max 230 chars!'],
   },
   createdAt: {
     type: Date,

@@ -18,7 +18,7 @@ const postSchema = new mongoose.Schema(
     ],
     image: {
       type: String,
-      required: [true, 'must have a cover img'],
+      required: [true, 'Post must have a image'],
     },
 
     testCommentsLength: {
@@ -77,37 +77,21 @@ postSchema.pre(/^find/, function (next) {
 })
 
 postSchema.post('init', async function (doc) {
-  console.log('THIS IS MY DOC!!', doc._id)
-
   const allReactions = await Reaction.countDocuments({ post: doc._id })
   const allComments = await Comment.countDocuments({ post: doc._id })
 
   doc.likesQuantity = allReactions
   doc.commentsQuantity = allComments
-  console.log('THIS IS LIKES:', allReactions)
   await doc.save()
 })
-// postSchema.post('remove', async function (doc) {
-//   console.log('\x1b[31m','THIS IS MY DOC!!', doc._id)
-
-//   const allReactions = await Reaction.countDocuments({ post: doc._id })
-//   const allComments = await Comment.countDocuments({ post: doc._id })
-
-//   doc.likesQuantity = allReactions
-//   doc.commentsQuantity = allComments
-//   console.log('\x1b[31m','THIS IS LIKES:', allReactions)
-//   await doc.save()
-// })
 
 postSchema.pre('save', async function (next) {
-  console.log(this.user._id, this.id)
   const user = await User.findById(this.user._id)
   if (!user.posts.includes(this.id)) user.posts.push(this.id)
   user.save({ validateBeforeSave: false })
   next()
 })
 postSchema.pre('remove', async function (next) {
-  console.log(this.user._id, this.id)
   const user = await User.findById(this.user._id)
   user.posts = user.posts.filter((id) => id != this.id)
   user.save({ validateBeforeSave: false })
