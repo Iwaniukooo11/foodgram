@@ -33,6 +33,7 @@ export const addComment = async (postId, content, socket) => {
 
 export const createPost = async (obj) => {
   try {
+    if (!obj) throw new Error('No file found!')
     const res = await axios.post(
       `${document.location.origin}/api/v1/posts`,
       obj
