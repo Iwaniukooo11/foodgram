@@ -43,10 +43,10 @@ const prepareDataPost = async (posts, userId, currentUser) => {
 }
 
 exports.getLogin = catchAsync(async (req, res) => {
-  res.status(200).render('login', {})
+  res.status(200).render('login', { login: true })
 })
 exports.getRegister = catchAsync(async (req, res) => {
-  res.status(200).render('register', {})
+  res.status(200).render('register', { login: true })
 })
 
 exports.getMe = catchAsync(async (req, res) => {
