@@ -25,11 +25,4 @@ router
   .patch(authController.protect, postController.updatePost)
   .delete(authController.protect, postController.deletePost)
 
-// router
-//   .route('/test')
-//   .post(
-//     authController.protect,
-//     postController.uploadImage,
-//     postController.resizeImg
-//   )
 module.exports = router

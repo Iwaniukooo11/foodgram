@@ -12,16 +12,13 @@ mixin statsItem(obj)
 mixin imgItem(id,src,likesQuantity,commentsQuantity)
   li.post-list__li
     img.post-list__img.box-shadow(src=`${src}`,alt='post image',data-id=`${id}`)
-    //- .post-list__stats-wrap
-      .post-list__likes.post-list__likes--like=likesQuantity
-      .post-list__likes.post-list__likes--comment=commentsQuantity
 
 
 block content
 
   main.main.section.section-me.me
     .me__img-wrap
-      img.me__img.box-shadow(src=`${user.image || 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Pierre-Person.jpg'}`, alt="user image")
+      img.me__img.box-shadow(src=`${user.image}`, alt="user image")
     h1.section__header.me__header 
       span= user.name
       if isMe
@@ -37,6 +34,5 @@ block content
 
     ul.me__post-list.post-list
       each post in posts
-        //- +imgItem(post.id,post.image,post.likesQuantity,post.commentsQuantity)
         +postItem(post)
 

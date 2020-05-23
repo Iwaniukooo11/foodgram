@@ -24,11 +24,9 @@ mixin nottfElement(obj)
          a.notff__link(href=`users/${obj.user._id}`) #{obj.user.nick}
          |  reacted to your  
          a.notff__link(href=`posts/${obj.post}`) post
-        //-  |  with "#{obj.reaction}"
 
 block content
 
-  //- notff in order to short notification
   main.main.section.notf
     ul.notf__list
       each element in notifications 
