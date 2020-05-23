@@ -17,7 +17,7 @@ const upload = multer({ storage: multerStorage, fileFilter: multerFilter })
 exports.uploadImage = upload.single('image')
 
 exports.resizeImg = catchAsync(async (req, res, next) => {
-  if (!req.file) return next()
+  if (!req.file) return next(new AppError('No image found!'))
   const id = process.env.AWS_ACCES_ID
   const secret = process.env.AWS_ACCES_SECRET
   const bucket_name = 'myfoodgram'
@@ -33,7 +33,7 @@ exports.resizeImg = catchAsync(async (req, res, next) => {
   req.file.buffer = await sharp(req.file.buffer)
     .resize(400, 400)
     .toFormat('jpeg')
-    .jpeg({ quality: 90 })
+  // .jpeg({ quality: 90 })
 
   const params = {
     Bucket: bucket_name,
