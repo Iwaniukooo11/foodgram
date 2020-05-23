@@ -11,17 +11,8 @@
     align-content: center;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-
     @include createGradientBox;
-    // background-color: $color-grey;
-    // background-color: rgb(240, 240, 240);
-    // padding: 10px;
 
-
-    // background: linear-gradient(to right, $color-orange, $color-red);
-    // background-color: $color-orange;
-    // border-bottom-left-radius: 10px;
-    // border-bottom-right-radius: 10px;
     &__link {
         color: $color-white;
         -webkit-text-fill-color: unset;
@@ -44,8 +35,6 @@
         align-content: center;
         align-items: center;
         margin: 0 10px;
-
-
         box-shadow: 34px 34px 80px #8a8a8a,
             -34px -34px 80px #ffffff;
 
@@ -61,8 +50,6 @@
     &__icon {
         font-size: 16px;
         color: $color-grey-dark;
-
-        // padding: 10px;
 
         &--home {
             padding-top: 7px;
@@ -80,14 +67,9 @@
         }
     }
 
-    // @media(min-width:1200px) {
-    //     top: 0;
-    //     bottom: auto;
-    // }
     @media(min-width:768px) {
 
         &__list {
-            // max-width: 800px;
             justify-content: space-between;
             max-width: $post-size-768;
         }
@@ -99,7 +81,6 @@
 
     @media(min-width:1024px) {
         &__list {
-            // max-width: 800px;
             max-width: $post-size-1024;
         }
 
@@ -110,14 +91,12 @@
 
     @media(min-width:1200px) {
         &__list {
-            // max-width: 800px;
             max-width: $post-size-1200;
         }
     }
 
     @media(min-width:1400px) {
         &__list {
-            // max-width: 800px;
             max-width: $post-size-1400;
         }
     }

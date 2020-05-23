@@ -19,8 +19,6 @@
     }
 
 
-    &__subtext {}
-
     &__button {
         padding: 8px 30px;
         border-radius: 10px;
@@ -55,7 +53,6 @@
             background: none;
             color: $color-red;
             font-weight: bold;
-
             width: 100%;
         }
 
@@ -211,7 +208,6 @@
         }
 
         @media(min-width:768px) {
-            // width: 500px;
             width: $post-size-768;
 
             &__img {
@@ -237,7 +233,6 @@
                 'img add-comment';
             column-gap: 30px;
             width: $post-size-1024;
-            // max-height: 370px;
             max-height: 400px;
             grid-template-columns: auto 1fr;
             box-shadow: 20px 20px 40px #ededed,
@@ -249,7 +244,6 @@
             &__img {
                 grid-area: img;
                 border-radius: 5%;
-                // @include makeSquare($post-img-size-1024)
                 width: $post-img-size-1024;
                 height: 100%;
             }
@@ -273,8 +267,6 @@
 
             &__stats-list {
                 background: linear-gradient(145deg, #f5f5f5, #f8f8f8);
-                // @include createGradientBox;
-                // color: $color-white !important;
                 padding: 6px;
                 border-radius: 5px;
             }
@@ -282,8 +274,6 @@
 
         @media(min-width:1200px) {
             width: $post-size-1200;
-            // height: 500px;
-            // max-height: 500px;
 
             &__img {
                 @include makeSquare(350px);
@@ -295,7 +285,6 @@
             height: 430px;
             max-height: none;
             padding: 0 10px 25px 0;
-            // row-gap: 20px;
 
             &__img {
                 @include makeSquare(400px);

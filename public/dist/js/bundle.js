@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ((status, message) => {\n  const alertElement = document.querySelector('.alert');\n  alertElement.classList.add(`alert--${status}`, 'active');\n  alertElement.innerHTML = message;\n  alertElement.addEventListener('click', () => alertElement.classList.remove('active'));\n  setTimeout(() => {\n    alertElement.classList.remove('active');\n  }, 1300 + message.length * 10);\n});\n\n//# sourceURL=webpack:///./frontend/src/js/alert.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ((status, message) => {\n  const alertElement = document.querySelector('.alert');\n  alertElement.classList.remove(`alert--${status}`, 'active');\n  alertElement.classList.add(`alert--${status}`, 'active');\n  alertElement.innerHTML = message;\n  alertElement.addEventListener('click', () => alertElement.classList.remove('active'));\n  setTimeout(() => {\n    alertElement.classList.remove('active');\n  }, 1300 + message.length * 10);\n});\n\n//# sourceURL=webpack:///./frontend/src/js/alert.js?");
 
 /***/ }),
 

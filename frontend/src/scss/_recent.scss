@@ -3,21 +3,14 @@
 
     &__posts-list {
         display: flex;
-        // justify-content: space-between;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
     }
 
-    &__search-btn {
-        // margin-bottom: 40px;
-
-    }
-
     &__search {
         text-align: center;
         margin-bottom: 10px;
-
     }
 
     &__search-wrap {
