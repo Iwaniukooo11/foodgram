@@ -36,7 +36,7 @@
     &__stats,
     .stats {
         width: 100%;
-        max-width: $post-size-1024;
+        max-width: $post-size-768;
         display: flex;
         justify-content: space-between;
         align-content: center;
@@ -84,6 +84,32 @@
             border-radius: 10%;
             margin: 5px 10px;
 
+        }
+    }
+
+    @media(min-width:1024px) {
+
+        &__stats,
+        .stats {
+            max-width: none;
+            width: $post-size-1024;
+            justify-content: space-around;
+        }
+    }
+
+    @media(min-width:1200px) {
+
+        &__stats,
+        .stats {
+            width: $post-size-1200;
+        }
+    }
+
+    @media(min-width:1400px) {
+
+        &__stats,
+        .stats {
+            width: $post-size-1400;
         }
     }
 }

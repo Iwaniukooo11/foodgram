@@ -102,6 +102,24 @@
             // max-width: 800px;
             max-width: $post-size-1024;
         }
+
+        &__icon {
+            font-size: 17px;
+        }
+    }
+
+    @media(min-width:1200px) {
+        &__list {
+            // max-width: 800px;
+            max-width: $post-size-1200;
+        }
+    }
+
+    @media(min-width:1400px) {
+        &__list {
+            // max-width: 800px;
+            max-width: $post-size-1400;
+        }
     }
 
 }
