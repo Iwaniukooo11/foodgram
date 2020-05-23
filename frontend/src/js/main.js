@@ -174,7 +174,7 @@ if (searchUserBtn) {
 }
 
 if (addPostForm) {
-  addPostForm.addEventListener('submit', (e) => {
+  addPostForm.addEventListener('submit', async (e) => {
     e.preventDefault()
     const descInput = document.getElementById('description')
     const imgInput = document.getElementById('image')
@@ -182,7 +182,7 @@ if (addPostForm) {
     form.append('description', descInput.value)
     console.log(imgInput.files)
     form.append('image', imgInput.files[0] || null)
-
-    postActions.createPost(form)
+    if (!imgInput.file) alert('kurde bele error')
+    else await postActions.createPost(form)
   })
 }
