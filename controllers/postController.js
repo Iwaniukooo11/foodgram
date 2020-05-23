@@ -35,7 +35,9 @@ exports.resizeImg = catchAsync(async (req, res, next) => {
   req.file.buffer = await sharp(req.file.buffer)
     .resize(400, 400)
     .toFormat('jpeg')
-  // .jpeg({ quality: 90 })
+    .jpeg({ quality: 90 })
+
+  console.log('buffer: ', req.file.buffer)
 
   const params = {
     Bucket: bucket_name,
@@ -46,11 +48,12 @@ exports.resizeImg = catchAsync(async (req, res, next) => {
 
   await s3.upload(params, async (err, data) => {
     if (err) {
-      throw err
+      return new AppError('Sth went wrong')
     }
     console.log(`uploaded at ${data.Location}`)
   })
 
+  console.log('before next', image)
   req.body.image = image
 
   next()
