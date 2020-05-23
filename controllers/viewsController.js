@@ -51,7 +51,6 @@ exports.getMe = catchAsync(async (req, res) => {
     { desc: 'follows', num: user.following, link: 'follows' },
   ]
   let posts = await Post.find({ user: user.id }).sort({ createdAt: -1 })
-
   posts = await prepareDataPost(posts, req.user.id, req.user)
 
   res.status(200).render('user', {
