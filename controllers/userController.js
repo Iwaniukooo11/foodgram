@@ -49,7 +49,7 @@ const upload = multer({ storage: multerStorage, fileFilter: multerFilter })
 exports.uploadImage = upload.single('image')
 
 exports.resizeImg = catchAsync(async (req, res, next) => {
-  if (!req.file) return next()
+  if (!req.file) return next(new AppError('no imgage selected'))
   const id = process.env.AWS_ACCES_ID
   const secret = process.env.AWS_ACCES_SECRET
   const bucket_name = 'foodgram-users'

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import showAlert from './alert'
 
 export const manageReaction = async (postId, reaction, method = 'POST') => {
   console.log('received method: ', method)
@@ -12,9 +13,8 @@ export const manageReaction = async (postId, reaction, method = 'POST') => {
     })
     return resp
   } catch (err) {
-    console.log('ERR!: ', err.response.data)
+    showAlert('error', err.response.data.message)
 
-    alert(err.response.data.message)
     return ''
   }
 }
@@ -31,8 +31,7 @@ export const addComment = async (postId, content, socket) => {
 
     console.log('resp: ', resp, resp.message)
   } catch (err) {
-    console.log('fucking error: ', err.response.data.message)
-    alert(err.message)
+    showAlert('error', err.response.data.message)
   }
 }
 
@@ -47,5 +46,6 @@ export const createPost = async (obj) => {
     location.assign('/me')
   } catch (err) {
     console.log(err)
+    showAlert('error', err.response.data.message)
   }
 }

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import showAlert from './alert'
 
 export const followUser = async (userId, method = 'POST') => {
   try {
@@ -6,7 +7,8 @@ export const followUser = async (userId, method = 'POST') => {
       method,
       url: `${document.location.origin}/api/v1/users/${userId}/follows`,
     })
+    // showAlert('ok', method==='POST'? 'followed succesfully':'unfollowed ')
   } catch (err) {
-    console.log('ERR: ', err)
+    showAlert('error', err.response.data.message)
   }
 }

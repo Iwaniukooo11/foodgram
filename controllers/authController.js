@@ -54,10 +54,9 @@ exports.login = catchAsync(async (req, res, next) => {
   console.log(nick)
 
   const user = await User.findOne({ nick }).select('+password')
-  console.log(user.name)
-  if (!user || !(await user.correctPassword(candidatePassword, user.password)))
+  if (!user) return next(new AppError('incorrect nick or password', 401))
+  if (!(await user.correctPassword(candidatePassword, user.password)))
     return next(new AppError('incorrect nick or password', 401))
-
   console.log('REQ-COOKIES: ', req.cookies)
   createsSendToken(user, 201, res)
 })

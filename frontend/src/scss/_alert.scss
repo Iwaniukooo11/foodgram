@@ -1,0 +1,22 @@
+.alert {
+    padding: 10px 20px;
+    text-align: center;
+    position: fixed;
+    transform: translateX(-50%) translateY(-15vh);
+    transition: transform .3s;
+    left: 50%;
+    top: 10%;
+    text-transform: uppercase;
+    color: $color-white;
+    background-color: $color-green;
+    border-radius: 5px;
+
+    &--error {
+        background-color: $color-red;
+    }
+
+    &.active {
+        transform: translateX(-50%) translateY(0);
+
+    }
+}

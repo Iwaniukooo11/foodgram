@@ -1,4 +1,5 @@
-const axios = require('axios')
+import axios from 'axios'
+import showAlert from './alert'
 
 export const auth = async (obj, type) => {
   try {
@@ -7,16 +8,10 @@ export const auth = async (obj, type) => {
       url: `${document.location.origin}/api/v1/users/${type}`,
       data: obj,
     })
-    if (res.data.status === 'OK') {
-      //   showAlert('success', 'logged in!')
-      alert('git majonez')
-      // window.setTimeout(() => {
-      location.assign('/me')
-      // }, 1000)
-    }
+    if (res.data.status === 'OK') location.assign('/me')
+    showAlert('ok', 'succesfully logged in!')
   } catch (err) {
-    console.log('err: ', err)
-    // showAlert('error', 'NOT logged in!')
+    showAlert('error', err.response.data.message)
   }
 }
 
