@@ -50,7 +50,7 @@ exports.getMe = catchAsync(async (req, res) => {
     { desc: 'followers', num: user.followers, link: 'followers' },
     { desc: 'follows', num: user.following, link: 'follows' },
   ]
-  let posts = await Post.find({ user: user.id }).sort({ createdAt: -1 }).exec()
+  let posts = await Post.find({ user: user.id }).sort({ createdAt: -1 })
 
   posts = await prepareDataPost(posts, req.user.id, req.user)
 
@@ -70,7 +70,8 @@ exports.getFeed = catchAsync(async (req, res) => {
     }
   })
   let posts = []
-  if (orTab)
+  console.log('orTab: ', orTab)
+  if (orTab.length > 0)
     posts = await Post.find({ $or: orTab }).sort({ createdAt: -1 }).limit(10)
 
   posts = await prepareDataPost(posts, req.user.id, req.user)
@@ -86,10 +87,10 @@ exports.getRecent = catchAsync(async (req, res) => {
 
 exports.getNotifications = catchAsync(async (req, res) => {
   const reactions = await Reaction.find({ postAuthor: req.user.id })
-    .sort({ createdAt: 'desc' })
+    .sort({ createdAt: -1 })
     .limit(10)
   const comments = await Comment.find({ postAuthor: req.user.id })
-    .sort({ createdAt: 'desc' })
+    .sort({ createdAt: -1 })
     .limit(10)
 
   const notifications = reactions

@@ -16,6 +16,11 @@
         margin-top: 30px;
     }
 
+    &__change-link {
+        color: $color-orange;
+        font-weight: bold;
+    }
+
     @media(min-width:1024px) {
         padding-top: 20vh;
     }
