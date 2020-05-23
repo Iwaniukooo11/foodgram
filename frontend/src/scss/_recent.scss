@@ -29,7 +29,30 @@
         align-items: center;
         justify-content: space-evenly;
         padding: 15px 0;
+        margin: 0 auto;
     }
 
+    @media(min-width:768px) {
+        &__search-wrap {
+            width: $post-size-768;
+        }
+    }
 
+    @media(min-width:1024px) {
+        &__search-wrap {
+            width: $post-size-1024;
+        }
+    }
+
+    @media(min-width:1200px) {
+        &__search-wrap {
+            width: $post-size-1200;
+        }
+    }
+
+    @media(min-width:1400px) {
+        &__search-wrap {
+            width: $post-size-1400;
+        }
+    }
 }

@@ -44,6 +44,9 @@
 
     &__submit {
         grid-area: button;
+        max-width: 125px;
+        justify-self: flex-end;
+
     }
 
     &__label {
@@ -61,5 +64,13 @@
         margin-top: 50px;
     }
 
+    @media(min-width:768px) {
+        justify-content: center;
+        margin-top: 20vh;
+
+        &__form {
+            width: $post-size-768;
+        }
+    }
 
 }
