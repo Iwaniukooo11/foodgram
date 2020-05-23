@@ -180,6 +180,7 @@ if (addPostForm) {
     const imgInput = document.getElementById('image')
     const form = new FormData()
     form.append('description', descInput.value)
+    console.log(imgInput.files)
     form.append('image', imgInput.files[0] || null)
 
     postActions.createPost(form)
