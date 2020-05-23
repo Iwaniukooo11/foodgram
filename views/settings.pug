@@ -3,20 +3,20 @@ extends base
 block content
 
   main.main.section.settings
-    form.settings__form.update-form
-      input.section__input.settings__input(type='text',name='name',id='name',placeholder=`${user.name}`)
+    form.settings__form.update-form(data-value_to_update='name')
+      input.section__input.settings__input(type='text',name='name',id='name',value=`${user.name}`)
       label.settings__label(for="name") name
-      button.section__button.section__button--background.settings__submit(type='submit') Update
+      button.section__button.section__button--background.settings__submit(type='submit',data-submit='name') Update
     
-    form.settings__form.update-form
-      textarea.section__input.settings__input(type='text',name='description',id='description',placeholder=`${user.description}`)
+    form.settings__form.update-form(data-value_to_update='description')
+      textarea.section__input.settings__input(type='text',name='description',id='description')= `${user.description}`
       label.settings__label(for="description") description
 
-      button.section__button.section__button--background.settings__submit(type='submit') Update
+      button.section__button.section__button--background.settings__submit(type='submit',data-submit='description') Update
 
-    form.settings__form.settings__form--update-img.update-img-form
+    form.settings__form.settings__form--update-img.update-img-form(data-value_to_update='image')
       input.settings__input(type='file',name='image',id='image',accept='.jpg,.png,.jpeg')
       label.section__input.settings__label.settings__label--upload(for="image") Upload image
-      button.section__button.section__button--background.settings__submit(type='submit') Update
+      button.section__button.section__button--background.settings__submit(type='submit',data-submit='update') Update
       
     button.section__button.section__button--background.settings__logout#logout-btn Log out

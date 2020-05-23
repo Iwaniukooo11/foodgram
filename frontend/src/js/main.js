@@ -159,9 +159,18 @@ if (updateForms) {
   updateForms.forEach((form) =>
     form.addEventListener('submit', async (e) => {
       e.preventDefault()
+
+      const inputSubmit = document.querySelector(
+        `[data-submit='${form.dataset.value_to_update}']`
+      )
+      inputSubmit.innerHTML = 'load..'
+      inputSubmit.classList.add('updating')
       await updateActions.update({
         [e.target[0].name]: e.target[0].value,
       })
+      inputSubmit.classList.remove('updating')
+
+      inputSubmit.innerHTML = 'update'
     })
   )
   const imgForm = document.querySelector('.update-img-form')
