@@ -3,6 +3,7 @@ const factory = require('./handlerFactory')
 const AWS = require('aws-sdk')
 const multer = require('multer')
 const sharp = require('sharp')
+const AppError = require('../utils/appError')
 const catchAsync = require('../utils/catchAsync')
 
 const multerStorage = multer.memoryStorage()

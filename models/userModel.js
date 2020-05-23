@@ -46,6 +46,7 @@ const userSchema = new mongoose.Schema(
     description: {
       type: String,
       default: '',
+      maxlength: [50, 'Max description length is 50!'],
     },
     image: {
       type: String,
