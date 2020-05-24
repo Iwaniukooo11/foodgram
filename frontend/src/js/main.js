@@ -177,7 +177,9 @@ if (searchUserBtn) {
   searchUserBtn.addEventListener('click', async (e) => {
     const input = document.getElementById('search-user-input')
 
-    await searchActions.searchUser(input.value)
+    await searchActions.searchUser(
+      input.value.length > 0 ? input.value : 'no-nuul-str'
+    )
   })
 }
 
