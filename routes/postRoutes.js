@@ -21,7 +21,7 @@ router.route('/').get(postController.getAllPosts).post(
 
 router
   .route('/:id')
-  .get(postController.getPost)
+  .get(authController.protect, postController.getPost)
   .patch(authController.protect, postController.updatePost)
   .delete(authController.protect, postController.deletePost)
 

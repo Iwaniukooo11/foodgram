@@ -9,7 +9,8 @@ export const auth = async (obj, type) => {
       data: obj,
     })
     console.log('REPONSE: ', res)
-    if (res.data.status === 'OK') location.assign('/me')
+    // if (res.data.status === 'OK')
+    location.assign('/me')
     showAlert('ok', 'succesfully logged in!!')
   } catch (err) {
     showAlert('error', err.response.data.message)
