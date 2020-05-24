@@ -7,7 +7,7 @@ const router = express.Router({ mergeParams: true })
 
 router
   .route('/')
-  .get(commentController.getAllComments)
+  .get(authController.protect, commentController.getAllComments)
   .post(
     authController.protect,
     hanlderFactory.setUserIdAsUser,
@@ -18,7 +18,7 @@ router
 
 router
   .route('/:id')
-  .get(commentController.getComment)
+  .get(authController.protect,,commentController.getComment)
   .patch(authController.protect, commentController.updateComment)
   .delete(authController.protect, commentController.deleteComment)
 

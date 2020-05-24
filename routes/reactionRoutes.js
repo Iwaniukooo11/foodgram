@@ -7,7 +7,7 @@ const router = express.Router({ mergeParams: true })
 
 router
   .route('/')
-  .get(reactionController.getAllReactions)
+  .get(authController.protect, reactionController.getAllReactions)
   .post(
     authController.protect,
     hanlderFactory.setUserIdAsUser,
@@ -24,7 +24,7 @@ router
 
 router
   .route('/:id')
-  .get(reactionController.getReaction)
+  .get(authController.protect, reactionController.getReaction)
   .patch(authController.protect, reactionController.updateReaction)
   .delete(authController.protect, reactionController.deleteReaction)
 

@@ -7,7 +7,7 @@ const router = express.Router({ mergeParams: true })
 
 router
   .route('/')
-  .get(followController.getAllFollows)
+  .get(authController.protect, followController.getAllFollows)
   .post(
     authController.protect,
     hanlderFactory.setUserIdAsUser,
@@ -24,11 +24,19 @@ router
 
 router
   .route('/count-followers')
-  .get(followController.addIdToBody, followController.countAllFollowers)
+  .get(
+    authController.protect,
+    followController.addIdToBody,
+    followController.countAllFollowers
+  )
 router
   .route('/count-followed')
-  .get(followController.addIdToBody, followController.countAllFollowed)
+  .get(
+    authController.protect,
+    followController.addIdToBody,
+    followController.countAllFollowed
+  )
 
-router.route('/:id').get(followController.getFollow)
+router.route('/:id').get(authController.protect, followController.getFollow)
 
 module.exports = router
