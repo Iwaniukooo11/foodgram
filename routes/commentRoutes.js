@@ -18,7 +18,7 @@ router
 
 router
   .route('/:id')
-  .get(authController.protect,,commentController.getComment)
+  .get(authController.protect, commentController.getComment)
   .patch(authController.protect, commentController.updateComment)
   .delete(authController.protect, commentController.deleteComment)
 
