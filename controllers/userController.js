@@ -74,7 +74,7 @@ exports.resizeImg = catchAsync(async (req, res, next) => {
     if (err) {
       throw err
     }
-    console.log(`uploaded at ${data.Location}`)
+    console.log('\x1b[36m', `|aws| uploaded user img at ${data.Location}`)
   })
 
   req.body.image = image

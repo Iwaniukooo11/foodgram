@@ -183,12 +183,10 @@ if (searchUserBtn) {
 
 if (addPostForm) {
   const imgFileInput = document.getElementById('image')
-  // imgFileInput.addEventListener('change', () => {
   imgFileInput.onchange = () => {
     showAlert('ok', 'loaded an image!', 500)
     document.querySelector('#upload-info').classList.add('active')
   }
-  // )
 
   addPostForm.addEventListener('submit', async (e) => {
     e.preventDefault()
@@ -196,10 +194,7 @@ if (addPostForm) {
     const imgInput = document.getElementById('image')
     const form = new FormData()
     form.append('description', descInput.value)
-    console.log(imgInput.files)
     form.append('image', imgInput.files[0] || null)
-    // if (!imgInput.files[0]) alert('kurde bele error')
-    // else
     await postActions.createPost(form)
   })
 }

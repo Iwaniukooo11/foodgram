@@ -26,7 +26,6 @@ const createsSendToken = (user, statusCode, res) => {
 
   const userToShow = { ...user }
   userToShow.password = undefined
-  //  console.log('before response')
   res.status(statusCode).json({
     status: 'OK',
     token,
@@ -43,20 +42,19 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
 exports.login = catchAsync(async (req, res, next) => {
   const { nick, password } = req.body
-  console.log(nick, password)
+  console.log('\x1b[33m', '|login| trying nick: ', nick)
   const candidatePassword = password
 
   const user = await User.findOne({ nick }).select('+password')
-  console.log('USER:--- ', user)
+  console.log('\x1b[33m', '|login| logged user: ', user)
+
   if (user == null) {
-    console.log('user is null,breaking')
+    console.log('\x1b[31m', '|auth| user is null,breaking')
     return next(new AppError('incorrect nick or password', 404))
   }
-  console.log('or going next')
 
   if (!(await user.correctPassword(candidatePassword, user.password)))
     return next(new AppError('incorrect nick or password', 401))
-  console.log('REQ-COOKIES: ', req.cookies)
   createsSendToken(user, 201, res)
 })
 

@@ -85,7 +85,6 @@ const userSchema = new mongoose.Schema(
         ref: 'Post',
       },
     ],
-    // posts: [],
   },
   {
     toJSON: { virtuals: true },
@@ -93,20 +92,7 @@ const userSchema = new mongoose.Schema(
   }
 )
 
-// userSchema.virtual('posts', {
-//   ref: 'Post',
-//   foreignField: 'user',
-//   localField: '_id',
-// })
-
 userSchema.pre(/^find/, async function (next) {
-  // this.populate({
-  //   path: 'posts',
-  //   select: '_id',
-  // })
-  console.log('----------posts func here')
-  // next()
-
   const followers = await Follow.countDocuments({
     followed: this.getQuery()._id,
   })

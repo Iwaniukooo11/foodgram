@@ -34,12 +34,10 @@ export const addComment = async (postId, content, socket) => {
 export const createPost = async (obj) => {
   try {
     if (!obj) throw new Error('No file found!')
-    console.log('actions obj: ', obj)
     const res = await axios.post(
       `${document.location.origin}/api/v1/posts`,
       obj
     )
-    console.log('res: ', res)
     location.assign('/me')
   } catch (err) {
     showAlert('error', err.response.data.message)

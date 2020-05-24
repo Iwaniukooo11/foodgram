@@ -72,6 +72,7 @@ exports.updateOne = (Model) =>
 exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.create(req.body)
+    console.log('\x1b[32m', '|factory| created doc: ', doc)
 
     res.status(201).json({
       status: 'OK',
@@ -84,7 +85,6 @@ exports.createOne = (Model) =>
 exports.getOne = (Model, populateOptions) =>
   catchAsync(async (req, res, next) => {
     if (!req.clientData) req.clientData = {}
-    console.log('HANDLEER FACTORY HERE!!!')
 
     let query = req.query.type
       ? Model.findOne({ [req.query.type]: req.params.id })
@@ -97,7 +97,6 @@ exports.getOne = (Model, populateOptions) =>
       return next(new AppError('No doc found with that ID', 404))
     }
 
-    // const doc = docs.find(el => el.id === id)
     res.status(200).json({
       status: 'OK',
       data: {

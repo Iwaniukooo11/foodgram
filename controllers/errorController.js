@@ -12,6 +12,5 @@ module.exports = (err, req, res, next) => {
       status: 'ERROR',
       message: err.message || err.data.message,
     })
-    // res.status(200).render('login', { login: true })
   } else res.redirect('/login')
 }

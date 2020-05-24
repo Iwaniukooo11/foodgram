@@ -37,8 +37,6 @@ exports.resizeImg = catchAsync(async (req, res, next) => {
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
 
-  console.log('buffer: ', req.file.buffer)
-
   const params = {
     Bucket: bucket_name,
     Key: path,
@@ -50,10 +48,9 @@ exports.resizeImg = catchAsync(async (req, res, next) => {
     if (err) {
       return new AppError('Sth went wrong')
     }
-    console.log(`uploaded at ${data.Location}`)
+    console.log('\x1b[36m', `|aws| uploaded user img at ${data.Location}`)
   })
 
-  console.log('before next', image)
   req.body.image = image
 
   next()
