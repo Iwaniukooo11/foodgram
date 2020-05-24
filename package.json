@@ -1,6 +1,6 @@
 {
   "name": "foodgram",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Foodgram application",
   "author": "",
   "main": "index.js",
