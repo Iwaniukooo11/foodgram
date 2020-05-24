@@ -25,7 +25,8 @@ mixin postItem(post)
             a.comment__link(href=`/users/${comment.user._id}`)
               img.comment__user-photo(src=`${comment.user.image}`,alt='photo of user')
             p.comment__content 
-              span.comment__user= `${comment.user.nick } ` 
+              span.comment__user 
+                a(href=`/users/${comment.user._id}`)= `${comment.user.nick } ` 
               | #{comment.content }
         else
           span.comment__no-coms(data-span_post_id=`${post.id}`)= `No comments yet!`

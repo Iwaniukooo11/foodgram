@@ -5,6 +5,7 @@ import * as updateActions from './update'
 import * as searchActions from './search'
 import io from 'socket.io-client'
 import axios from 'axios'
+import showAlert from './alert'
 
 const loginForm = document.getElementById('form-login')
 const signUpForm = document.getElementById('form-signup')
@@ -174,6 +175,14 @@ if (searchUserBtn) {
 }
 
 if (addPostForm) {
+  const imgFileInput = document.getElementById('image')
+  // imgFileInput.addEventListener('change', () => {
+  imgFileInput.onchange = () => {
+    showAlert('ok', 'loaded an image!', 500)
+    document.querySelector('#upload-info').classList.add('active')
+  }
+  // )
+
   addPostForm.addEventListener('submit', async (e) => {
     e.preventDefault()
     const descInput = document.getElementById('description')

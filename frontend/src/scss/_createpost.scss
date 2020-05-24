@@ -26,6 +26,16 @@
         border-radius: 5px;
     }
 
+    &__upload-info {
+        opacity: 0;
+        margin-top: 10px;
+        transition: .8s;
+
+        &.active {
+            opacity: 1;
+        }
+    }
+
     &__send {
         display: flex;
         align-content: center;
