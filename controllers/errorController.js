@@ -5,12 +5,13 @@ module.exports = (err, req, res, next) => {
 
   console.log('ERROR CONTROLLER', err.message, req.originalUrl)
   console.log('frist case')
-  // res.status(error.statusCode).json({
-  //   test: 'mati',
-  //   error,
-  //   status: 'ERROR',
-  //   message: err.message || err.data.message,
-  // })
-  // res.status(200).render('login', { login: true })
-  res.redirect('/login')
+  if (req.originalUrl.startsWith('/api')) {
+    return res.status(error.statusCode).json({
+      test: 'mati',
+      error,
+      status: 'ERROR',
+      message: err.message || err.data.message,
+    })
+    // res.status(200).render('login', { login: true })
+  } else res.redirect('/login')
 }

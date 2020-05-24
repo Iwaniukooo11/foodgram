@@ -8,8 +8,9 @@ export const auth = async (obj, type) => {
       url: `${document.location.origin}/api/v1/users/${type}`,
       data: obj,
     })
+    console.log('REPONSE: ', res)
     if (res.data.status === 'OK') location.assign('/me')
-    showAlert('ok', 'succesfully logged in!')
+    showAlert('ok', 'succesfully logged in!!')
   } catch (err) {
     showAlert('error', err.response.data.message)
   }
