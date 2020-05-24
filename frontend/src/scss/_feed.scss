@@ -8,5 +8,7 @@
 
     &__no-posts {
         @include createGradientText;
+        width: 100%;
+        text-align: center;
     }
 }

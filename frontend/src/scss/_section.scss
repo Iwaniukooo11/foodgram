@@ -32,7 +32,29 @@
         &.updating {
             opacity: 0.7;
         }
+    }
 
+    &__subtext {
+        // width: $post-size;
+        width: 100%;
+        padding: 0 10px;
+        text-align: center;
+
+        @media(min-width:768px) {
+            width: $post-size-768;
+        }
+
+        @media(min-width:1024px) {
+            width: $post-size-1024;
+        }
+
+        @media(min-width:1200px) {
+            width: $post-size-1200;
+        }
+
+        @media(min-width:1400px) {
+            width: $post-size-1400;
+        }
     }
 
     &__post,
