@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-// const User = require('./userModel')
+const User = require('./userModel')
 const Comment = require('./commentModel')
 const Reaction = require('./reactionModel')
 const postSchema = new mongoose.Schema(

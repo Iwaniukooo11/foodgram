@@ -43,7 +43,7 @@ exports.resizeImg = catchAsync(async (req, res, next) => {
     Bucket: bucket_name,
     Key: path,
     Body: req.file.buffer,
-    // ACL: 'public-read',
+    ACL: 'public-read',
   }
 
   await s3.upload(params, async (err, data) => {

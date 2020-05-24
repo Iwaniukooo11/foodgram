@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, 'User must have a name!'],
-      // minlength: [5, 'Name should have min 5 chars'],
+      minlength: [5, 'Name should have min 5 chars'],
       maxlength: [20, 'Name should have max 20 chars'],
     },
     nick: {
@@ -79,12 +79,12 @@ const userSchema = new mongoose.Schema(
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
-    // posts: [
-    //   {
-    //     type: mongoose.Schema.ObjectId,
-    //     ref: 'Post',
-    //   },
-    // ],
+    posts: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Post',
+      },
+    ],
     // posts: [],
   },
   {
@@ -100,10 +100,10 @@ const userSchema = new mongoose.Schema(
 // })
 
 userSchema.pre(/^find/, async function (next) {
-  this.populate({
-    path: 'posts',
-    select: '_id',
-  })
+  // this.populate({
+  //   path: 'posts',
+  //   select: '_id',
+  // })
   console.log('----------posts func here')
   // next()
 
