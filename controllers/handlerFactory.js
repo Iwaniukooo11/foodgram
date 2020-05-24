@@ -84,6 +84,7 @@ exports.createOne = (Model) =>
 exports.getOne = (Model, populateOptions) =>
   catchAsync(async (req, res, next) => {
     if (!req.clientData) req.clientData = {}
+    console.log('HANDLEER FACTORY HERE!!!')
 
     let query = req.query.type
       ? Model.findOne({ [req.query.type]: req.params.id })

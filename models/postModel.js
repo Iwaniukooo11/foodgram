@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const User = require('./userModel')
+// const User = require('./userModel')
 const Comment = require('./commentModel')
 const Reaction = require('./reactionModel')
 const postSchema = new mongoose.Schema(
@@ -93,7 +93,7 @@ postSchema.pre('save', async function (next) {
 })
 postSchema.pre('remove', async function (next) {
   const user = await User.findById(this.user._id)
-  user.posts = user.posts.filter((id) => id != this.id)
+  user.posts = user.posts.filter((id) => id != this._id)
   user.save({ validateBeforeSave: false })
 
   await Comment.deleteMany({ post: this.id })
