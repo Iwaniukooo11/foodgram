@@ -151,7 +151,6 @@ if (updateForms) {
         [e.target[0].name]: e.target[0].value,
       })
       inputSubmit.classList.remove('updating')
-
       inputSubmit.innerHTML = 'update'
     })
   )
@@ -159,11 +158,19 @@ if (updateForms) {
   if (imgForm)
     imgForm.addEventListener('submit', async (e) => {
       e.preventDefault()
+      const inputSubmit = document.getElementById('settings-update-img')
+      inputSubmit.innerHTML = 'load..'
+      inputSubmit.classList.add('updating')
 
       const imgInput = document.getElementById('image')
       const form = new FormData()
-      form.append('image', imgInput.files[0] || '')
-      updateActions.updateUserImage(form)
+      form.append('image', imgInput.files[0] || null)
+
+      if (imgInput.files[0]) await updateActions.updateUserImage(form)
+      else showAlert('error', 'no image selected!')
+
+      inputSubmit.classList.remove('updating')
+      inputSubmit.innerHTML = 'update'
     })
 }
 if (searchUserBtn) {

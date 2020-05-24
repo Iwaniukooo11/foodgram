@@ -6,6 +6,7 @@
     transition: transform .3s;
     left: 50%;
     top: 10%;
+    z-index: 400;
     text-transform: uppercase;
     color: $color-white;
     background-color: $color-green;
