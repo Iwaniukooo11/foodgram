@@ -3,6 +3,10 @@ include _post
 
 block content
   main.main.section.feed
-    ul.feed__posts-list
-      each post in posts
-        +postItem(post)
+    if posts.length>0
+      ul.feed__posts-list
+        each post in posts
+          +postItem(post)
+    else
+      h1.feed__no-posts You don't follow anyone, so there are posts there!
+        
