@@ -35,6 +35,8 @@ const reactionSchema = new mongoose.Schema(
   }
 )
 
+reactionSchema.index({ post: 1, user: 1 })
+
 reactionSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',

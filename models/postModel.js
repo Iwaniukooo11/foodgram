@@ -68,6 +68,11 @@ const postSchema = new mongoose.Schema(
   }
 )
 
+postSchema.index({
+  user: 1,
+  createdAt: -1,
+})
+
 postSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',

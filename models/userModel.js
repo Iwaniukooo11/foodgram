@@ -92,6 +92,8 @@ const userSchema = new mongoose.Schema(
   }
 )
 
+userSchema.index({name:1})
+
 userSchema.pre(/^find/, async function (next) {
   const followers = await Follow.countDocuments({
     followed: this.getQuery()._id,

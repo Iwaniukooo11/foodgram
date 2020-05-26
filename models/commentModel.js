@@ -37,6 +37,11 @@ commentSchema.pre(/^find/, function (next) {
   next()
 })
 
+commentSchema.index({
+  post: 1,
+  postAuthor: 1,
+})
+
 const Comment = mongoose.model('Comment', commentSchema)
 
 module.exports = Comment

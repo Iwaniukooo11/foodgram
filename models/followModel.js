@@ -36,6 +36,13 @@ followSchema.pre(/^find/, function (next) {
   next()
 })
 
+followSchema.index({
+  user: 1,
+})
+followSchema.index({
+  followed: 1,
+})
+
 const Follow = mongoose.model('Follow', followSchema)
 
 module.exports = Follow
