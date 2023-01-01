@@ -14,7 +14,7 @@
   "dependencies": {
     "aws-sdk": "^2.668.0",
     "axios": "^0.19.2",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^8.3.0",
     "bcryptjs": "^2.4.3",
     "connect-livereload": "^0.6.1",
     "cookie-parser": "^1.4.5",
@@ -50,8 +50,8 @@
     "@babel/preset-env": "^7.9.6",
     "gulp": "^4.0.2",
     "livereload": "^0.9.1",
-    "webpack": "^4.43.0",
-    "webpack-stream": "^5.2.1"
+    "webpack": "^5.75.0",
+    "webpack-stream": "^7.0.0"
   },
   "engines": {
     "node": ">=10.0.0"
